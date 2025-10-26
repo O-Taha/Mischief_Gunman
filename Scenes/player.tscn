@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://kqv4rlq3vjgj"]
+
+[ext_resource type="PackedScene" uid="uid://belgvmbxjjgpt" path="res://Scenes/cowboy.tscn" id="1_v1ht0"]
+[ext_resource type="Script" uid="uid://bchun2vvocpa" path="res://Scripts/player.gd" id="2_vdpp0"]
+[ext_resource type="Script" uid="uid://civclvn4n55ef" path="res://Scenes/States/idle.gd" id="3_6t5aa"]
+[ext_resource type="Script" uid="uid://b8hr0170lrdv7" path="res://Scenes/States/walk.gd" id="4_vgqql"]
+[ext_resource type="Script" uid="uid://c61gy41eu7fqg" path="res://Scenes/States/dash.gd" id="5_fkybt"]
+
+[node name="Player" instance=ExtResource("1_v1ht0")]
+script = ExtResource("2_vdpp0")
+dash_force = null
+
+[node name="FSM" parent="." index="2" node_paths=PackedStringArray("init_state")]
+init_state = NodePath("idle")
+
+[node name="idle" type="Node" parent="FSM" index="0"]
+script = ExtResource("3_6t5aa")
+
+[node name="Node" type="Node" parent="FSM" index="1"]
+script = ExtResource("4_vgqql")
+
+[node name="Node2" type="Node" parent="FSM" index="2"]
+script = ExtResource("5_fkybt")
