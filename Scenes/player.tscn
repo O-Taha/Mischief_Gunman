@@ -16,7 +16,7 @@ init_state = NodePath("idle")
 [node name="idle" type="Node" parent="FSM" index="0"]
 script = ExtResource("3_6t5aa")
 
-[node name="Node" type="Node" parent="FSM" index="1"]
+[node name="walk" type="Node" parent="FSM" index="1"]
 script = ExtResource("4_vgqql")
 
 [node name="Node2" type="Node" parent="FSM" index="2"]

@@ -1,3 +1,4 @@
+@tool
 extends State
 
 func enter():
@@ -5,9 +6,12 @@ func enter():
 		owner.velocity = owner.dir * owner.dash_force
 		
 func exit():
-	owner.can_dash = false
-	var dash_cooldown: Tween = get_tree().create_tween()
-	dash_cooldown.tween_callback(func (): owner.can_dash = true).set_delay(owner.dash_cooldown)
+	owner.dash_enable = false
+	_enable_dash_after_cooldown(owner.dash_cooldown_time)
 
 func update(delta: float):
 	transitioned.emit(self, "walk")
+
+func _enable_dash_after_cooldown(time: float):
+	var dash_cooldown_enabler: Tween = get_tree().create_tween()
+	dash_cooldown_enabler.tween_callback(func (): owner.dash_enable = true).set_delay(time)

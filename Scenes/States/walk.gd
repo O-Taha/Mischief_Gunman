@@ -1,3 +1,4 @@
+@tool 
 extends State
 
 var last_vel_lenght: float
@@ -14,6 +15,6 @@ func physics_update(delta: float):
 		
 		for direction in owner.input_types["movement"]:
 			if Input.is_action_just_pressed(direction):
-				if owner.dir == owner.input_buffer and owner.can_dash:
+				if owner.dir == owner.dir_input_buffer and owner.dash_enable:
 					transitioned.emit(self, "dash")
-				owner.input_buffer = owner.dir
+				owner.dir_input_buffer = owner.dir
