@@ -11,7 +11,7 @@ func physics_update(delta: float):
 	if owner.move_enable:
 		owner.velocity = owner.velocity.lerp(owner.dir * owner.speed, 0.1)
 		
-		var player_decelerated = owner.velocity.length() <= 50 \
+		var player_decelerated = owner.velocity.length() <= 50\
 		and owner.velocity.length() < last_vel_lenght
 		
 		last_vel_lenght = owner.velocity.length()
