@@ -1,6 +1,9 @@
 @tool
 extends State
 
+func enter():
+	owner.sprite.play(name)
+
 func physics_update(delta: float):
 	owner.velocity = owner.velocity.lerp(Vector2.ZERO, 0.1)
 	_check_if_any_action_pressed()#-> Walk

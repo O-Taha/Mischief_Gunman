@@ -3,6 +3,10 @@ extends State
 
 var last_vel_lenght: float
 
+func enter():
+	if owner.sprite.animation == "dash": await owner.sprite.animation_finished
+	owner.sprite.play(name)
+
 func physics_update(delta: float):
 	if owner.move_enable:
 		owner.velocity = owner.velocity.lerp(owner.dir * owner.speed, 0.1)

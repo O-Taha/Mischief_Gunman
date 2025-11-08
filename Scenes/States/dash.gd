@@ -4,6 +4,7 @@ extends State
 func enter():
 	if owner.move_enable:
 		owner.velocity = owner.dir * owner.dash_force
+	owner.sprite.play(name)
 		
 func exit():
 	owner.dash_enable = false

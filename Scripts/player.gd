@@ -25,13 +25,13 @@ var dash_cooldown_time: float = 1
 var dash_enable: bool = true:			# NOTE: Automatically sets sprite transparency (setter)
 	set(value):
 		dash_enable = value
-		modulate.a = 1 if value else 0.5
+		modulate.a = 1.0 if value else 0.5
 
 func _physics_process(delta: float) -> void:
 	print_debug($FSM.curr_state, velocity.length(), dir_input_buffer, dir)
 	dir = Input.get_vector("left", "right", "up", "down")
 	move_and_slide()
-	
+	sprite.flip_h = get_real_velocity().x < 0
 	for i in get_slide_collision_count(): # Credits to KidsCanCode (https://kidscancode.org/godot_recipes/4.x/physics/character_vs_rigid/index.html)
 		var collision_info = get_slide_collision(i)
 		var curr_vel: Vector2 = get_real_velocity()
