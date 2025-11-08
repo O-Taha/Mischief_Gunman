@@ -22,6 +22,7 @@ height = 138.0
 [node name="Cowboy" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_u404f")
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_u404f")

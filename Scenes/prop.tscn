@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpbvlnb0x7af7"]
+
+[ext_resource type="Script" uid="uid://mrvhsqa6akvx" path="res://Scripts/prop.gd" id="1_5sh6o"]
+[ext_resource type="Texture2D" uid="uid://co3v83fiot4co" path="res://icon.svg" id="1_b5kkq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5sh6o"]
+size = Vector2(128, 128)
+
+[node name="Prop" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 65535
+gravity_scale = 0.0
+can_sleep = false
+linear_damp = 5.0
+script = ExtResource("1_5sh6o")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.298039, 1, 1)
+texture = ExtResource("1_b5kkq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5sh6o")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+scale = Vector2(10, 10)
+collide_with_bodies = false
