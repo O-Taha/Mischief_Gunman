@@ -19,7 +19,6 @@ var dir_buffer_counter: float = 0:		# Counter that will WARNING loop automatical
 		dir_buffer_counter = value
 		if value >= DIR_BUFFER_DELAY:
 			dir_input_buffer = Vector2.ZERO
-			print('a')
 			dir_buffer_counter = 0
 #endregion
 
@@ -29,8 +28,11 @@ var dash_enable: bool = true:			# NOTE: Automatically sets sprite transparency (
 		dash_enable = value
 		modulate.a = 1.0 if value else 0.5
 
+func _ready() -> void:
+	$BulletTrajectory/RayCast2D.add_exception(self)
+
 func _physics_process(delta: float) -> void:
-	printt(curr_state, dir_buffer_counter, dir_input_buffer, dir, dir_input_buffer == dir)
+	printt(curr_state, "%0.2f"%dir_buffer_counter, dir_input_buffer, dir, dir == dir_input_buffer and dir)
 	dir = Input.get_vector("left", "right", "up", "down")
 	move_and_slide()
 	
@@ -43,7 +45,6 @@ func _physics_process(delta: float) -> void:
 		if collider is RigidBody2D and (velocity.length() >= speed):
 			collided.emit(curr_vel)
 			_apply_opposite_force_to_self_and_collider(collision_info, collider)
-			
 
 	dir_buffer_counter += delta # Regularly reset (every DIR_BUFFER_DELAY) by his setter
 		
@@ -53,3 +54,6 @@ func _apply_opposite_force_to_self_and_collider(collision_info: KinematicCollisi
 										/(collider.mass*1.5)
 	collider.apply_central_impulse(impulse)
 	velocity = -impulse
+
+#func _draw():
+	#draw_dashed_line(position, get_local_mouse_position(),Color.WHITE)

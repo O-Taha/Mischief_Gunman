@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cds8x2nw2or4"]
+
+[ext_resource type="Script" uid="uid://cmjjc58vnytlq" path="res://Scripts/bullet_trajectory.gd" id="1_2ow1s"]
+
+[node name="BulletTrajectory" type="Line2D"]
+script = ExtResource("1_2ow1s")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+collision_mask = 2
