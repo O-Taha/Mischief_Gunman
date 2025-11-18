@@ -32,7 +32,7 @@ func _ready() -> void:
 	$BulletTrajectory/RayCast2D.add_exception(self)
 
 func _physics_process(delta: float) -> void:
-	printt(curr_state, "%0.2f"%dir_buffer_counter, dir_input_buffer, dir, dir == dir_input_buffer and dir)
+	#printt(curr_state, "%0.2f"%dir_buffer_counter, dir_input_buffer, dir, dir == dir_input_buffer and dir)
 	dir = Input.get_vector("left", "right", "up", "down")
 	move_and_slide()
 	
