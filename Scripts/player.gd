@@ -54,6 +54,3 @@ func _apply_opposite_force_to_self_and_collider(collision_info: KinematicCollisi
 										/(collider.mass*1.5)
 	collider.apply_central_impulse(impulse)
 	velocity = -impulse
-
-#func _draw():
-	#draw_dashed_line(position, get_local_mouse_position(),Color.WHITE)

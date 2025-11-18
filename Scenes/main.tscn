@@ -7,9 +7,12 @@
 
 [node name="World" type="Node2D" parent="."]
 
+[node name="Prop" parent="." instance=ExtResource("2_bo1nx")]
+position = Vector2(490, 265)
+
+[node name="Prop2" parent="." instance=ExtResource("2_bo1nx")]
+position = Vector2(741, 276)
+
 [node name="Player" parent="." instance=ExtResource("1_jjgbg")]
 position = Vector2(309, 224)
 collision_mask = 3
-
-[node name="Prop" parent="." instance=ExtResource("2_bo1nx")]
-position = Vector2(490, 265)

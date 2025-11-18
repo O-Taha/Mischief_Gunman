@@ -219,8 +219,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hseb1"]
-radius = 61.0
-height = 138.0
+radius = 44.0
+height = 124.0
 
 [node name="Player" instance=ExtResource("1_v1ht0")]
 script = ExtResource("2_vdpp0")

@@ -11,6 +11,7 @@ collision_layer = 2
 collision_mask = 65535
 gravity_scale = 0.0
 can_sleep = false
+lock_rotation = true
 linear_damp = 5.0
 script = ExtResource("1_5sh6o")
 metadata/_edit_group_ = true
