@@ -52,7 +52,7 @@
 [ext_resource type="Texture2D" uid="uid://cymlwvi1jpo3o" path="res://Assets/Placeholder/course/0014.png" id="47_un823"]
 [ext_resource type="Texture2D" uid="uid://bh6a5wuobe1u7" path="res://Assets/Placeholder/course/0015.png" id="48_aclic"]
 [ext_resource type="Texture2D" uid="uid://b8orta17jo7j5" path="res://Assets/Placeholder/course/0016.png" id="49_0y64g"]
-[ext_resource type="PackedScene" uid="uid://cds8x2nw2or4" path="res://Scenes/bullet_trajectory.tscn" id="53_ie7r7"]
+[ext_resource type="PackedScene" uid="uid://cds8x2nw2or4" path="res://Scenes/line_of_sight.tscn" id="53_ie7r7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ramv3"]
 animations = [{
