@@ -14,6 +14,7 @@ func physics_update(delta: float):
 		var player_decelerated = owner.velocity.length() <= 50\
 		and owner.velocity.length() < last_vel_lenght
 		
+		owner.acceleration = owner.velocity.length() - last_vel_lenght
 		last_vel_lenght = owner.velocity.length()
 		
 		if player_decelerated:

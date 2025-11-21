@@ -23,7 +23,7 @@ func _compute_line_of_sight() -> void:
 	_reset_line_of_sight()
 	_init_line_of_sight()
 	while remaining_line_length >= 0:
-		$RayCast2D.target_position = raycast_target.limit_length(remaining_line_length)	
+		$RayCast2D.target_position = raycast_target.limit_length(min(remaining_line_length, position.distance_to(get_local_mouse_position())))
 								# raycast_target coordinate system :
 								# local to RayCast2D
 		$RayCast2D.force_raycast_update()
@@ -35,7 +35,7 @@ func _compute_line_of_sight() -> void:
 																# global
 			add_point(to_local(collision_point))
 			remaining_line_length -= $RayCast2D.position.distance_to(to_local(collision_point))
-			raycast_target = $RayCast2D.to_local(collision_point).bounce($RayCast2D.get_collision_normal())*LINE_LENGTH
+			raycast_target = $RayCast2D.to_local(collision_point).bounce($RayCast2D.get_collision_normal()).normalized()*remaining_line_length
 			var anti_hit_from_inside_offset: Vector2 = $RayCast2D.get_collision_normal()	
 			_place_raycast_origin(to_local(collision_point), anti_hit_from_inside_offset)
 		else:

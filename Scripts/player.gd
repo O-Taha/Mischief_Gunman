@@ -22,6 +22,8 @@ var dir_buffer_counter: float = 0:		# Counter that will WARNING loop automatical
 			dir_buffer_counter = 0
 #endregion
 
+var acceleration: float
+
 var dash_cooldown_time: float = 1
 var dash_enable: bool = true:			# NOTE: Automatically sets sprite transparency (setter)
 	set(value):
@@ -42,15 +44,16 @@ func _physics_process(delta: float) -> void:
 		var collision_info: KinematicCollision2D = get_slide_collision(i)
 		var curr_vel: Vector2 = get_real_velocity()
 		var collider: Object = collision_info.get_collider()
-		if collider is RigidBody2D and (velocity.length() >= speed):
+		if collider is RigidBody2D and (acceleration > 0 or velocity.length() >= speed):
 			collided.emit(curr_vel)
-			_apply_opposite_force_to_self_and_collider(collision_info, collider)
+			var impulse_dir = Vector2.from_angle(lerp_angle((-collision_info.get_normal()).angle(), dir.angle(), 0.5))
+			var impulse: Vector2 = (impulse_dir*velocity.length())\
+									/(collider.mass*1.5)
+			_apply_opposite_force_to_self_and_collider(impulse, collider)
 
 	dir_buffer_counter += delta # Regularly reset (every DIR_BUFFER_DELAY) by his setter
 		
 	
-func _apply_opposite_force_to_self_and_collider(collision_info: KinematicCollision2D, collider: Object):
-	var impulse: Vector2 = (-collision_info.get_normal()*velocity.length())\
-										/(collider.mass*1.5)
+func _apply_opposite_force_to_self_and_collider(impulse: Vector2, collider: Object):
 	collider.apply_central_impulse(impulse)
 	velocity = -impulse
