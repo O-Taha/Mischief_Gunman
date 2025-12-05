@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://belgvmbxjjgpt"]
+[gd_scene load_steps=7 format=3 uid="uid://belgvmbxjjgpt"]
 
 [ext_resource type="Texture2D" uid="uid://co3v83fiot4co" path="res://icon.svg" id="1_4rmwn"]
 [ext_resource type="Script" uid="uid://bixoo4yxno4cw" path="res://Scripts/cowboy.gd" id="1_u404f"]
+[ext_resource type="PackedScene" uid="uid://c58aiqdcb4njg" path="res://Scenes/bullet.tscn" id="2_6w0tq"]
 [ext_resource type="Script" uid="uid://485jw08h5onf" path="res://Scenes/States/fsm.gd" id="3_65m2c"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u404f"]
@@ -22,6 +23,7 @@ height = 138.0
 [node name="Cowboy" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
 motion_mode = 1
 script = ExtResource("1_u404f")
+bullet = ExtResource("2_6w0tq")
 sprite = NodePath("AnimatedSprite2D")
 metadata/_edit_group_ = true
 
