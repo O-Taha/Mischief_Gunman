@@ -16,7 +16,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-BulletCongregator="*res://bullet_congregator.gd"
+BulletCongregator="*res://Scripts/bullet_congregator.gd"
 
 [editor]
 

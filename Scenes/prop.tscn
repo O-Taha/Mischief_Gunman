@@ -9,7 +9,7 @@ size = Vector2(128, 128)
 
 [node name="Prop" type="RigidBody2D"]
 collision_layer = 2
-collision_mask = 65535
+collision_mask = 3
 gravity_scale = 0.0
 can_sleep = false
 lock_rotation = true

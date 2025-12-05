@@ -15,8 +15,12 @@ func _physics_process(delta):
 	var collision_info: KinematicCollision2D = move_and_collide(velocity * delta)
 	if collision_info:
 		velocity = velocity.bounce(collision_info.get_normal())
-		if collision_info.get_collider().has_method("hit"):
-			collision_info.get_collider().hit()
+		var prop = collision_info.get_collider()
+		if not prop.get("components"): return
+		if prop.has_component(prop.HEALTH_COMPONENT):
+			prop.get_node("HealthComponent")._on_hit(self)
+		if not prop.has_component(prop.RICOCHET_COMPONENT): queue_free()
+		else: velocity *= prop.get_node("RicochetComponent").bounce
 
 func _on_screen_exited():
 	queue_free()
