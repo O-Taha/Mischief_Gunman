@@ -2,12 +2,10 @@ extends CharacterBody2D
 
 var speed = 750
 
-func _initialize(position = Vector2.ZERO, direction = 0, shooter = get_parent()) -> CharacterBody2D:
-	rotation = direction
-	position = position
-	owner = shooter
+func _initialize(_position = Vector2.ZERO, _direction = 0) -> Node:
+	rotation = _direction
+	position = _position
 	velocity = Vector2(speed, 0).rotated(rotation)
-	
 	return self
 
 func _ready() -> void:

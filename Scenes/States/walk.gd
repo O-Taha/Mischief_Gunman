@@ -4,6 +4,9 @@ extends State
 var last_vel_lenght: float
 
 func enter():
+	_end_dash_anim_before_walk_anim()
+	
+func _end_dash_anim_before_walk_anim():
 	if owner.sprite.animation == "dash": await owner.sprite.animation_finished
 	owner.sprite.play(name)
 
@@ -20,8 +23,5 @@ func physics_update(delta: float):
 		if player_decelerated:
 			transitioned.emit(self, "idle")
 		
-		for direction in owner.input_types["movement"]:
-			if Input.is_action_just_pressed(direction):
-				if owner.dir == owner.dir_input_buffer and owner.dash_enable:
-					transitioned.emit(self, "dash")
-				owner.dir_input_buffer = owner.dir
+		_check_for_dash()
+		_check_for_shoot()

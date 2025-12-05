@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export_category("Nodes & Scenes")
 @export var bullet: PackedScene
 @export var sprite: Node2D
+
 var move_enable: bool = true
 
 func shoot() -> Node2D:

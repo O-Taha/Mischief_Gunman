@@ -55,7 +55,7 @@ func _update_components():
 	for mask in possible_components.keys():
 		if (components & mask) and not added_components.has(mask):
 
-			var inst = possible_components[mask].instantiate()
+			var inst = possible_components[mask].instantiate(PackedScene.GEN_EDIT_STATE_INSTANCE)
 			add_child(inst)
 			inst.owner = self.owner  # OK only now
 

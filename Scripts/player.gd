@@ -3,6 +3,10 @@ extends Cowboy
 
 signal collided(vel) # Will be used for screen shake
 
+@export_category("Nodes & Scenes")
+@export var bullet_trajectory: Line2D
+@export var collision: CollisionShape2D
+
 @export var dash_force: float = speed * 5
 
 var input_types: Dictionary[String, Array] = \
@@ -31,7 +35,7 @@ var dash_enable: bool = true:			# NOTE: Automatically sets sprite transparency (
 		modulate.a = 1.0 if value else 0.5
 
 func _ready() -> void:
-	$BulletTrajectory/RayCast2D.add_exception(self)
+	bullet_trajectory.get_node("RayCast2D").add_exception(self)
 
 func _physics_process(delta: float) -> void:
 	#printt(curr_state, "%0.2f"%dir_buffer_counter, dir_input_buffer, dir, dir == dir_input_buffer and dir)
