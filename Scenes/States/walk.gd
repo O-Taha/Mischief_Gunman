@@ -23,5 +23,5 @@ func physics_update(delta: float):
 		if player_decelerated:
 			transitioned.emit(self, "idle")
 		
-		_check_for_dash()
-		_check_for_shoot()
+		check_for_dash()
+		check_for_shoot()

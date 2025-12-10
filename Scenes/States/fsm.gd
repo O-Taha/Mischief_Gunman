@@ -31,7 +31,6 @@ func transition(curr: State, new_state_name: String):
 	
 	if curr:
 		curr.exit()
-	
 	if new:
 		new.enter()
 	

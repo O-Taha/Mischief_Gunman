@@ -1,7 +1,7 @@
 class_name HealthComponent
 extends Node2D
 
-@export var health: float
+@export var health: float = 1.0
 
 func _on_hit(body: Node2D):
 	if "damage" in body: decrease_health(body.damage)

@@ -1,30 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlmr6missb311"]
+[gd_scene load_steps=5 format=3 uid="uid://dlmr6missb311"]
 
 [ext_resource type="PackedScene" uid="uid://kqv4rlq3vjgj" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://k0lkvmnf0qhf" path="res://Scripts/ricochet_component.gd" id="2_8gbba"]
 [ext_resource type="PackedScene" uid="uid://dpbvlnb0x7af7" path="res://Scenes/prop.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://dujt3r3bmm62r" path="res://Scenes/opponent.tscn" id="4_jjvhh"]
 
 [node name="Main" type="Node"]
 
 [node name="World" type="Node2D" parent="."]
 
-[node name="Prop" parent="." instance=ExtResource("2_bo1nx")]
+[node name="Prop" parent="World" instance=ExtResource("2_bo1nx")]
 position = Vector2(490, 265)
 
-[node name="HealthComponent" parent="Prop" index="3"]
-health = 2.0
+[node name="HealthComponent" parent="World/Prop" index="3"]
+health = 10.0
 
-[node name="Prop2" parent="." instance=ExtResource("2_bo1nx")]
+[node name="Prop2" parent="World" instance=ExtResource("2_bo1nx")]
 position = Vector2(741, 276)
 
-[node name="RicochetComponent" type="Node2D" parent="Prop2"]
+[node name="RicochetComponent" type="Node2D" parent="World/Prop2"]
 script = ExtResource("2_8gbba")
-bounce = 2.0
 metadata/_custom_type_script = "uid://k0lkvmnf0qhf"
 
-[node name="Player" parent="." instance=ExtResource("1_jjgbg")]
+[node name="Player" parent="World" instance=ExtResource("1_jjgbg")]
 position = Vector2(309, 224)
 collision_mask = 3
 
-[editable path="Prop"]
-[editable path="Prop2"]
+[node name="Opponent" parent="World" instance=ExtResource("4_jjvhh")]
+position = Vector2(510, 53)
+
+[editable path="World/Prop"]
+[editable path="World/Prop2"]
