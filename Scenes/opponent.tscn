@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://da7wuer0xvlw" path="res://Assets/Placeholder/idle/0014.png" id="15_2n0xx"]
 [ext_resource type="Texture2D" uid="uid://cskvl0n3o5jlw" path="res://Assets/Placeholder/idle/0015.png" id="16_w6d8u"]
 [ext_resource type="Texture2D" uid="uid://4c8g0wpfu807" path="res://Assets/Placeholder/idle/0016.png" id="17_restm"]
-[ext_resource type="Script" uid="uid://dvsjkabhrrgby" path="res://Scenes/Vision_ray.gd" id="18_uyk7u"]
+[ext_resource type="PackedScene" uid="uid://tem0cx8tjqvh" path="res://Scenes/vision_cone.tscn" id="18_uyk7u"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2o52v"]
 animations = [{
@@ -88,9 +88,4 @@ sprite_frames = SubResource("SpriteFrames_2o52v")
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("CapsuleShape2D_6thd5")
 
-[node name="VisionCone" type="Node2D" parent="." index="3"]
-
-[node name="VisionRay" type="RayCast2D" parent="VisionCone" index="0"]
-target_position = Vector2(0, 500)
-collision_mask = 3
-script = ExtResource("18_uyk7u")
+[node name="VisionCone" parent="." index="3" instance=ExtResource("18_uyk7u")]

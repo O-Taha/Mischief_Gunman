@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://tem0cx8tjqvh"]
+
+[ext_resource type="Script" uid="uid://dvsjkabhrrgby" path="res://Scripts/vision_ray.gd" id="1_upggy"]
+
+[node name="VisionCone" type="Node2D"]
+
+[node name="VisionRay0" type="RayCast2D" parent="."]
+target_position = Vector2(0, 500)
+collision_mask = 3
+script = ExtResource("1_upggy")
+
+[node name="VisionRay-1" type="RayCast2D" parent="."]
+rotation = 0.0872665
+target_position = Vector2(0, 500)
+collision_mask = 3
+script = ExtResource("1_upggy")
+
+[node name="VisionRay1" type="RayCast2D" parent="."]
+rotation = -0.0872665
+target_position = Vector2(0, 500)
+collision_mask = 3
+script = ExtResource("1_upggy")
+
+[node name="VisionRay-2" type="RayCast2D" parent="."]
+rotation = 0.174533
+target_position = Vector2(0, 500)
+collision_mask = 3
+script = ExtResource("1_upggy")
+
+[node name="VisionRay2" type="RayCast2D" parent="."]
+rotation = -0.174533
+target_position = Vector2(0, 500)
+collision_mask = 3
+script = ExtResource("1_upggy")

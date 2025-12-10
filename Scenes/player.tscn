@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://belgvmbxjjgpt" path="res://Scenes/cowboy.tscn" id="1_v1ht0"]
 [ext_resource type="Script" uid="uid://bchun2vvocpa" path="res://Scripts/player.gd" id="2_vdpp0"]
-[ext_resource type="Script" uid="uid://civclvn4n55ef" path="res://Scenes/States/idle.gd" id="3_6t5aa"]
+[ext_resource type="Script" uid="uid://civclvn4n55ef" path="res://Scripts/States/idle.gd" id="3_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://cn36lxq6t5u7g" path="res://Assets/Placeholder/vol/0002.png" id="3_57lvd"]
 [ext_resource type="Texture2D" uid="uid://bqydwh5dxphs8" path="res://Assets/Placeholder/vol/0003.png" id="4_ie7r7"]
-[ext_resource type="Script" uid="uid://b8hr0170lrdv7" path="res://Scenes/States/walk.gd" id="4_vgqql"]
-[ext_resource type="Script" uid="uid://c61gy41eu7fqg" path="res://Scenes/States/dash.gd" id="5_fkybt"]
+[ext_resource type="Script" uid="uid://b8hr0170lrdv7" path="res://Scripts/States/walk.gd" id="4_vgqql"]
+[ext_resource type="Script" uid="uid://c61gy41eu7fqg" path="res://Scripts/States/dash.gd" id="5_fkybt"]
 [ext_resource type="Texture2D" uid="uid://2glfb7c2hs7a" path="res://Assets/Placeholder/vol/0004.png" id="5_vq3lt"]
 [ext_resource type="Texture2D" uid="uid://83fnvtqy74j7" path="res://Assets/Placeholder/vol/0005.png" id="6_pukcj"]
 [ext_resource type="Texture2D" uid="uid://dbjnc2sw65f0x" path="res://Assets/Placeholder/vol/0006.png" id="7_1htnp"]
@@ -53,7 +53,7 @@
 [ext_resource type="Texture2D" uid="uid://bh6a5wuobe1u7" path="res://Assets/Placeholder/course/0015.png" id="48_aclic"]
 [ext_resource type="Texture2D" uid="uid://b8orta17jo7j5" path="res://Assets/Placeholder/course/0016.png" id="49_0y64g"]
 [ext_resource type="PackedScene" uid="uid://cds8x2nw2or4" path="res://Scenes/line_of_sight.tscn" id="53_ie7r7"]
-[ext_resource type="Script" uid="uid://c74vhesh8fily" path="res://Scenes/States/shoot.gd" id="53_vq3lt"]
+[ext_resource type="Script" uid="uid://c74vhesh8fily" path="res://Scripts/States/shoot.gd" id="53_vq3lt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ramv3"]
 animations = [{

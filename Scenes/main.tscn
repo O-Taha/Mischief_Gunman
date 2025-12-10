@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlmr6missb311"]
+[gd_scene load_steps=7 format=3 uid="uid://dlmr6missb311"]
 
 [ext_resource type="PackedScene" uid="uid://kqv4rlq3vjgj" path="res://Scenes/player.tscn" id="1_jjgbg"]
-[ext_resource type="Script" uid="uid://k0lkvmnf0qhf" path="res://Scripts/ricochet_component.gd" id="2_8gbba"]
 [ext_resource type="PackedScene" uid="uid://dpbvlnb0x7af7" path="res://Scenes/prop.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://bu5dbrc46i8iy" path="res://Scenes/Components/non_cover_component.tscn" id="3_6bp64"]
+[ext_resource type="PackedScene" uid="uid://bhchfsbwqnrj1" path="res://Scenes/Components/health_component.tscn" id="3_21xkr"]
+[ext_resource type="PackedScene" uid="uid://vnetyy40d6l6" path="res://Scenes/Components/ricochet_component.tscn" id="4_344ge"]
 [ext_resource type="PackedScene" uid="uid://dujt3r3bmm62r" path="res://Scenes/opponent.tscn" id="4_jjvhh"]
 
 [node name="Main" type="Node"]
@@ -12,15 +14,17 @@
 [node name="Prop" parent="World" instance=ExtResource("2_bo1nx")]
 position = Vector2(490, 265)
 
-[node name="HealthComponent" parent="World/Prop" index="3"]
-health = 10.0
+[node name="HealthComponent" parent="World/Prop" instance=ExtResource("3_21xkr")]
+
+[node name="NonCoverComponent" parent="World/Prop" instance=ExtResource("3_6bp64")]
 
 [node name="Prop2" parent="World" instance=ExtResource("2_bo1nx")]
 position = Vector2(741, 276)
 
-[node name="RicochetComponent" type="Node2D" parent="World/Prop2"]
-script = ExtResource("2_8gbba")
-metadata/_custom_type_script = "uid://k0lkvmnf0qhf"
+[node name="HealthComponent" parent="World/Prop2" instance=ExtResource("3_21xkr")]
+position = Vector2(-251, -11)
+
+[node name="RicochetComponent" parent="World/Prop2" instance=ExtResource("4_344ge")]
 
 [node name="Player" parent="World" instance=ExtResource("1_jjgbg")]
 position = Vector2(309, 224)

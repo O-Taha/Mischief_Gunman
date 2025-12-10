@@ -37,7 +37,6 @@ var dash_enable: bool = true:			# NOTE: Automatically sets sprite transparency (
 func _ready() -> void:
 	bullet_trajectory.get_node("RayCast2D").add_exception(self)
 
-
 func _physics_process(delta: float) -> void:
 	#printt("%0.2f"%dir_buffer_counter, dir_input_buffer, dir, dir == dir_input_buffer and dir)
 	dir = Input.get_vector("left", "right", "up", "down")

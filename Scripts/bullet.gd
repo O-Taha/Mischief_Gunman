@@ -26,12 +26,13 @@ func _physics_process(delta):
 			die()
 			return
 		if prop.has_component(prop.HEALTH_COMPONENT):
-			prop.get_node("HealthComponent")._on_hit(self)
+			prop.get_node("HealthComponent")._on_hit_by(self)
 			queue_death = true
 		if prop.has_component(prop.RICOCHET_COMPONENT):
 			velocity = velocity.bounce(collision_info.get_normal())
 			velocity *= prop.get_node("RicochetComponent").bounce_factor
 			queue_death = false
+		else: queue_death = true
 			
 		if queue_death: die()
 

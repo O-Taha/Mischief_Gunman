@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dpbvlnb0x7af7"]
+[gd_scene load_steps=4 format=3 uid="uid://dpbvlnb0x7af7"]
 
 [ext_resource type="Script" uid="uid://mrvhsqa6akvx" path="res://Scripts/prop.gd" id="1_5sh6o"]
 [ext_resource type="Texture2D" uid="uid://co3v83fiot4co" path="res://icon.svg" id="1_b5kkq"]
-[ext_resource type="Script" uid="uid://ch55eshbn6twe" path="res://Scripts/health_component.gd" id="4_mpnaq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5sh6o"]
 size = Vector2(128, 128)
@@ -28,7 +27,3 @@ shape = SubResource("RectangleShape2D_5sh6o")
 scale = Vector2(10, 10)
 target_position = Vector2(0, 0)
 collide_with_bodies = false
-
-[node name="HealthComponent" type="Node2D" parent="."]
-script = ExtResource("4_mpnaq")
-metadata/_custom_type_script = "uid://ch55eshbn6twe"

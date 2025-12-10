@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu5dbrc46i8iy"]
+
+[ext_resource type="Script" uid="uid://ckplv6a5ibijk" path="res://Scripts/non_cover_component.gd" id="1_tvjut"]
+
+[node name="NonCoverComponent" type="Node2D"]
+script = ExtResource("1_tvjut")
