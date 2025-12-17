@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://kqv4rlq3vjgj"]
+[gd_scene load_steps=58 format=3 uid="uid://kqv4rlq3vjgj"]
 
 [ext_resource type="PackedScene" uid="uid://belgvmbxjjgpt" path="res://Scenes/cowboy.tscn" id="1_v1ht0"]
 [ext_resource type="Script" uid="uid://bchun2vvocpa" path="res://Scripts/player.gd" id="2_vdpp0"]
@@ -52,6 +52,7 @@
 [ext_resource type="Texture2D" uid="uid://cymlwvi1jpo3o" path="res://Assets/Placeholder/course/0014.png" id="47_un823"]
 [ext_resource type="Texture2D" uid="uid://bh6a5wuobe1u7" path="res://Assets/Placeholder/course/0015.png" id="48_aclic"]
 [ext_resource type="Texture2D" uid="uid://b8orta17jo7j5" path="res://Assets/Placeholder/course/0016.png" id="49_0y64g"]
+[ext_resource type="Script" uid="uid://bg6y7f2ijq33m" path="res://Scripts/player_animated_sprite_2d.gd" id="50_pukcj"]
 [ext_resource type="PackedScene" uid="uid://cds8x2nw2or4" path="res://Scenes/line_of_sight.tscn" id="53_ie7r7"]
 [ext_resource type="Script" uid="uid://c74vhesh8fily" path="res://Scripts/States/shoot.gd" id="53_vq3lt"]
 
@@ -233,6 +234,7 @@ dash_force = null
 [node name="AnimatedSprite2D" parent="." index="0"]
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_ramv3")
+script = ExtResource("50_pukcj")
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("CapsuleShape2D_hseb1")
@@ -240,16 +242,20 @@ shape = SubResource("CapsuleShape2D_hseb1")
 [node name="FSM" parent="." index="2" node_paths=PackedStringArray("init_state")]
 init_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="FSM" index="0"]
+[node name="idle" type="Node" parent="FSM" index="0" node_paths=PackedStringArray("FSM")]
 script = ExtResource("3_6t5aa")
+FSM = NodePath("..")
 
-[node name="walk" type="Node" parent="FSM" index="1"]
+[node name="walk" type="Node" parent="FSM" index="1" node_paths=PackedStringArray("FSM")]
 script = ExtResource("4_vgqql")
+FSM = NodePath("..")
 
-[node name="dash" type="Node" parent="FSM" index="2"]
+[node name="dash" type="Node" parent="FSM" index="2" node_paths=PackedStringArray("FSM")]
 script = ExtResource("5_fkybt")
+FSM = NodePath("..")
 
-[node name="shoot" type="Node" parent="FSM" index="3"]
+[node name="shoot" type="Node" parent="FSM" index="3" node_paths=PackedStringArray("FSM")]
 script = ExtResource("53_vq3lt")
+FSM = NodePath("..")
 
 [node name="BulletTrajectory" parent="." index="3" instance=ExtResource("53_ie7r7")]

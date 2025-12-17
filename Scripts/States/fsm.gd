@@ -28,10 +28,9 @@ func transition(curr: State, new_state_name: String):
 		return
 		
 	var new: State = states[new_state_name]
-	
 	if curr:
 		curr.exit()
+	curr_state = new
 	if new:
 		new.enter()
 	
-	curr_state = new

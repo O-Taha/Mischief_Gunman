@@ -7,6 +7,7 @@ var display_debug_vector: bool = true
 const HEALTH_COMPONENT: int = 1
 const RICOCHET_COMPONENT: int = 2
 const NON_COVER_COMPONENT: int = 4
+const IMMOVABLE_COMPONENT: int = 8
 var added_components: int = 0
 
 func _set_added_components():

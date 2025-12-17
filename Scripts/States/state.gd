@@ -2,6 +2,7 @@
 class_name State
 extends Node
 
+@export var FSM: Node = get_parent()
 signal transitioned(curr_state: State, new_state_name: String)
 
 func _ready() -> void:

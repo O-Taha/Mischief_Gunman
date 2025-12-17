@@ -39,6 +39,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	#printt("%0.2f"%dir_buffer_counter, dir_input_buffer, dir, dir == dir_input_buffer and dir)
+	#print($FSM.curr_state)
 	dir = Input.get_vector("left", "right", "up", "down")
 	move_and_slide()
 	_flip_sprite_if_leftward()
@@ -47,7 +48,9 @@ func _physics_process(delta: float) -> void:
 	dir_buffer_counter += delta # Regularly reset (every DIR_BUFFER_DELAY) by his setter
 
 func _flip_sprite_if_leftward():
-	sprite.flip_h = get_real_velocity().x < 0 and get_real_velocity().length() > 100 # HACK to fix flickering sprites when running against collisions
+	if dir:
+		sprite.flip_h = dir.x < 0 
+		# and get_real_velocity().length() > 100 HACK to fix flickering sprites when running against collisions
 
 func _handle_collisions():
 	for collision in get_slide_collision_count(): # Credits to KidsCanCode (https://kidscancode.org/godot_recipes/4.x/physics/character_vs_rigid/index.html)
