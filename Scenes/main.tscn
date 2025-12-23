@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://dlmr6missb311"]
+[gd_scene load_steps=12 format=3 uid="uid://dlmr6missb311"]
 
+[ext_resource type="Script" uid="uid://3go8gw3j1sdi" path="res://Scenes/main.gd" id="1_344ge"]
 [ext_resource type="PackedScene" uid="uid://kqv4rlq3vjgj" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://dpbvlnb0x7af7" path="res://Scenes/prop.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://bu5dbrc46i8iy" path="res://Scenes/Components/non_cover_component.tscn" id="3_6bp64"]
@@ -7,8 +8,16 @@
 [ext_resource type="PackedScene" uid="uid://vnetyy40d6l6" path="res://Scenes/Components/ricochet_component.tscn" id="4_344ge"]
 [ext_resource type="PackedScene" uid="uid://dujt3r3bmm62r" path="res://Scenes/opponent.tscn" id="4_jjvhh"]
 [ext_resource type="Script" uid="uid://m6atskjmp8qu" path="res://Scripts/immovable_component.gd" id="5_6bp64"]
+[ext_resource type="PackedScene" uid="uid://bcmopllvyr764" path="res://Scenes/wall.tscn" id="9_hptm8"]
+[ext_resource type="Script" uid="uid://ci4l5t5hytxto" path="res://Scenes/label.gd" id="9_ynf5e"]
 
-[node name="Main" type="Node"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hptm8"]
+size = Vector2(1159, 29.5)
+
+[node name="Main" type="Node" node_paths=PackedStringArray("timer", "opponent")]
+script = ExtResource("1_344ge")
+timer = NodePath("Timer")
+opponent = NodePath("World/Opponent")
 
 [node name="World" type="Node2D" parent="."]
 
@@ -33,10 +42,38 @@ metadata/_custom_type_script = "uid://m6atskjmp8qu"
 
 [node name="Player" parent="World" instance=ExtResource("1_jjgbg")]
 position = Vector2(309, 224)
-collision_mask = 3
 
 [node name="Opponent" parent="World" instance=ExtResource("4_jjvhh")]
 position = Vector2(510, 53)
 
+[node name="Wall" parent="World" instance=ExtResource("9_hptm8")]
+
+[node name="CollisionShape2D" parent="World/Wall" index="0"]
+position = Vector2(0, 318.5)
+
+[node name="Wall2" parent="World" instance=ExtResource("9_hptm8")]
+
+[node name="CollisionShape2D" parent="World/Wall2" index="0"]
+position = Vector2(1152, 318.5)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="World/Wall2"]
+position = Vector2(578.5, 2.25)
+shape = SubResource("RectangleShape2D_hptm8")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="World/Wall2"]
+position = Vector2(578.5, 644)
+shape = SubResource("RectangleShape2D_hptm8")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="Label" type="Label" parent="Timer"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("9_ynf5e")
+
 [editable path="World/Prop"]
 [editable path="World/Prop2"]
+[editable path="World/Wall"]
+[editable path="World/Wall2"]

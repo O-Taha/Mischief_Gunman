@@ -2,6 +2,7 @@ class_name Cowboy
 extends CharacterBody2D
 
 @export var speed: float = 300
+var dir: Vector2 
 
 @export_category("Nodes & Scenes")
 @export var bullet: PackedScene

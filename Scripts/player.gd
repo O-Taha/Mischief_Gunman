@@ -12,8 +12,6 @@ signal collided(vel) # Will be used for screen shake
 var input_types: Dictionary[String, Array] = \
 {"movement": ["left", "right", "up", "down"], "special": ["shoot"]}
 
-var dir: Vector2 = Input.get_vector("left", "right", "up", "down") # holds inputed direction for comparison with dir_input_buffer
-
 #region Dash buffer-related variables
 var dir_input_buffer: Vector2			# Holds last direction input to check for double taps
 const DIR_BUFFER_DELAY: float = 0.5	# Buffer flushed/emptied after DIR_BUFFER_DELAY
@@ -40,7 +38,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	#printt("%0.2f"%dir_buffer_counter, dir_input_buffer, dir, dir == dir_input_buffer and dir)
 	#print($FSM.curr_state)
-	dir = Input.get_vector("left", "right", "up", "down")
+	dir = Input.get_vector("left", "right", "up", "down") # holds inputed direction for comparison with dir_input_buffer
 	move_and_slide()
 	_flip_sprite_if_leftward()
 	_handle_collisions()

@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://dujt3r3bmm62r"]
+[gd_scene load_steps=24 format=3 uid="uid://dujt3r3bmm62r"]
 
 [ext_resource type="PackedScene" uid="uid://belgvmbxjjgpt" path="res://Scenes/cowboy.tscn" id="1_i4xd2"]
+[ext_resource type="Script" uid="uid://bro8mi4mkjdtg" path="res://Scenes/opponent.gd" id="2_1ejkn"]
 [ext_resource type="Texture2D" uid="uid://8wn44xr8ygoq" path="res://Assets/Placeholder/idle/0001.png" id="2_uyk7u"]
 [ext_resource type="Texture2D" uid="uid://byks7t5wa3dl0" path="res://Assets/Placeholder/idle/0002.png" id="3_1ejkn"]
 [ext_resource type="Texture2D" uid="uid://c8fouif8xmtcu" path="res://Assets/Placeholder/idle/0003.png" id="4_g3rks"]
@@ -18,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://cskvl0n3o5jlw" path="res://Assets/Placeholder/idle/0015.png" id="16_w6d8u"]
 [ext_resource type="Texture2D" uid="uid://4c8g0wpfu807" path="res://Assets/Placeholder/idle/0016.png" id="17_restm"]
 [ext_resource type="PackedScene" uid="uid://tem0cx8tjqvh" path="res://Scenes/vision_cone.tscn" id="18_uyk7u"]
+[ext_resource type="Script" uid="uid://dgsb0y5ijb2ui" path="res://Scripts/States/Opponent/o_turned.gd" id="19_g3rks"]
+[ext_resource type="Script" uid="uid://dggjq5oai4pav" path="res://Scripts/States/Opponent/o_passive.gd" id="20_xjl4b"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2o52v"]
 animations = [{
@@ -79,7 +82,10 @@ animations = [{
 radius = 61.0
 height = 138.0
 
-[node name="Opponent" instance=ExtResource("1_i4xd2")]
+[node name="Opponent" node_paths=PackedStringArray("FSM") instance=ExtResource("1_i4xd2")]
+collision_mask = 11
+script = ExtResource("2_1ejkn")
+FSM = NodePath("FSM")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 scale = Vector2(0.2, 0.2)
@@ -88,4 +94,17 @@ sprite_frames = SubResource("SpriteFrames_2o52v")
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("CapsuleShape2D_6thd5")
 
+[node name="FSM" parent="." index="2" node_paths=PackedStringArray("init_state")]
+init_state = NodePath("o_turned")
+
+[node name="o_turned" type="Node" parent="FSM" index="0"]
+script = ExtResource("19_g3rks")
+metadata/_custom_type_script = "uid://b2fcj5bbvbogh"
+
+[node name="o_passive" type="Node" parent="FSM" index="1"]
+script = ExtResource("20_xjl4b")
+metadata/_custom_type_script = "uid://b2fcj5bbvbogh"
+
 [node name="VisionCone" parent="." index="3" instance=ExtResource("18_uyk7u")]
+
+[editable path="VisionCone"]

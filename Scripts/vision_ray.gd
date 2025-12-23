@@ -11,5 +11,5 @@ func _physics_process(delta: float) -> void:
 	target_position = target_position.normalized() * initial_length
 	force_raycast_update()
 	if is_colliding():
-		target_position = target_position.limit_length(to_local(get_collision_point()).length())
+		target_position = target_position.limit_length(to_local(get_collision_point()).length()) 
 		
