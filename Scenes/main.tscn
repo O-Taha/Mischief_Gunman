@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://dlmr6missb311"]
 
-[ext_resource type="Script" uid="uid://3go8gw3j1sdi" path="res://Scenes/main.gd" id="1_344ge"]
+[ext_resource type="Script" uid="uid://3go8gw3j1sdi" path="res://Scripts/main.gd" id="1_344ge"]
 [ext_resource type="PackedScene" uid="uid://kqv4rlq3vjgj" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://dpbvlnb0x7af7" path="res://Scenes/prop.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://bu5dbrc46i8iy" path="res://Scenes/Components/non_cover_component.tscn" id="3_6bp64"]
@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dujt3r3bmm62r" path="res://Scenes/opponent.tscn" id="4_jjvhh"]
 [ext_resource type="Script" uid="uid://m6atskjmp8qu" path="res://Scripts/immovable_component.gd" id="5_6bp64"]
 [ext_resource type="PackedScene" uid="uid://bcmopllvyr764" path="res://Scenes/wall.tscn" id="9_hptm8"]
-[ext_resource type="Script" uid="uid://ci4l5t5hytxto" path="res://Scenes/label.gd" id="9_ynf5e"]
+[ext_resource type="Script" uid="uid://ci4l5t5hytxto" path="res://Scripts/label.gd" id="9_ynf5e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hptm8"]
 size = Vector2(1159, 29.5)
@@ -65,7 +65,6 @@ position = Vector2(578.5, 644)
 shape = SubResource("RectangleShape2D_hptm8")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 10.0
 one_shot = true
 
 [node name="Label" type="Label" parent="Timer"]
