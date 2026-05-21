@@ -12,7 +12,9 @@ var alert_gauge: float = 0.0:
 			# only ones to change current state but easier 
 			#than checking current state then calling  the state's function...
 			FSM.curr_state.transitioned.emit(FSM.curr_state, "o_hunt")
-		else: alert_gauge = value
+		else: 
+			alert_gauge = value
+		$ProgressBar.value = alert_gauge
 		
 var new_dest: Vector2 = position # DEBUG
 			
