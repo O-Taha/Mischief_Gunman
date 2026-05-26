@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://kqv4rlq3vjgj"]
+[gd_scene load_steps=59 format=3 uid="uid://kqv4rlq3vjgj"]
 
 [ext_resource type="PackedScene" uid="uid://belgvmbxjjgpt" path="res://Scenes/cowboy.tscn" id="1_v1ht0"]
 [ext_resource type="Script" uid="uid://bchun2vvocpa" path="res://Scripts/player.gd" id="2_vdpp0"]
@@ -55,6 +55,7 @@
 [ext_resource type="Script" uid="uid://bg6y7f2ijq33m" path="res://Scripts/player_animated_sprite_2d.gd" id="50_pukcj"]
 [ext_resource type="PackedScene" uid="uid://cds8x2nw2or4" path="res://Scenes/line_of_sight.tscn" id="53_ie7r7"]
 [ext_resource type="Script" uid="uid://c74vhesh8fily" path="res://Scripts/States/Player/shoot.gd" id="53_vq3lt"]
+[ext_resource type="PackedScene" uid="uid://bhchfsbwqnrj1" path="res://Scenes/Components/health_component.tscn" id="56_1htnp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ramv3"]
 animations = [{
@@ -259,3 +260,5 @@ script = ExtResource("53_vq3lt")
 FSM = NodePath("..")
 
 [node name="BulletTrajectory" parent="." index="3" instance=ExtResource("53_ie7r7")]
+
+[node name="HealthComponent" parent="." index="4" instance=ExtResource("56_1htnp")]

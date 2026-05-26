@@ -22,8 +22,9 @@ func _physics_process(delta):
 		var has_no_components: bool = not prop.get("added_components")
 		var queue_death: bool = false # Allows for freeing *after* checking all conditions
 		
-		if has_no_components: #Either no components added or isn't a Prop
+		if has_no_components: #Either no components added or isn't a Prop (could be a player)
 			die()
+			if prop.has_method("die"): prop.die()
 			return
 		if prop.has_component(prop.HEALTH_COMPONENT):
 			prop.get_node("HealthComponent")._on_hit_by(self)

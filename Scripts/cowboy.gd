@@ -10,8 +10,5 @@ var dir: Vector2
 
 var move_enable: bool = true
 
-func shoot() -> Node2D:
-	return null
-
 func die():
 	queue_free()
