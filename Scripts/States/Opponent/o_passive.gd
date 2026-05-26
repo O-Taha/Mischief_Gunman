@@ -17,7 +17,6 @@ func _ready() -> void:
 
 const WALL_BUFFER := 80.0
 
-
 func randomize_move():
 	wander_time = 0.0
 	owner.dir = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
@@ -43,5 +42,8 @@ func physics_update(delta: float):
 	if wander_time > 0:	wander_time -= delta
 	else:
 		randomize_move()
-	owner.velocity = owner.dir * (owner.speed)
+	owner.velocity = owner.dir * owner.speed
+	if Input.is_action_just_pressed("ui_focus_next"): 
+		transitioned.emit(self, "o_hunt") # DEBUG
+
 	

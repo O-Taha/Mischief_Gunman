@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dujt3r3bmm62r"]
+[gd_scene load_steps=25 format=3 uid="uid://dujt3r3bmm62r"]
 
 [ext_resource type="PackedScene" uid="uid://belgvmbxjjgpt" path="res://Scenes/cowboy.tscn" id="1_i4xd2"]
 [ext_resource type="Script" uid="uid://bro8mi4mkjdtg" path="res://Scripts/opponent.gd" id="2_1ejkn"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://tem0cx8tjqvh" path="res://Scenes/vision_cone.tscn" id="18_uyk7u"]
 [ext_resource type="Script" uid="uid://dgsb0y5ijb2ui" path="res://Scripts/States/Opponent/o_turned.gd" id="19_g3rks"]
 [ext_resource type="Script" uid="uid://dggjq5oai4pav" path="res://Scripts/States/Opponent/o_passive.gd" id="20_xjl4b"]
+[ext_resource type="Script" uid="uid://ddlguch71dr1t" path="res://Scripts/States/Opponent/o_hunt.gd" id="21_xagfj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2o52v"]
 animations = [{
@@ -84,6 +85,7 @@ height = 138.0
 
 [node name="Opponent" node_paths=PackedStringArray("FSM") instance=ExtResource("1_i4xd2")]
 collision_mask = 11
+wall_min_slide_angle = 0.0
 script = ExtResource("2_1ejkn")
 FSM = NodePath("FSM")
 
@@ -95,7 +97,7 @@ sprite_frames = SubResource("SpriteFrames_2o52v")
 shape = SubResource("CapsuleShape2D_6thd5")
 
 [node name="FSM" parent="." index="2" node_paths=PackedStringArray("init_state")]
-init_state = NodePath("o_turned")
+init_state = NodePath("o_passive")
 
 [node name="o_turned" type="Node" parent="FSM" index="0"]
 script = ExtResource("19_g3rks")
@@ -105,10 +107,21 @@ metadata/_custom_type_script = "uid://b2fcj5bbvbogh"
 script = ExtResource("20_xjl4b")
 metadata/_custom_type_script = "uid://b2fcj5bbvbogh"
 
+[node name="o_hunt" type="Node" parent="FSM" index="2"]
+script = ExtResource("21_xagfj")
+
 [node name="VisionCone" parent="." index="3" instance=ExtResource("18_uyk7u")]
 
 [node name="WanderRay" type="RayCast2D" parent="." index="4"]
 target_position = Vector2(500, 0)
 collision_mask = 13
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="5"]
+path_desired_distance = 500.0
+target_desired_distance = 200.0
+path_max_distance = 500.0
+avoidance_enabled = true
+radius = 30.0
+debug_enabled = true
 
 [editable path="VisionCone"]

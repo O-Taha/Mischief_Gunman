@@ -1,5 +1,5 @@
 @tool
-class_name State
+class_name State 
 extends Node
 
 @export var FSM: FSM = get_parent()
