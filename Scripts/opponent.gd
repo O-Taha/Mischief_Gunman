@@ -15,13 +15,13 @@ var alert_gauge: float = 0.0:
 			FSM.curr_state.transitioned.emit(FSM.curr_state, "o_hunt")
 		else: 
 			alert_gauge = value
-		$ProgressBar.value = alert_gauge
+		$AlertGauge.value = alert_gauge
 		
 var new_dest: Vector2 = position # DEBUG : used for o_passive wandering direction
 			
 			
 func _ready() -> void:
-	$FSM/o_passive.new_dest.connect(draw_debug)
+	$FSM/o_passive.new_dest.connect(update_debug_dest)
 
 func _physics_process(_delta: float) -> void:
 	queue_redraw() 
@@ -29,9 +29,12 @@ func _physics_process(_delta: float) -> void:
 		move_and_slide()
 		$VisionCone.rotation = dir.angle()
 
-func draw_debug(coord: Vector2):
+func update_debug_dest(coord: Vector2):
 	new_dest = coord
 	queue_redraw()
+	
+func saw_this_moved(distance: Vector2):
+	alert_gauge += distance.length()/50
 		
 func _draw() -> void:
 	draw_string(ThemeDB.fallback_font, Vector2(80, -20), FSM.curr_state.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color.BLACK)

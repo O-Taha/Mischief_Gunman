@@ -69,5 +69,6 @@ func _push_prop(collider: Object, direction: Vector2):
 	_apply_opposite_force_to_self_and_collider(impulse, collider)
 
 func _apply_opposite_force_to_self_and_collider(impulse: Vector2, collider: Object):
-	collider.apply_central_impulse(impulse)
+	collider.push(impulse)
+	#print(impulse)
 	velocity = -impulse

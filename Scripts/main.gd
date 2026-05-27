@@ -5,7 +5,7 @@ extends Node
 @export var opponent: CharacterBody2D
 
 func _ready() -> void:
-	timer.start()
+	timer.start(10)
 	timer.timeout.connect(turn_opponent_after_countdown)
 
 func turn_opponent_after_countdown():

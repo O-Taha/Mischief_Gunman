@@ -6,7 +6,7 @@ var last_vel_lenght: float
 
 func physics_update(delta: float):
 	if owner.move_enable:
-		owner.velocity = owner.velocity.lerp(owner.dir * owner.speed, 0.1)
+		owner.velocity = owner.velocity.lerp(owner.dir * owner.speed, 0.2)
 		
 		if owner.sprite.animation != "walk" and owner.velocity.length() >= is_moving_threshold_vel:
 			if owner.sprite.animation == "dash": 
