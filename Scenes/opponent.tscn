@@ -150,4 +150,6 @@ fill_mode = 3
 texture_under = SubResource("GradientTexture2D_sd3ku")
 texture_progress = SubResource("GradientTexture2D_nrimw")
 
+[node name="Area2D" type="Area2D" parent="." index="7"]
+
 [editable path="VisionCone"]

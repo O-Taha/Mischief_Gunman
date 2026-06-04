@@ -21,6 +21,7 @@ func has_component(component_mask: int) -> bool:
 
 func _ready() -> void:
 	_set_added_components()
+	$SoundRadius/CollisionShape2D.set_deferred("disabled", true)
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"): apply_central_impulse(Vector2.LEFT * 100) # DEBUG
@@ -34,7 +35,11 @@ func push(impulse: Vector2):	# Just a wrapper for moving props,
 						#since we can hardly modify the position setter...)
 	var old_pos = position
 	apply_central_impulse(impulse)
+	
 	SfxPlayer.play_sfx("TEST")
+	$SoundRadius/CollisionShape2D.set_deferred("disabled", false)
+	var sound_radius_disabler: Tween = get_tree().create_tween()
+	sound_radius_disabler.tween_callback($SoundRadius/CollisionShape2D.set_deferred.bind("disabled", true)).set_delay(1.0)
 
 func die():
 	queue_free()
