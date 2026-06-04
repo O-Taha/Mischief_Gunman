@@ -16,7 +16,7 @@ func physics_update(delta: float):
 		
 		owner.sprite.speed_scale = owner.get_real_velocity().length()/owner.speed
 
-		check_for_dash()	# WARNING: Prioritize dash check over idle 
+		#check_for_dash()	# WARNING: Prioritize dash check over idle 
 						# for easier dash state entry
 		_check_for_idle()
 		check_for_shoot()

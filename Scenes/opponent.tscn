@@ -80,8 +80,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6thd5"]
-radius = 61.0
-height = 138.0
+radius = 16.0
+height = 32.0
 
 [sub_resource type="Gradient" id="Gradient_xagfj"]
 offsets = PackedFloat32Array(0)
@@ -109,9 +109,6 @@ FSM = NodePath("FSM")
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_2o52v")
 
-[node name="CollisionShape2D" parent="." index="1"]
-shape = SubResource("CapsuleShape2D_6thd5")
-
 [node name="FSM" parent="." index="2" node_paths=PackedStringArray("init_state")]
 init_state = NodePath("o_turned")
 
@@ -119,8 +116,9 @@ init_state = NodePath("o_turned")
 script = ExtResource("19_g3rks")
 metadata/_custom_type_script = "uid://b2fcj5bbvbogh"
 
-[node name="o_passive" type="Node" parent="FSM" index="1"]
+[node name="o_passive" type="Node" parent="FSM" index="1" node_paths=PackedStringArray("obstacle_checker")]
 script = ExtResource("20_xjl4b")
+obstacle_checker = NodePath("../../ObstableChecker")
 metadata/_custom_type_script = "uid://b2fcj5bbvbogh"
 
 [node name="o_hunt" type="Node" parent="FSM" index="2"]
@@ -128,9 +126,11 @@ script = ExtResource("21_xagfj")
 
 [node name="VisionCone" parent="." index="3" instance=ExtResource("18_uyk7u")]
 
-[node name="WanderRay" type="RayCast2D" parent="." index="4"]
+[node name="ObstableChecker" type="ShapeCast2D" parent="." index="4"]
+modulate = Color(1, 1, 1, 0.0392157)
+shape = SubResource("CapsuleShape2D_6thd5")
 target_position = Vector2(500, 0)
-collision_mask = 13
+collision_mask = 10
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="5"]
 path_desired_distance = 500.0

@@ -33,8 +33,8 @@ func update_debug_dest(coord: Vector2):
 	new_dest = coord
 	queue_redraw()
 	
-func saw_this_moved(distance: Vector2):
-	alert_gauge += distance.length()/50
+func saw_prop_moved(speed: float):
+	alert_gauge += speed/1000
 		
 func _draw() -> void:
 	draw_string(ThemeDB.fallback_font, Vector2(80, -20), FSM.curr_state.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color.BLACK)

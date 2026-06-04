@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 BulletCongregator="*res://Scripts/bullet_congregator.gd"
+SfxPlayer="*res://Scenes/sfx_player.tscn"
 
 [editor]
 

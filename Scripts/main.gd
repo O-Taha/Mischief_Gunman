@@ -5,9 +5,9 @@ extends Node
 @export var opponent: CharacterBody2D
 
 func _ready() -> void:
-	timer.start(10)
+	timer.start(20)
 	timer.timeout.connect(turn_opponent_after_countdown)
 
 func turn_opponent_after_countdown():
-	if opponent.FSM.curr_state.has_method("turn_around"):
+	if opponent and opponent.FSM.curr_state.has_method("turn_around"):
 		opponent.FSM.curr_state.turn_around()

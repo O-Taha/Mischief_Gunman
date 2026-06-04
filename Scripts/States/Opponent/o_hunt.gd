@@ -2,7 +2,7 @@
 extends State
 
 @onready var nav_agent: NavigationAgent2D = $"../../NavigationAgent2D"
-@onready var old_dir = owner.dir
+@onready var old_dir = owner.get("dir")
 
 func enter():
 	nav_agent.velocity_computed.connect(on_avoidance_velocity_computed)

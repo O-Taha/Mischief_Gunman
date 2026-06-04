@@ -12,39 +12,74 @@ signal collided(vel) # Will be used for screen shake
 var input_types: Dictionary[String, Array] = \
 {"movement": ["left", "right", "up", "down"], "special": ["shoot"]}
 
-#region Dash buffer-related variables
-var dir_input_buffer: Vector2			# Holds last direction input to check for double taps
-const DIR_BUFFER_DELAY: float = 0.5	# Buffer flushed/emptied after DIR_BUFFER_DELAY
-var dir_buffer_counter: float = 0:		# Counter that will WARNING loop automatically (setter) until DIR_BUFFER_DELAY
+#region Dash variables
+enum DashCheckState {
+	IDLE,
+	FIRST_INPUT,
+	DELAY,
+	SECOND_INPUT
+}
+
+var dash_check_state: DashCheckState = DashCheckState.IDLE:
 	set(value):
-		dir_buffer_counter = value
-		if value >= DIR_BUFFER_DELAY:
-			dir_input_buffer = Vector2.ZERO
-			dir_buffer_counter = 0
-#endregion
+		dash_check_state = value
+		dir_buffer_counter = 0.0 # Reset the counter to give time again to perform the next operation
+const DIR_BUFFER_DELAY := 0.15	# Buffer flushed/emptied after DIR_BUFFER_DELAY
+var first_input_dir := Vector2.ZERO
+var dir_buffer_counter: float = 0.0
 
-var acceleration: float
-
-var dash_cooldown_time: float = 1
+var dash_cooldown_time: float = 1.0
 var dash_enable: bool = true:			# NOTE: Automatically sets sprite transparency (setter)
 	set(value):
 		dash_enable = value
 		modulate.a = 1.0 if value else 0.5
+#endregion
+
+var acceleration: float # Used to check we just did a dash, since checking dash state isn't enough as it is transient
 
 
 func _ready() -> void:
 	bullet_trajectory.get_node("RayCast2D").add_exception(self)
 
 func _physics_process(delta: float) -> void:
-	#printt("%0.2f"%dir_buffer_counter, dir_input_buffer, dir, dir == dir_input_buffer and dir)
-	#print($FSM.curr_state)
-	dir = Input.get_vector("left", "right", "up", "down") # holds inputed direction for comparison with dir_input_buffer
+	dir = Input.get_vector("left", "right", "up", "down")
+	if dash_enable: check_for_dash(delta)
 	move_and_slide()
 	_flip_sprite_if_leftward()
 	_handle_collisions()
 
-	dir_buffer_counter += delta # Regularly reset (every DIR_BUFFER_DELAY) by his setter
+func check_for_dash(delta: float) -> void: # A dash is achieved by pressing a direction
+								# releasing, then pressing the same direction.
+								# The FSM below checks for this pattern
+	dir_buffer_counter += delta
+	if dir_buffer_counter >= DIR_BUFFER_DELAY:
+		reset_dash_check() # Too bad... Not quick enough !
+		return
 
+	match dash_check_state:
+		DashCheckState.IDLE:
+			if dir != Vector2.ZERO:
+				first_input_dir = dir
+				dash_check_state = DashCheckState.FIRST_INPUT
+
+		DashCheckState.FIRST_INPUT:
+			if dir == Vector2.ZERO:
+				dash_check_state = DashCheckState.DELAY
+
+		DashCheckState.DELAY:
+			if dir != Vector2.ZERO:
+				if dir.is_equal_approx(first_input_dir):
+					dash_check_state = DashCheckState.SECOND_INPUT
+					$FSM.curr_state.transitioned.emit($FSM.curr_state,"dash")
+					reset_dash_check()
+				else: # Not the same direction
+					reset_dash_check()
+		
+func reset_dash_check():
+	dash_check_state = DashCheckState.IDLE
+	#dir_buffer_counter = 0.0 #Already performed through dash_check_state's setter
+	first_input_dir = Vector2.ZERO
+	
 func _flip_sprite_if_leftward():
 	if dir:
 		sprite.flip_h = dir.x < 0 
@@ -70,5 +105,4 @@ func _push_prop(collider: Object, direction: Vector2):
 
 func _apply_opposite_force_to_self_and_collider(impulse: Vector2, collider: Object):
 	collider.push(impulse)
-	#print(impulse)
 	velocity = -impulse

@@ -680,3 +680,5 @@ label_settings = SubResource("LabelSettings_hptm8")
 script = ExtResource("9_ynf5e")
 
 [editable path="World/Prop"]
+[editable path="World/Opponent"]
+[editable path="World/Opponent/VisionCone"]
