@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dujt3r3bmm62r"]
+[gd_scene load_steps=30 format=3 uid="uid://dujt3r3bmm62r"]
 
 [ext_resource type="PackedScene" uid="uid://belgvmbxjjgpt" path="res://Scenes/cowboy.tscn" id="1_i4xd2"]
 [ext_resource type="Script" uid="uid://bro8mi4mkjdtg" path="res://Scripts/opponent.gd" id="2_1ejkn"]
@@ -99,6 +99,9 @@ colors = PackedColorArray(1, 0.374074, 0.342341, 1)
 gradient = SubResource("Gradient_e5o20")
 width = 16
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_xagfj"]
+radius = 208.274
+
 [node name="Opponent" node_paths=PackedStringArray("FSM") instance=ExtResource("1_i4xd2")]
 collision_mask = 11
 wall_min_slide_angle = 0.0
@@ -144,12 +147,18 @@ debug_enabled = true
 [node name="AlertGauge" type="TextureProgressBar" parent="." index="6"]
 offset_left = 32.0
 offset_top = -88.0
-offset_right = 288.0
-offset_bottom = 16.0
+offset_right = 48.0
+offset_bottom = -24.0
 fill_mode = 3
 texture_under = SubResource("GradientTexture2D_sd3ku")
 texture_progress = SubResource("GradientTexture2D_nrimw")
 
-[node name="Area2D" type="Area2D" parent="." index="7"]
+[node name="HearingRadius" type="Area2D" parent="." index="7"]
+modulate = Color(0.3, 0.44, 1, 1)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HearingRadius" index="0"]
+shape = SubResource("CircleShape2D_xagfj")
 
 [editable path="VisionCone"]

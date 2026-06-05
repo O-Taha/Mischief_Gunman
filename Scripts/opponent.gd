@@ -18,11 +18,13 @@ var alert_gauge: float = 0.0:
 		$AlertGauge.value = alert_gauge
 		
 var new_dest: Vector2 = position # DEBUG : used for o_passive wandering direction
-			
+var audible_props: Array[Prop]
 			
 func _ready() -> void:
 	$FSM/o_passive.new_dest.connect(update_debug_dest)
-
+	$HearingRadius.body_entered.connect(update_audible_prop_list.bind(true))
+	$HearingRadius.body_exited.connect(update_audible_prop_list.bind(false))
+	
 func _physics_process(_delta: float) -> void:
 	queue_redraw() 
 	if move_enable:
@@ -35,6 +37,16 @@ func update_debug_dest(coord: Vector2):
 	
 func saw_prop_moved(speed: float):
 	alert_gauge += speed/1000
+
+func heard_prop_moved(prop_global_position: Vector2, volume: int):
+	alert_gauge += (volume * 1000)/(global_position.distance_to(prop_global_position))
+	print(alert_gauge)
+	
+func update_audible_prop_list(body:Node2D, add_prop: bool):
+	if add_prop: # body_entered
+		body.sound_emitted.connect(heard_prop_moved)
+	else: # body_exited
+		body.sound_emitted.disconnect(heard_prop_moved)
 		
 func _draw() -> void:
 	draw_string(ThemeDB.fallback_font, Vector2(80, -20), FSM.curr_state.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color.BLACK)

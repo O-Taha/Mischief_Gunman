@@ -10,7 +10,11 @@ const NON_COVER_COMPONENT: int = 4
 const IMMOVABLE_COMPONENT: int = 8
 var added_components: int = 0
 
+signal sound_emitted(global_position: Vector2, volume: int)
+
 var is_moving: bool = false
+@export var sfx_name: StringName = "TEST"
+@export_range(0.0, 3.0) var sfx_volume: int = 1
 
 func _set_added_components():
 	for component in find_children("*Component*"):
@@ -21,7 +25,6 @@ func has_component(component_mask: int) -> bool:
 
 func _ready() -> void:
 	_set_added_components()
-	$SoundRadius/CollisionShape2D.set_deferred("disabled", true)
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"): apply_central_impulse(Vector2.LEFT * 100) # DEBUG
@@ -31,15 +34,14 @@ func _physics_process(delta: float) -> void:
 	else: is_moving = false
 
 func push(impulse: Vector2):	# Just a wrapper for moving props, 
-						# to easily emit the moved signal (
-						#since we can hardly modify the position setter...)
+						# to easily emit the signals and create setter-like behaviour
 	var old_pos = position
 	apply_central_impulse(impulse)
+	emit_sound()
 	
-	SfxPlayer.play_sfx("TEST")
-	$SoundRadius/CollisionShape2D.set_deferred("disabled", false)
-	var sound_radius_disabler: Tween = get_tree().create_tween()
-	sound_radius_disabler.tween_callback($SoundRadius/CollisionShape2D.set_deferred.bind("disabled", true)).set_delay(1.0)
+func emit_sound():
+	SfxPlayer.play_sfx(sfx_name)
+	sound_emitted.emit(global_position, sfx_volume)
 
 func die():
 	queue_free()
