@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfjt2ebm1npn6"]
+
+[ext_resource type="PackedScene" uid="uid://dpbvlnb0x7af7" path="res://Scenes/prop.tscn" id="1_m5w3l"]
+[ext_resource type="Texture2D" uid="uid://cst4iw5vpg0il" path="res://Assets/Placeholder/tilt_minus_45_512.png" id="2_rp70x"]
+[ext_resource type="PackedScene" uid="uid://bhchfsbwqnrj1" path="res://Scenes/Components/health_component.tscn" id="3_rp70x"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1tdys"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rp70x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m5w3l"]
+size = Vector2(100, 49)
+
+[node name="Barrel" instance=ExtResource("1_m5w3l")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+self_modulate = Color(1, 1, 1, 1)
+scale = Vector2(0.265, 0.265)
+sprite_frames = SubResource("SpriteFrames_1tdys")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 40.5)
+shape = SubResource("RectangleShape2D_m5w3l")
+
+[node name="HealthComponent" parent="." index="4" instance=ExtResource("3_rp70x")]
+health = 3.0

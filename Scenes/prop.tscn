@@ -1,10 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpbvlnb0x7af7"]
+[gd_scene load_steps=5 format=3 uid="uid://dpbvlnb0x7af7"]
 
 [ext_resource type="Script" uid="uid://mrvhsqa6akvx" path="res://Scripts/prop.gd" id="1_5sh6o"]
-[ext_resource type="Texture2D" uid="uid://co3v83fiot4co" path="res://icon.svg" id="1_b5kkq"]
+[ext_resource type="Texture2D" uid="uid://dvs1art550aah" path="res://Assets/Placeholder/sphere-00.png" id="2_5sh6o"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5sh6o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5sh6o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5sh6o"]
-size = Vector2(128, 128)
+size = Vector2(100, 100)
 
 [node name="Prop" type="RigidBody2D"]
 collision_layer = 2
@@ -15,13 +26,13 @@ can_sleep = false
 lock_rotation = true
 linear_damp = 5.0
 script = ExtResource("1_5sh6o")
-sfx_name = null
-sfx_volume = null
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0.298039, 1, 1)
-texture = ExtResource("1_b5kkq")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(0, 0.600517, 0.32298, 1)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_5sh6o")
+offset = Vector2(0, -40)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5sh6o")

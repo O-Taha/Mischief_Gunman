@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://d343t4ym6bdnc"]
+
+[ext_resource type="PackedScene" uid="uid://dpbvlnb0x7af7" path="res://Scenes/prop.tscn" id="1_6c32n"]
+[ext_resource type="Texture2D" uid="uid://c5t0gfqqsgfwg" path="res://Assets/Placeholder/hanging_sign_01.png" id="2_v8ien"]
+[ext_resource type="PackedScene" uid="uid://kr065k2vptg0" path="res://Scenes/Components/immovable_component.tscn" id="3_u6bny"]
+[ext_resource type="PackedScene" uid="uid://vnetyy40d6l6" path="res://Scenes/Components/ricochet_component.tscn" id="4_qwoug"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bqbd3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_v8ien")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6fgx1"]
+size = Vector2(100, 100)
+
+[node name="Sign" instance=ExtResource("1_6c32n")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+scale = Vector2(3.155, 3.155)
+sprite_frames = SubResource("SpriteFrames_bqbd3")
+offset = Vector2(0, 0)
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_6fgx1")
+
+[node name="ImmovableComponent" parent="." index="4" instance=ExtResource("3_u6bny")]
+
+[node name="RicochetComponent" parent="." index="5" instance=ExtResource("4_qwoug")]

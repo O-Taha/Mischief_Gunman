@@ -105,4 +105,4 @@ func _push_prop(collider: Object, direction: Vector2):
 
 func _apply_opposite_force_to_self_and_collider(impulse: Vector2, collider: Object):
 	collider.push(impulse)
-	velocity = -impulse
+	velocity = -impulse/2

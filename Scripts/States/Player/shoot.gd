@@ -10,14 +10,6 @@ func enter():
 		var congregator = get_tree().root.get_node("/root/BulletCongregator")
 		congregator.add_child(bullet)
 		bullet.owner = congregator
-		
-#func exit():
-	#owner.dash_enable = false
-	#_enable_dash_after_cooldown(owner.dash_cooldown_time)
 
 func update(delta: float):
 	transitioned.emit(self, "idle")
-
-#func _enable_dash_after_cooldown(time: float):
-	#var dash_cooldown_enabler: Tween = get_tree().create_tween()
-	#dash_cooldown_enabler.tween_callback(func (): owner.dash_enable = true).set_delay(time)

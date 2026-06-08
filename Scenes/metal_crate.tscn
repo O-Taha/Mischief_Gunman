@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://dnajrn1qknkrw"]
+
+[ext_resource type="PackedScene" uid="uid://dpbvlnb0x7af7" path="res://Scenes/prop.tscn" id="1_isp43"]
+[ext_resource type="Texture2D" uid="uid://c70n5cwpy1cfs" path="res://Assets/Placeholder/box_closed.png" id="2_sead1"]
+[ext_resource type="Script" uid="uid://k0lkvmnf0qhf" path="res://Scripts/ricochet_component.gd" id="3_ptr1n"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k52rv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_sead1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_maato"]
+size = Vector2(100, 29)
+
+[node name="MetalCrate" instance=ExtResource("1_isp43")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+self_modulate = Color(0.498514, 1, 0.984633, 1)
+position = Vector2(0, 24.0337)
+scale = Vector2(0.423529, 0.325843)
+sprite_frames = SubResource("SpriteFrames_k52rv")
+offset = Vector2(0, -90)
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 35.5)
+shape = SubResource("RectangleShape2D_maato")
+
+[node name="NavigationObstacle2D" parent="." index="3"]
+visible = false
+
+[node name="RicochetComponent" type="Node2D" parent="." index="4"]
+script = ExtResource("3_ptr1n")
+metadata/_custom_type_script = "uid://k0lkvmnf0qhf"
