@@ -22,7 +22,7 @@ size = Vector2(100, 49)
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 self_modulate = Color(1, 1, 1, 1)
-scale = Vector2(0.265, 0.265)
+scale = Vector2(0.29, 0.29)
 sprite_frames = SubResource("SpriteFrames_1tdys")
 
 [node name="CollisionShape2D" parent="." index="1"]
