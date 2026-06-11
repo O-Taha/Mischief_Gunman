@@ -44,6 +44,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	dir = Input.get_vector("left", "right", "up", "down")
 	if dash_enable: check_for_dash(delta)
+	check_for_shoot()
 	move_and_slide()
 	_flip_sprite_if_leftward()
 	_handle_collisions()
@@ -61,11 +62,9 @@ func check_for_dash(delta: float) -> void: # A dash is achieved by pressing a di
 			if dir != Vector2.ZERO:
 				first_input_dir = dir
 				dash_check_state = DashCheckState.FIRST_INPUT
-
 		DashCheckState.FIRST_INPUT:
 			if dir == Vector2.ZERO:
 				dash_check_state = DashCheckState.DELAY
-
 		DashCheckState.DELAY:
 			if dir != Vector2.ZERO:
 				if dir.is_equal_approx(first_input_dir):
@@ -74,6 +73,10 @@ func check_for_dash(delta: float) -> void: # A dash is achieved by pressing a di
 					reset_dash_check()
 				else: # Not the same direction
 					reset_dash_check()
+					
+func check_for_shoot():
+	if Input.is_action_just_pressed('shoot'):
+				$FSM.curr_state.transitioned.emit($FSM.curr_state, "shoot")
 		
 func reset_dash_check():
 	dash_check_state = DashCheckState.IDLE

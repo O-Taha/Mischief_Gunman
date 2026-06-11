@@ -19,7 +19,6 @@ func physics_update(delta: float):
 		#check_for_dash()	# WARNING: Prioritize dash check over idle 
 						# for easier dash state entry
 		_check_for_idle()
-		check_for_shoot()
 		
 func _check_for_idle():
 	var player_about_to_stop = owner.velocity.length() <= 100\

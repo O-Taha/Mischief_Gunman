@@ -19,7 +19,3 @@ func update(delta: float):
 
 func physics_update(delta: float):
 	pass
-	
-func check_for_shoot():
-	if Input.is_action_just_pressed('shoot'):
-				transitioned.emit(self, "shoot")
