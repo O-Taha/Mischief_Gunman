@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://tem0cx8tjqvh"]
+[gd_scene load_steps=3 format=3 uid="uid://tem0cx8tjqvh"]
 
 [ext_resource type="Script" uid="uid://dvsjkabhrrgby" path="res://Scripts/vision_ray.gd" id="1_upggy"]
+
+[sub_resource type="Curve" id="Curve_upggy"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.3), 0.0, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
 
 [node name="VisionCone" type="Node2D"]
 
@@ -8,27 +13,32 @@
 target_position = Vector2(500, 0)
 collision_mask = 11
 script = ExtResource("1_upggy")
+alert_by_distance_curve = SubResource("Curve_upggy")
 
 [node name="VisionRay-1" type="RayCast2D" parent="."]
 rotation = 0.0872665
 target_position = Vector2(500, 0)
 collision_mask = 11
 script = ExtResource("1_upggy")
+alert_by_distance_curve = SubResource("Curve_upggy")
 
 [node name="VisionRay1" type="RayCast2D" parent="."]
 rotation = -0.0872665
 target_position = Vector2(500, 0)
 collision_mask = 11
 script = ExtResource("1_upggy")
+alert_by_distance_curve = SubResource("Curve_upggy")
 
 [node name="VisionRay-2" type="RayCast2D" parent="."]
 rotation = 0.174533
 target_position = Vector2(500, 0)
 collision_mask = 11
 script = ExtResource("1_upggy")
+alert_by_distance_curve = SubResource("Curve_upggy")
 
 [node name="VisionRay2" type="RayCast2D" parent="."]
 rotation = -0.174533
 target_position = Vector2(500, 0)
 collision_mask = 11
 script = ExtResource("1_upggy")
+alert_by_distance_curve = SubResource("Curve_upggy")

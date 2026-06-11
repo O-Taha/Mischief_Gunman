@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dujt3r3bmm62r"]
+[gd_scene load_steps=32 format=3 uid="uid://dujt3r3bmm62r"]
 
 [ext_resource type="PackedScene" uid="uid://belgvmbxjjgpt" path="res://Scenes/cowboy.tscn" id="1_i4xd2"]
 [ext_resource type="Script" uid="uid://bro8mi4mkjdtg" path="res://Scripts/opponent.gd" id="2_1ejkn"]
@@ -22,6 +22,8 @@
 [ext_resource type="Script" uid="uid://dgsb0y5ijb2ui" path="res://Scripts/States/Opponent/o_turned.gd" id="19_g3rks"]
 [ext_resource type="Script" uid="uid://dggjq5oai4pav" path="res://Scripts/States/Opponent/o_passive.gd" id="20_xjl4b"]
 [ext_resource type="Script" uid="uid://ddlguch71dr1t" path="res://Scripts/States/Opponent/o_hunt.gd" id="21_xagfj"]
+[ext_resource type="Script" uid="uid://834hq614bavk" path="res://Scripts/States/Opponent/o_shoot.gd" id="22_sd3ku"]
+[ext_resource type="Script" uid="uid://o0xtf3d1i5r0" path="res://Scripts/States/Opponent/o_win.gd" id="23_e5o20"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2o52v"]
 animations = [{
@@ -102,11 +104,12 @@ width = 16
 [sub_resource type="CircleShape2D" id="CircleShape2D_xagfj"]
 radius = 208.274
 
-[node name="Opponent" node_paths=PackedStringArray("FSM") instance=ExtResource("1_i4xd2")]
+[node name="Opponent" node_paths=PackedStringArray("FSM", "collision") instance=ExtResource("1_i4xd2")]
 collision_mask = 11
 wall_min_slide_angle = 0.0
 script = ExtResource("2_1ejkn")
 FSM = NodePath("FSM")
+collision = NodePath("CollisionShape2D")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 scale = Vector2(0.2, 0.2)
@@ -126,6 +129,12 @@ metadata/_custom_type_script = "uid://b2fcj5bbvbogh"
 
 [node name="o_hunt" type="Node" parent="FSM" index="2"]
 script = ExtResource("21_xagfj")
+
+[node name="o_shoot" type="Node" parent="FSM" index="3"]
+script = ExtResource("22_sd3ku")
+
+[node name="o_win" type="Node" parent="FSM" index="4"]
+script = ExtResource("23_e5o20")
 
 [node name="VisionCone" parent="." index="3" instance=ExtResource("18_uyk7u")]
 

@@ -27,7 +27,7 @@ func has_component(component_mask: int) -> bool:
 
 func _ready() -> void:
 	_set_added_components()
-	print(name)
+	
 func _physics_process(delta: float) -> void:
 	if not Engine.is_editor_hint():
 		if $VelocityVector and display_debug_vector: # DEBUG

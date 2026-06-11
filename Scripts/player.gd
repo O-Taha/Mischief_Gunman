@@ -2,6 +2,7 @@ class_name Player
 extends Cowboy
 
 signal collided(vel) # Will be used for screen shake
+signal died # used to put opponent in win state and avoid calling a freed player reference
 
 @export_category("Nodes & Scenes")
 @export var bullet_trajectory: Line2D
@@ -109,3 +110,8 @@ func _push_prop(collider: Object, direction: Vector2):
 func _apply_opposite_force_to_self_and_collider(impulse: Vector2, collider: Object):
 	collider.push(impulse)
 	velocity = -impulse/2
+
+func die():
+	super.die()
+	died.emit()
+	

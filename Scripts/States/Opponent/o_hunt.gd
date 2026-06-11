@@ -8,14 +8,6 @@ func enter():
 	nav_agent.velocity_computed.connect(on_avoidance_velocity_computed)
 	nav_agent.target_position = owner.player.global_position
 	nav_agent.navigation_finished.connect(update_player_target_position)
-	#if owner.move_enable:
-		#var aim_direction: Vector2 = owner.bullet_trajectory.points[1] - owner.bullet_trajectory.points[0]
-		#aim_direction = aim_direction.normalized() * owner.collision.get_shape().get_rect().size.y
-		#
-		#var bullet = owner.bullet.instantiate()._initialize(owner.global_position+aim_direction, aim_direction.angle())
-		#var congregator = get_tree().root.get_node("/root/BulletCongregator")
-		#congregator.add_child(bullet)
-		#bullet.owner = congregator
 
 func update_player_target_position():
 	nav_agent.target_position = owner.player.global_position
@@ -33,3 +25,4 @@ func on_avoidance_velocity_computed(safe_velocity: Vector2):
 
 func exit(): # DEBUG
 	nav_agent.velocity_computed.disconnect(on_avoidance_velocity_computed)
+	nav_agent.navigation_finished.disconnect(update_player_target_position)
