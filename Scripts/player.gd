@@ -25,7 +25,7 @@ var dash_check_state: DashCheckState = DashCheckState.IDLE:
 	set(value):
 		dash_check_state = value
 		dir_buffer_counter = 0.0 # Reset the counter to give time again to perform the next operation
-const DIR_BUFFER_DELAY := 0.15	# Buffer flushed/emptied after DIR_BUFFER_DELAY
+const DIR_BUFFER_DELAY := 0.1	# Buffer flushed/emptied after DIR_BUFFER_DELAY
 var first_input_dir := Vector2.ZERO
 var dir_buffer_counter: float = 0.0
 

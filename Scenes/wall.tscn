@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://bcmopllvyr764"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b57mv"]
-size = Vector2(12, 665)
+size = Vector2(1144.38, 18.25)
 
 [node name="Wall" type="StaticBody2D"]
 collision_layer = 8

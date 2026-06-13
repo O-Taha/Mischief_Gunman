@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://dlmr6missb311"]
+[gd_scene load_steps=30 format=4 uid="uid://dlmr6missb311"]
 
 [ext_resource type="Script" uid="uid://3go8gw3j1sdi" path="res://Scripts/main.gd" id="1_344ge"]
 [ext_resource type="PackedScene" uid="uid://kqv4rlq3vjgj" path="res://Scenes/player.tscn" id="1_jjgbg"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dnajrn1qknkrw" path="res://Scenes/metal_crate.tscn" id="10_d1ilt"]
 [ext_resource type="PackedScene" uid="uid://c5q8ectcb2ima" path="res://Scenes/cactus.tscn" id="10_hptm8"]
 [ext_resource type="PackedScene" uid="uid://d343t4ym6bdnc" path="res://Scenes/sign.tscn" id="11_6iyac"]
+[ext_resource type="PackedScene" uid="uid://bcmopllvyr764" path="res://Scenes/wall.tscn" id="12_fdnlq"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_d1ilt"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -335,7 +336,6 @@ texture = ExtResource("2_d1ilt")
 12:15/0 = 0
 0:16/0 = 0
 0:16/0/terrain_set = 0
-0:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2.1583, -8, 8, -8, 8, 8, -2.1583, 8)
 0:16/0/terrains_peering_bit/right_side = 0
 0:16/0/terrains_peering_bit/bottom_right_corner = 0
 0:16/0/terrains_peering_bit/bottom_side = 0
@@ -343,7 +343,6 @@ texture = ExtResource("2_d1ilt")
 0:16/0/terrains_peering_bit/top_right_corner = 0
 6:16/0 = 0
 6:16/0/terrain_set = 0
-6:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(2.1583, -8, -8, -8, -8, 8, 2.1583, 8)
 6:16/0/terrains_peering_bit/bottom_side = 0
 6:16/0/terrains_peering_bit/bottom_left_corner = 0
 6:16/0/terrains_peering_bit/left_side = 0
@@ -355,7 +354,6 @@ texture = ExtResource("2_d1ilt")
 12:16/0 = 0
 0:17/0 = 0
 0:17/0/terrain_set = 0
-0:17/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2.1583, -8, 8, -8, 8, 8, -2.1583, 8)
 0:17/0/terrains_peering_bit/right_side = 0
 0:17/0/terrains_peering_bit/bottom_right_corner = 0
 0:17/0/terrains_peering_bit/bottom_side = 0
@@ -385,7 +383,6 @@ texture = ExtResource("2_d1ilt")
 5:17/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_fevyy")
 6:17/0 = 0
 6:17/0/terrain_set = 0
-6:17/0/physics_layer_0/polygon_0/points = PackedVector2Array(2.1583, -8, -8, -8, -8, 8, 2.1583, 8)
 6:17/0/terrains_peering_bit/bottom_side = 0
 6:17/0/terrains_peering_bit/bottom_left_corner = 0
 6:17/0/terrains_peering_bit/left_side = 0
@@ -399,7 +396,6 @@ texture = ExtResource("2_d1ilt")
 12:17/0 = 0
 0:18/0 = 0
 0:18/0/terrain_set = 0
-0:18/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2.1583, -8, 8, -8, 8, 8, -2.1583, 8)
 0:18/0/terrains_peering_bit/right_side = 0
 0:18/0/terrains_peering_bit/bottom_right_corner = 0
 0:18/0/terrains_peering_bit/bottom_side = 0
@@ -452,7 +448,6 @@ texture = ExtResource("2_d1ilt")
 5:18/0/terrains_peering_bit/top_right_corner = 0
 6:18/0 = 0
 6:18/0/terrain_set = 0
-6:18/0/physics_layer_0/polygon_0/points = PackedVector2Array(2.1583, -8, -8, -8, -8, 8, 2.1583, 8)
 6:18/0/terrains_peering_bit/right_side = 0
 6:18/0/terrains_peering_bit/bottom_right_corner = 0
 6:18/0/terrains_peering_bit/bottom_side = 0
@@ -470,7 +465,6 @@ texture = ExtResource("2_d1ilt")
 12:18/0 = 0
 0:19/0 = 0
 0:19/0/terrain_set = 0
-0:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2.1583, -8, 8, -8, 8, 8, -2.1583, 8)
 0:19/0/terrains_peering_bit/right_side = 0
 0:19/0/terrains_peering_bit/bottom_right_corner = 0
 0:19/0/terrains_peering_bit/bottom_side = 0
@@ -529,7 +523,6 @@ texture = ExtResource("2_d1ilt")
 5:19/0/terrains_peering_bit/top_right_corner = 0
 6:19/0 = 0
 6:19/0/terrain_set = 0
-6:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(2.1583, -8, -8, -8, -8, 8, 2.1583, 8)
 6:19/0/terrains_peering_bit/bottom_left_corner = 0
 6:19/0/terrains_peering_bit/left_side = 0
 6:19/0/terrains_peering_bit/top_left_corner = 0
@@ -630,13 +623,20 @@ texture = ExtResource("2_d1ilt")
 7:23/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_fdnlq"]
-physics_layer_0/collision_layer = 8
-physics_layer_0/collision_mask = 7
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Wall"
 terrain_set_0/terrain_0/color = Color(0.549443, 0.198, 0.639021, 1)
 navigation_layer_0/layers = 1
 sources/17 = SubResource("TileSetAtlasSource_6iyac")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jkdf5"]
+size = Vector2(38.5313, 623.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wsu2k"]
+size = Vector2(40.375, 618.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k12tt"]
+size = Vector2(1072, 16)
 
 [sub_resource type="LabelSettings" id="LabelSettings_hptm8"]
 font_size = 40
@@ -685,6 +685,32 @@ position = Vector2(419, 166)
 [node name="Sign" parent="World" instance=ExtResource("11_6iyac")]
 position = Vector2(92, 191)
 
+[node name="Wall" parent="World" instance=ExtResource("12_fdnlq")]
+
+[node name="CollisionShape2D" parent="World/Wall" index="0"]
+position = Vector2(20.7344, 312.125)
+shape = SubResource("RectangleShape2D_jkdf5")
+
+[node name="Wall3" parent="World" instance=ExtResource("12_fdnlq")]
+position = Vector2(309, 48)
+
+[node name="CollisionShape2D" parent="World/Wall3" index="0"]
+position = Vector2(262.813, 582.875)
+
+[node name="Wall4" parent="World" instance=ExtResource("12_fdnlq")]
+position = Vector2(309, 48)
+
+[node name="CollisionShape2D" parent="World/Wall4" index="0"]
+position = Vector2(822.813, 261.125)
+shape = SubResource("RectangleShape2D_wsu2k")
+
+[node name="Wall2" parent="World" instance=ExtResource("12_fdnlq")]
+position = Vector2(230, 167)
+
+[node name="CollisionShape2D" parent="World/Wall2" index="0"]
+position = Vector2(346, -159)
+shape = SubResource("RectangleShape2D_k12tt")
+
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
@@ -702,3 +728,7 @@ script = ExtResource("9_ynf5e")
 [editable path="World/Prop"]
 [editable path="World/Opponent"]
 [editable path="World/Opponent/VisionCone"]
+[editable path="World/Wall"]
+[editable path="World/Wall3"]
+[editable path="World/Wall4"]
+[editable path="World/Wall2"]
