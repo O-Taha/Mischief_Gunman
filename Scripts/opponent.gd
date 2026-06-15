@@ -5,7 +5,6 @@ extends Cowboy
 @export var player: Player
 @export var collision: CollisionShape2D
 
-
 const MAX_ALERT: float = 100.0
 var alert_gauge: float = 0.0:
 	set(value):
@@ -21,6 +20,7 @@ var alert_gauge: float = 0.0:
 		
 var new_dest: Vector2 = position # DEBUG : used for o_passive wandering direction
 var audible_props: Array[Prop]
+
 			
 func _ready() -> void:
 	$FSM/o_passive.new_dest.connect(update_debug_dest)
@@ -28,11 +28,19 @@ func _ready() -> void:
 	$HearingRadius.body_exited.connect(update_audible_prop_list.bind(false))
 	player.died.connect(_on_player_died)
 	
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	super(delta)
 	queue_redraw() 
 	if move_enable:
+		_handle_collisions()
 		move_and_slide()
 		$VisionCone.rotation = dir.angle()
+
+func _push_prop(collider: Object, direction: Vector2):
+	var impulse_dir = Vector2.from_angle(lerp_angle((direction).angle(), dir.angle(), 0.5))
+	var impulse: Vector2 = (impulse_dir*10*velocity.length())\
+							/(collider.mass*1.5)
+	_apply_opposite_force_to_self_and_collider(impulse, collider)
 
 func update_debug_dest(coord: Vector2):
 	new_dest = coord

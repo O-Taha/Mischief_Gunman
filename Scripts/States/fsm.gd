@@ -21,8 +21,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if curr_state:
 		curr_state.physics_update(delta)
-		
-		
+
 func transition(curr: State, new_state_name: String):
 	if curr != curr_state or new_state_name not in states or curr_state.name == new_state_name: # Don't transition based on signals from states other than current
 		return

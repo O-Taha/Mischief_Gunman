@@ -41,6 +41,3 @@ shape = SubResource("RectangleShape2D_5sh6o")
 scale = Vector2(10, 10)
 target_position = Vector2(0, 0)
 collide_with_bodies = false
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
-radius = 95.0

@@ -2,7 +2,6 @@
 extends State
 
 @onready var is_moving_threshold_vel: float = owner.speed/6 # Minimal speed to consider the player is moving
-var last_vel_lenght: float
 
 func physics_update(delta: float):
 	if owner.move_enable:
@@ -19,15 +18,9 @@ func physics_update(delta: float):
 		#check_for_dash()	# WARNING: Prioritize dash check over idle 
 						# for easier dash state entry
 		_check_for_idle()
-		
+
 func _check_for_idle():
-	var player_about_to_stop = owner.velocity.length() <= 100\
-				and owner.velocity.length() < last_vel_lenght
-	
-	owner.acceleration = owner.velocity.length() - last_vel_lenght
-	last_vel_lenght = owner.velocity.length()
-	
-	if player_about_to_stop:
+	if owner.about_to_stop:
 		transitioned.emit(self, "idle")
 		
 func exit():

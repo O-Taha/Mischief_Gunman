@@ -659,7 +659,7 @@ tile_map_data = PackedByteArray("AABFAP//EQAAABAAAABFAAAAEQAAABAAAABFAAEAEQAAABA
 tile_set = SubResource("TileSet_fdnlq")
 
 [node name="Prop" parent="World" instance=ExtResource("2_bo1nx")]
-position = Vector2(616, 184)
+position = Vector2(527, 355)
 
 [node name="HealthComponent" parent="World/Prop" instance=ExtResource("3_21xkr")]
 health = 2.0
@@ -668,25 +668,21 @@ health = 2.0
 
 [node name="Player" parent="World" instance=ExtResource("1_jjgbg")]
 position = Vector2(158, 286)
+speed = null
 
 [node name="Opponent" parent="World" node_paths=PackedStringArray("player") instance=ExtResource("4_jjvhh")]
-position = Vector2(632, 312)
+position = Vector2(669, 350)
 player = NodePath("../Player")
+speed = null
 
 [node name="Barrel" parent="World" instance=ExtResource("9_hptm8")]
-position = Vector2(488, 376)
-
-[node name="Barrel2" parent="World" instance=ExtResource("9_hptm8")]
-position = Vector2(640, 448)
+position = Vector2(358, 394)
 
 [node name="Cactus" parent="World" instance=ExtResource("10_hptm8")]
 position = Vector2(969, 248)
 
 [node name="MetalCrate" parent="World" instance=ExtResource("10_d1ilt")]
-position = Vector2(488, 232)
-
-[node name="MetalCrate2" parent="World" instance=ExtResource("10_d1ilt")]
-position = Vector2(760, 184)
+position = Vector2(419, 166)
 
 [node name="Sign" parent="World" instance=ExtResource("11_6iyac")]
 position = Vector2(92, 191)
