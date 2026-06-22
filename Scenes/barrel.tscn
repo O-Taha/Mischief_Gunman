@@ -29,5 +29,5 @@ sprite_frames = SubResource("SpriteFrames_1tdys")
 position = Vector2(0, 40.5)
 shape = SubResource("RectangleShape2D_m5w3l")
 
-[node name="HealthComponent" parent="." index="4" instance=ExtResource("3_rp70x")]
+[node name="HealthComponent" parent="." index="3" instance=ExtResource("3_rp70x")]
 health = 3.0

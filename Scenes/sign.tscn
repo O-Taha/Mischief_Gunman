@@ -29,6 +29,6 @@ offset = Vector2(0, 0)
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("RectangleShape2D_6fgx1")
 
-[node name="ImmovableComponent" parent="." index="4" instance=ExtResource("3_u6bny")]
+[node name="ImmovableComponent" parent="." index="3" instance=ExtResource("3_u6bny")]
 
-[node name="RicochetComponent" parent="." index="5" instance=ExtResource("4_qwoug")]
+[node name="RicochetComponent" parent="." index="4" instance=ExtResource("4_qwoug")]

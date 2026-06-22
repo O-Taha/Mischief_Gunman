@@ -31,9 +31,6 @@ offset = Vector2(0, -90)
 position = Vector2(0, 35.5)
 shape = SubResource("RectangleShape2D_maato")
 
-[node name="NavigationObstacle2D" parent="." index="3"]
-visible = false
-
-[node name="RicochetComponent" type="Node2D" parent="." index="4"]
+[node name="RicochetComponent" type="Node2D" parent="." index="3"]
 script = ExtResource("3_ptr1n")
 metadata/_custom_type_script = "uid://k0lkvmnf0qhf"

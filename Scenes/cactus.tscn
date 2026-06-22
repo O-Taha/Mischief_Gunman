@@ -32,7 +32,7 @@ offset = Vector2(0, 0)
 position = Vector2(0, 28)
 shape = SubResource("RectangleShape2D_kj16u")
 
-[node name="HealthComponent" parent="." index="4" instance=ExtResource("3_mjejd")]
+[node name="HealthComponent" parent="." index="3" instance=ExtResource("3_mjejd")]
 health = 3.0
 
-[node name="ImmovableComponent" parent="." index="5" instance=ExtResource("4_kj16u")]
+[node name="ImmovableComponent" parent="." index="4" instance=ExtResource("4_kj16u")]

@@ -689,7 +689,7 @@ position = Vector2(488, 232)
 position = Vector2(760, 184)
 
 [node name="Sign" parent="World" instance=ExtResource("11_6iyac")]
-position = Vector2(92, 191)
+position = Vector2(184, 176)
 
 [node name="Wall" parent="World" instance=ExtResource("12_fdnlq")]
 

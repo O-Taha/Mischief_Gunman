@@ -26,19 +26,20 @@ func _ready() -> void:
 	$FSM/o_passive.new_dest.connect(update_debug_dest)
 	$HearingRadius.body_entered.connect(update_audible_prop_list.bind(true))
 	$HearingRadius.body_exited.connect(update_audible_prop_list.bind(false))
-	player.died.connect(_on_player_died)
+	if player: player.died.connect(_on_player_died)
 	
 func _physics_process(delta: float) -> void:
 	super(delta)
-	queue_redraw() 
+	queue_redraw()
+	print(get_slide_collision_count())
 	if move_enable:
 		_handle_collisions()
 		move_and_slide()
 		$VisionCone.rotation = dir.angle()
 
 func _push_prop(collider: Object, direction: Vector2):
-	var impulse_dir = Vector2.from_angle(lerp_angle((direction).angle(), dir.angle(), 0.5))
-	var impulse: Vector2 = (impulse_dir*10*velocity.length())\
+	var impulse_dir = Vector2.from_angle(lerp_angle((direction).angle(), dir.angle()+PI, 0.5))
+	var impulse: Vector2 = (impulse_dir*2*velocity.length())\
 							/(collider.mass*1.5)
 	_apply_opposite_force_to_self_and_collider(impulse, collider)
 
@@ -68,4 +69,5 @@ func _draw() -> void:
 		draw_string(ThemeDB.fallback_font, Vector2(50, 0), "finished: %s" % $NavigationAgent2D.is_navigation_finished(), HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color.BLACK)
 		draw_string(ThemeDB.fallback_font, Vector2(50, 20), "reachable: %s" % $NavigationAgent2D.is_target_reachable(), HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color.BLACK)
 		draw_string(ThemeDB.fallback_font, Vector2(50, 40), "reached: %s" % $NavigationAgent2D.is_target_reached(), HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color.BLACK)
+	draw_string(ThemeDB.fallback_font, Vector2(-50, -70), "Collision: %s Velocity: %s" % [get_slide_collision_count(), velocity], HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color.BLACK)
 	draw_line(Vector2.ZERO, new_dest, Color.BLUE, 7.0)

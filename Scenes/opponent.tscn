@@ -107,6 +107,7 @@ radius = 208.274
 [node name="Opponent" node_paths=PackedStringArray("FSM", "collision") instance=ExtResource("1_i4xd2")]
 collision_mask = 11
 wall_min_slide_angle = 0.0
+safe_margin = 0.1
 script = ExtResource("2_1ejkn")
 FSM = NodePath("FSM")
 collision = NodePath("CollisionShape2D")
@@ -145,12 +146,13 @@ target_position = Vector2(500, 0)
 collision_mask = 10
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="5"]
-path_desired_distance = 500.0
-target_desired_distance = 200.0
-path_max_distance = 500.0
+path_desired_distance = 861.45
+target_desired_distance = 0.1
+path_max_distance = 1000.0
 path_postprocessing = 1
 avoidance_enabled = true
 radius = 30.0
+avoidance_layers = 0
 debug_enabled = true
 
 [node name="AlertGauge" type="TextureProgressBar" parent="." index="6"]
