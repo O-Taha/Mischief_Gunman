@@ -1,6 +1,9 @@
 @tool
 extends State
 
+var state_register_delay: float = 0.0 # Leaves some time for other nodes to 
+							# properly detect this state before leaving it
+
 func enter():
 	if owner.move_enable:
 		var aim_direction: Vector2 = owner.bullet_trajectory.points[1] - owner.bullet_trajectory.points[0]
@@ -12,4 +15,7 @@ func enter():
 		bullet.owner = congregator
 
 func update(delta: float):
-	transitioned.emit(self, "idle")
+	state_register_delay += delta
+	if state_register_delay >= 0.1:
+		state_register_delay = 0.0
+		transitioned.emit(self, "idle")

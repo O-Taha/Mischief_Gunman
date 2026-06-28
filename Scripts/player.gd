@@ -4,6 +4,7 @@ extends Cowboy
 signal died # used to put opponent in win state and avoid calling a freed player reference
 
 @export_category("Nodes & Scenes")
+@export var FSM: FSM
 @export var bullet_trajectory: Line2D
 @export var collision: CollisionShape2D
 
@@ -39,13 +40,13 @@ func _ready() -> void:
 	bullet_trajectory.get_node("RayCast2D").add_exception(self)
 
 func _physics_process(delta: float) -> void:
+	print(FSM.curr_state.name)
 	super(delta)
 	dir = Input.get_vector("left", "right", "up", "down")
 	if dash_enable: check_for_dash(delta)
 	check_for_shoot()
 	move_and_slide()
 	_handle_collisions()
-	_flip_sprite_if_leftward()
 
 func check_for_dash(delta: float) -> void: # A dash is achieved by pressing a direction
 								# releasing, then pressing the same direction.
@@ -67,25 +68,21 @@ func check_for_dash(delta: float) -> void: # A dash is achieved by pressing a di
 			if dir != Vector2.ZERO:
 				if dir.is_equal_approx(first_input_dir):
 					dash_check_state = DashCheckState.SECOND_INPUT
-					$FSM.curr_state.transitioned.emit($FSM.curr_state,"dash")
+					FSM.curr_state.transitioned.emit(FSM.curr_state,"dash")
 					reset_dash_FSM()
 				else: # Not the same direction
 					reset_dash_FSM()
 					
 func check_for_shoot():
 	if Input.is_action_just_pressed('shoot'):
-				$FSM.curr_state.transitioned.emit($FSM.curr_state, "shoot")
+				FSM.curr_state.transitioned.emit(FSM.curr_state, "shoot")
+				SfxPlayer.play_sfx("TEST")
 		
 func reset_dash_FSM():
 	dash_check_state = DashCheckState.IDLE
 	#dir_buffer_counter = 0.0 #Already performed through dash_check_state's setter
 	first_input_dir = Vector2.ZERO
 	
-func _flip_sprite_if_leftward():
-	if dir:
-		sprite.flip_h = dir.x < 0 
-		# and get_real_velocity().length() > 100 HACK to fix flickering sprites when running against collisions
-
 func die():
 	super.die()
 	died.emit()

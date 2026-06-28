@@ -36,16 +36,13 @@ func _physics_process(delta: float) -> void:
 		var speed: float= linear_velocity.length()
 		if speed > 50.0:
 			is_moving = true
-			
 			var target_skew: float = clamp(linear_velocity.normalized().x/5, -PI/4, PI/4)
 			var stretch: float = clamp(abs(linear_velocity.y)/(1000.0*target_skew), 0.0, initial_scale.x/4)
 			var target_scale: Vector2 = Vector2(initial_scale.x-stretch, initial_scale.y+stretch) # Volume Conservation
-			
 			$AnimatedSprite2D.scale = $AnimatedSprite2D.scale.lerp(target_scale, delta * 10.0)
 			$AnimatedSprite2D.skew = lerp($AnimatedSprite2D.skew, target_skew, delta * 10.0)
 		else: 
 			is_moving = false
-			
 			$AnimatedSprite2D.scale = $AnimatedSprite2D.scale.lerp(initial_scale, delta * 10.0)
 			$AnimatedSprite2D.skew = lerp($AnimatedSprite2D.skew, 0.0, delta * 10.0)
 	

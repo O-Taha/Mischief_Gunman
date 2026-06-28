@@ -6,17 +6,6 @@ extends State
 func physics_update(delta: float):
 	if owner.move_enable:
 		owner.velocity = owner.velocity.lerp(owner.dir * owner.speed, 0.2)
-		
-		if owner.sprite.animation != "walk" and owner.velocity.length() >= is_moving_threshold_vel:
-			if owner.sprite.animation == "dash": 
-				await owner.sprite.animation_finished
-			owner.sprite.play(self.name)
-			 # Waits for a true movement to play walk, avoids jittering against walls
-		
-		owner.sprite.speed_scale = owner.get_real_velocity().length()/owner.speed
-
-		#check_for_dash()	# WARNING: Prioritize dash check over idle 
-						# for easier dash state entry
 		_check_for_idle()
 
 func _check_for_idle():

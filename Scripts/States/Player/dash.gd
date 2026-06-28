@@ -5,7 +5,6 @@ func enter():
 	assert(owner.dash_enable, "You didn't check dash_enable was valid before transitioning to dash state !")
 	if owner.move_enable:
 		owner.velocity = owner.dir * owner.dash_force
-	owner.sprite.play(self.name)
 		
 func exit():
 	owner.dash_enable = false
