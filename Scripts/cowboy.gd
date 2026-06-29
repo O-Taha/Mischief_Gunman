@@ -2,6 +2,7 @@ class_name Cowboy
 extends CharacterBody2D
 
 signal collided(vel) # Will be used for screen shake
+signal died
 
 @export var speed: float = 300
 var dir: Vector2 

@@ -31,7 +31,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	super(delta)
 	queue_redraw()
-	print(get_slide_collision_count())
 	if move_enable:
 		_handle_collisions()
 		move_and_slide()
@@ -61,7 +60,13 @@ func update_audible_prop_list(body:Node2D, add_prop: bool):
 		
 func _on_player_died():
 	FSM.curr_state.transitioned.emit(FSM.curr_state, "o_win")
-		
+	
+
+func die():
+	super.die()
+	move_enable = false
+	died.emit()
+
 func _draw() -> void:
 	draw_string(ThemeDB.fallback_font, Vector2(80, -20), FSM.curr_state.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color.BLACK)
 	if FSM.curr_state.name == "o_passive": draw_string(ThemeDB.fallback_font, Vector2(0, -50), str(roundf(FSM.curr_state.wander_time)), HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color.LIGHT_BLUE)

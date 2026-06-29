@@ -1,8 +1,6 @@
 class_name Player 
 extends Cowboy
 
-signal died # used to put opponent in win state and avoid calling a freed player reference
-
 @export_category("Nodes & Scenes")
 @export var FSM: FSM
 @export var bullet_trajectory: Line2D
@@ -40,7 +38,6 @@ func _ready() -> void:
 	bullet_trajectory.get_node("RayCast2D").add_exception(self)
 
 func _physics_process(delta: float) -> void:
-	print(FSM.curr_state.name)
 	super(delta)
 	dir = Input.get_vector("left", "right", "up", "down")
 	if dash_enable: check_for_dash(delta)
@@ -85,5 +82,6 @@ func reset_dash_FSM():
 	
 func die():
 	super.die()
+	move_enable = false
 	died.emit()
 	
