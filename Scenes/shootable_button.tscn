@@ -7,17 +7,25 @@ script/source = "extends RigidBody2D
 
 signal hit
 
+
 func die():
 	hit.emit()
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5sh6o"]
-size = Vector2(100, 100)
 
-[node name="ShootableButton" type="ColorRect"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="ShootableButton" type="RichTextLabel" node_paths=PackedStringArray("collision", "collision_shape")]
+clip_contents = false
+offset_right = 93.0
+offset_bottom = 23.0
+bbcode_enabled = true
+text = "jijiojoijiojijio"
+fit_content = true
+autowrap_mode = 0
+shortcut_keys_enabled = false
 script = ExtResource("1_7f1ec")
+collision = NodePath("ButtonCollision")
+collision_shape = NodePath("ButtonCollision/CollisionShape2D")
 
 [node name="ButtonCollision" type="RigidBody2D" parent="."]
 collision_layer = 256
