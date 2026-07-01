@@ -7,12 +7,13 @@ script/source = "extends RigidBody2D
 
 signal hit
 
-
 func die():
 	hit.emit()
+	$CollisionShape2D.set_deferred(\"disabled\", true)
 "
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5sh6o"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7f1ec"]
+size = Vector2(93, 23)
 
 [node name="ShootableButton" type="RichTextLabel" node_paths=PackedStringArray("collision", "collision_shape")]
 clip_contents = false
@@ -23,11 +24,14 @@ text = "jijiojoijiojijio"
 fit_content = true
 autowrap_mode = 0
 shortcut_keys_enabled = false
+horizontal_alignment = 1
+vertical_alignment = 1
 script = ExtResource("1_7f1ec")
 collision = NodePath("ButtonCollision")
 collision_shape = NodePath("ButtonCollision/CollisionShape2D")
 
 [node name="ButtonCollision" type="RigidBody2D" parent="."]
+position = Vector2(46.5, 11.5)
 collision_layer = 256
 collision_mask = 0
 collision_priority = 10.0
@@ -39,4 +43,4 @@ script = SubResource("GDScript_7f1ec")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ButtonCollision"]
-shape = SubResource("RectangleShape2D_5sh6o")
+shape = SubResource("RectangleShape2D_7f1ec")

@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=3 uid="uid://dptg81ablxq32"]
+
+[ext_resource type="PackedScene" uid="uid://ylm46mo706i8" path="res://Scenes/hideable_container.tscn" id="1_jxero"]
+[ext_resource type="Script" uid="uid://ds11052war1qg" path="res://Scenes/duel_counter.gd" id="2_nf4gj"]
+[ext_resource type="PackedScene" uid="uid://br4tbqjoxysmx" path="res://Scenes/shootable_button.tscn" id="2_qdvrb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jxero"]
+bg_color = Color(0.223853, 0.690513, 0.560823, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2246s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qdvrb"]
+bg_color = Color(0.893355, 0.444392, 0.442331, 1)
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HideableContainer" parent="UI" instance=ExtResource("1_jxero")]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+position_slot = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="UI/HideableContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jxero")
+
+[node name="TitleLogo" type="TextureRect" parent="UI/HideableContainer"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_2246s")
+
+[node name="DuelCounter" type="RichTextLabel" parent="UI/HideableContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_nf4gj")
+
+[node name="Timer" type="Timer" parent="UI/HideableContainer/DuelCounter"]
+one_shot = true
+
+[node name="HideableContainer2" parent="UI" instance=ExtResource("1_jxero")]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel2" type="Panel" parent="UI/HideableContainer2"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qdvrb")
+
+[node name="ShootableStartButton" parent="UI/HideableContainer2" instance=ExtResource("2_qdvrb")]
+layout_mode = 2
+
+[node name="ShootableRetryButton" parent="UI/HideableContainer2" instance=ExtResource("2_qdvrb")]
+layout_mode = 2

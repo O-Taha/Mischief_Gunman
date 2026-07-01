@@ -23,7 +23,7 @@ func _physics_process(delta):
 		var queue_death: bool = false # Allows for freeing *after* checking all conditions
 		
 		if has_no_components: #Either no components added or isn't a Prop (could be a player)
-			die()
+			self.die()
 			if prop.has_method("die"): prop.die() # Used to kill Cowboys, trigger shootable buttons
 			return
 		if prop.has_component(prop.HEALTH_COMPONENT):

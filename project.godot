@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 BulletCongregator="*res://Scripts/bullet_congregator.gd"
 SfxPlayer="*res://Scenes/sfx_player.tscn"
 
+[display]
+
+window/size/viewport_width=480
+window/size/viewport_height=853
+
 [editor]
 
 version_control/plugin_name="GitPlugin"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://dlmr6missb311"]
+[gd_scene load_steps=28 format=4 uid="uid://dlmr6missb311"]
 
 [ext_resource type="Script" uid="uid://3go8gw3j1sdi" path="res://Scripts/main.gd" id="1_344ge"]
 [ext_resource type="PackedScene" uid="uid://kqv4rlq3vjgj" path="res://Scenes/player.tscn" id="1_jjgbg"]
@@ -8,12 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://dujt3r3bmm62r" path="res://Scenes/opponent.tscn" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://vnetyy40d6l6" path="res://Scenes/Components/ricochet_component.tscn" id="5_344ge"]
 [ext_resource type="PackedScene" uid="uid://dfjt2ebm1npn6" path="res://Scenes/barrel.tscn" id="9_hptm8"]
-[ext_resource type="Script" uid="uid://ci4l5t5hytxto" path="res://Scripts/label.gd" id="9_ynf5e"]
 [ext_resource type="PackedScene" uid="uid://dnajrn1qknkrw" path="res://Scenes/metal_crate.tscn" id="10_d1ilt"]
 [ext_resource type="PackedScene" uid="uid://c5q8ectcb2ima" path="res://Scenes/cactus.tscn" id="10_hptm8"]
 [ext_resource type="PackedScene" uid="uid://d343t4ym6bdnc" path="res://Scenes/sign.tscn" id="11_6iyac"]
 [ext_resource type="PackedScene" uid="uid://bcmopllvyr764" path="res://Scenes/wall.tscn" id="12_fdnlq"]
-[ext_resource type="PackedScene" uid="uid://br4tbqjoxysmx" path="res://Scenes/shootable_button.tscn" id="14_jkdf5"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_d1ilt"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -639,15 +637,11 @@ size = Vector2(40.375, 618.25)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k12tt"]
 size = Vector2(1072, 16)
 
-[sub_resource type="LabelSettings" id="LabelSettings_hptm8"]
-font_size = 40
-font_color = Color(0, 0, 0, 1)
-
 [node name="Main" type="Node" node_paths=PackedStringArray("player", "opponent", "timer")]
 script = ExtResource("1_344ge")
 player = NodePath("World/Player")
 opponent = NodePath("World/Opponent")
-timer = NodePath("Timer")
+timer = NodePath("")
 
 [node name="World" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -718,26 +712,6 @@ position = Vector2(230, 167)
 [node name="CollisionShape2D" parent="World/Wall2" index="0"]
 position = Vector2(346, -159)
 shape = SubResource("RectangleShape2D_k12tt")
-
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
-
-[node name="Label" type="Label" parent="Timer"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
-grow_horizontal = 2
-label_settings = SubResource("LabelSettings_hptm8")
-script = ExtResource("9_ynf5e")
-
-[node name="ShootableButton" parent="." instance=ExtResource("14_jkdf5")]
-offset_left = 328.0
-offset_top = 416.0
-offset_right = 368.0
-offset_bottom = 456.0
 
 [editable path="World/Prop"]
 [editable path="World/Opponent"]
