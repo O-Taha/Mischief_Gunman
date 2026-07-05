@@ -5,7 +5,7 @@ var state_register_delay: float = 0.0 # Leaves some time for other nodes to
 							# properly detect this state before leaving it
 
 func enter():
-	if owner.move_enable:
+	if owner.shoot_enable:
 		var aim_direction: Vector2 = owner.bullet_trajectory.points[1] - owner.bullet_trajectory.points[0]
 		aim_direction = aim_direction.normalized() * owner.collision.get_shape().get_rect().size.y
 		

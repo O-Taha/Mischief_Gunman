@@ -12,6 +12,7 @@ var dir: Vector2
 @export var sprite: Node2D
 
 var move_enable: bool = true
+var shoot_enable: bool = true
 var acceleration: float # Used to check we just did a dash, for prop pushing 
 # since checking dash state isn't enough as it is transient
 var last_vel_lenght: float

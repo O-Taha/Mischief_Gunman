@@ -1,4 +1,4 @@
-[gd_scene load_steps=227 format=3 uid="uid://kqv4rlq3vjgj"]
+[gd_scene load_steps=228 format=3 uid="uid://kqv4rlq3vjgj"]
 
 [ext_resource type="PackedScene" uid="uid://belgvmbxjjgpt" path="res://Scenes/cowboy.tscn" id="1_v1ht0"]
 [ext_resource type="Script" uid="uid://bchun2vvocpa" path="res://Scripts/player.gd" id="2_vdpp0"]
@@ -1484,6 +1484,10 @@ animations = [{
 radius = 21.0
 height = 60.0
 
+[sub_resource type="Curve" id="Curve_gymyn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.938272, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="Animation" id="Animation_y6uwr"]
 length = 0.001
 tracks/0/type = "value"
@@ -2011,7 +2015,6 @@ _data = {
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_pu2lt"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ukyrk"]
-graph_offset = Vector2(-471.067, -237.5)
 "nodes/Player Animation FSM/node" = ExtResource("10_gymyn")
 "nodes/Player Animation FSM/position" = Vector2(-180, 160)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_pu2lt")
@@ -2060,6 +2063,7 @@ script = ExtResource("53_vq3lt")
 FSM = NodePath("..")
 
 [node name="BulletTrajectory" parent="." index="3" instance=ExtResource("53_ie7r7")]
+fade_curve = SubResource("Curve_gymyn")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
 libraries = {

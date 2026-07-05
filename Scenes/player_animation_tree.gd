@@ -8,4 +8,10 @@ func _physics_process(delta: float) -> void:
 		set("parameters/Player Animation FSM/idle/blend_position", last_facing_dir)
 		set("parameters/Player Animation FSM/run/blend_position", last_facing_dir)
 		set("parameters/Player Animation FSM/shoot/blend_position", last_facing_dir)
+	elif owner.bullet_trajectory.mouse_movement:
+		last_facing_dir = owner.get_mouse_position()
+		set("parameters/Player Animation FSM/idle/blend_position", last_facing_dir)
+		set("parameters/Player Animation FSM/run/blend_position", last_facing_dir)
+		set("parameters/Player Animation FSM/shoot/blend_position", last_facing_dir)
+		
 	set("parameters/TimeScale/scale", max(owner.velocity.length()*3/owner.speed, 2))

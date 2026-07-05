@@ -39,7 +39,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	super(delta)
-	dir = Input.get_vector("left", "right", "up", "down")
+	if move_enable: dir = Input.get_vector("left", "right", "up", "down")
 	if dash_enable: check_for_dash(delta)
 	check_for_shoot()
 	move_and_slide()

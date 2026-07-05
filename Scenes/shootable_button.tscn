@@ -10,6 +10,9 @@ signal hit
 func die():
 	hit.emit()
 	$CollisionShape2D.set_deferred(\"disabled\", true)
+
+func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
+	position = owner.position + owner.size/2
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7f1ec"]

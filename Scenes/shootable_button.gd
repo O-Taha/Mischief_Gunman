@@ -20,5 +20,10 @@ func set_collision_size_based_on_label_size():
 	collision_shape.shape = button_shape
 	collision.position = size/2
 
-func _physics_process(delta: float) -> void:
-	collision.position = position + size/2
+func show_enable():
+	show()
+	collision_shape.set_deferred("disabled", false)
+
+func hide_disable():
+	hide()
+	collision_shape.set_deferred("disabled", true)
