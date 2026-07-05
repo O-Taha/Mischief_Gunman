@@ -75,6 +75,7 @@ offset_top = -23.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
+theme_override_constants/margin_bottom = 300
 
 [node name="ShootableStartButton" parent="LowerContainer" instance=ExtResource("2_qdvrb")]
 layout_mode = 2

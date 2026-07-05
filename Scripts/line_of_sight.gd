@@ -13,23 +13,23 @@ var fade_gauge: float = 0.0: # Used to make self transparent when no mouse movem
 		fade_gauge = value
 		modulate.a = value
 var fade_timer: float
-var fade_duration: float = 5.0
+var fade_duration: float = 1.0
 @export var fade_curve: Curve
 
 func _physics_process(delta: float) -> void:
-	if owner: player_movement = true if owner.velocity else false
-	print(fade_gauge)
 	fade_timer += delta
-	if mouse_movement or player_movement:
+	var t: float = clamp(fade_timer / fade_duration, 0.0, 1.0)
+	fade_gauge = lerp(0.0, 1.0, fade_curve.sample(t))
+	
+	if mouse_movement or owner.dir:
 		mouse_movement = false
-		var t: float = clamp(fade_timer / fade_duration, 0.0, 1.0)
-		fade_gauge = lerp(0.0, 1.0, fade_curve.sample(t))
 		_compute_line_of_sight()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		fade_gauge = 1.0
 		fade_timer = 0.0
+		mouse_movement = true
 
 func _compute_line_of_sight() -> void:
 	_reset_line_of_sight()

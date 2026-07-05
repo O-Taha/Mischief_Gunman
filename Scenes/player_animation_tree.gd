@@ -1,6 +1,7 @@
 extends AnimationTree
 
-@onready var last_facing_dir: Vector2 = owner.dir
+@onready var last_facing_dir: Vector2 = Vector2.UP
+var aim_direction: Vector2 = Vector2.UP
 
 func _physics_process(delta: float) -> void:
 	if owner.dir:
@@ -8,8 +9,9 @@ func _physics_process(delta: float) -> void:
 		set("parameters/Player Animation FSM/idle/blend_position", last_facing_dir)
 		set("parameters/Player Animation FSM/run/blend_position", last_facing_dir)
 		set("parameters/Player Animation FSM/shoot/blend_position", last_facing_dir)
-	elif owner.bullet_trajectory.mouse_movement:
-		last_facing_dir = owner.get_mouse_position()
+	elif owner.bullet_trajectory.fade_gauge:
+		if owner.bullet_trajectory.points: aim_direction = owner.bullet_trajectory.points[1] - owner.bullet_trajectory.points[0]
+		last_facing_dir = aim_direction
 		set("parameters/Player Animation FSM/idle/blend_position", last_facing_dir)
 		set("parameters/Player Animation FSM/run/blend_position", last_facing_dir)
 		set("parameters/Player Animation FSM/shoot/blend_position", last_facing_dir)
