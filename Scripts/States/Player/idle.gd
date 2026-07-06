@@ -3,7 +3,7 @@ extends State
 
 const DECELERATION_DELAY: float = 0.08
 
-func physics_update(delta: float):
+func physics_update(_delta: float):
 	owner.velocity = owner.velocity.lerp(Vector2.ZERO, 0.1)
 	_check_for_walk()	#-> Walk
 	

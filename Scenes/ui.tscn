@@ -45,6 +45,7 @@ script = ExtResource("2_nf4gj")
 one_shot = true
 
 [node name="GameOver" type="TextureRect" parent="UpperContainer"]
+modulate = Color(1, 1, 1, 0.337255)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("5_ryf15")
@@ -52,6 +53,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Go" type="TextureRect" parent="UpperContainer"]
+modulate = Color(1, 1, 1, 0.337255)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("6_mmixe")
@@ -59,6 +61,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Title" type="TextureRect" parent="UpperContainer"]
+modulate = Color(1, 1, 1, 0.337255)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("3_smcll")

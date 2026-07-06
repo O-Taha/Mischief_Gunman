@@ -18,7 +18,7 @@ var acceleration: float # Used to check we just did a dash, for prop pushing
 var last_vel_lenght: float
 var about_to_stop: bool
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	about_to_stop = velocity.length() <= 100\
 				and velocity.length() < last_vel_lenght
 	acceleration = velocity.length() - last_vel_lenght
@@ -48,3 +48,5 @@ func _apply_opposite_force_to_self_and_collider(impulse: Vector2, collider: Obje
 
 func die():
 	queue_free()
+	move_enable = false
+	died.emit()

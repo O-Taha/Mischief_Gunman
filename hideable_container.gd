@@ -35,7 +35,7 @@ func show_container(instantaneous: bool = false):
 	is_hidden = false
 	
 	var duration = 0.0 if instantaneous else tween_duration
-	var visible_y = 0 if position_slot == PositionType.TOP else get_viewport_rect().size.y/2
+	var visible_y = 0.0 if position_slot == PositionType.TOP else get_viewport_rect().size.y/2
 	
 	var pos_tween = get_tree().create_tween().bind_node(self).set_trans(tween_transition).set_ease(Tween.EASE_OUT)
 	pos_tween.tween_property(self, "position:y", visible_y, duration)

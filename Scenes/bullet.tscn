@@ -6,6 +6,7 @@
 size = Vector2(16, 16)
 
 [node name="Bullet" type="CharacterBody2D"]
+y_sort_enabled = true
 collision_layer = 4
 collision_mask = 259
 script = ExtResource("1_xjght")

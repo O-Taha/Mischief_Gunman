@@ -35,6 +35,11 @@ version_control/autoload_on_startup=true
 
 enabled=PackedStringArray("res://addons/AS2P/plugin.cfg")
 
+[global_group]
+
+Player=""
+Opponent=""
+
 [input]
 
 up={

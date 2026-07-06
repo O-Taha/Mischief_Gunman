@@ -10,7 +10,7 @@ var player_seen_gauge_fill_rate: float = 1000:
 		player_seen_gauge_fill_rate *= 2
 		return player_seen_gauge_fill_rate
 
-@onready var opponent: CharacterBody2D = owner.owner
+@onready var opponent: Cowboy = owner.owner
 
 func _ready() -> void:
 	for non_cover_prop in get_tree().get_nodes_in_group("not_a_cover_prop"):
@@ -26,5 +26,5 @@ func _physics_process(delta: float) -> void:
 		if player: 
 			var distance_to_player: float = opponent.to_local(player.global_position).length()/get_viewport_rect().size.y
 			opponent.saw_prop_moved((delta * player_seen_gauge_fill_rate) * alert_by_distance_curve.sample_baked(distance_to_player))
-			if opponent.FSM.curr_state.name == "o_hunt": opponent.FSM.curr_state.transitioned.emit(opponent.FSM.curr_state, "o_shoot")
+			if opponent.fsm.curr_state.name == "o_hunt": opponent.fsm.curr_state.transitioned.emit(opponent.fsm.curr_state, "o_shoot")
 		if prop and prop.is_moving: opponent.saw_prop_moved(prop.linear_velocity.length() * delta)

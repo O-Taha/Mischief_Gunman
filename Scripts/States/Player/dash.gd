@@ -10,7 +10,7 @@ func exit():
 	owner.dash_enable = false
 	_enable_dash_after_cooldown(owner.dash_cooldown_time)
 
-func update(delta: float):
+func update(_delta: float):
 	transitioned.emit(self, "walk")
 
 func _enable_dash_after_cooldown(time: float):

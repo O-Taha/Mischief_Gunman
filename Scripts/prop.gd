@@ -48,12 +48,11 @@ func _physics_process(delta: float) -> void:
 	
 func push(impulse: Vector2):	# Just a wrapper for moving props, 
 						# to easily emit the signals and create setter-like behaviour
-	var old_pos = position
 	apply_central_impulse(impulse)
 	emit_sound()
 	
 func emit_sound():
-	SfxPlayer.play_sfx(sfx_name)
+	SfxPlayer.play_sound(sfx_name)
 	sound_emitted.emit(global_position, sfx_volume)
 
 func die():

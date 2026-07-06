@@ -1,9 +1,10 @@
 extends Cowboy
 
 @export_category("Nodes & Scenes")
-@export var FSM: FSM
-@export var player: Player
+@export var fsm: FSM
 @export var collision: CollisionShape2D
+
+@onready var player: Player = get_tree().get_first_node_in_group("Player")
 
 const MAX_ALERT: float = 100.0
 var alert_gauge: float = 0.0:
@@ -13,7 +14,7 @@ var alert_gauge: float = 0.0:
 			alert_gauge = MAX_ALERT #↓ HACK ↓ : States should be the 
 			# only ones to change current state but easier 
 			#than checking current state then calling  the state's function...
-			FSM.curr_state.transitioned.emit(FSM.curr_state, "o_hunt")
+			fsm.curr_state.transitioned.emit(fsm.curr_state, "o_hunt")
 		else: 
 			alert_gauge = value
 		$AlertGauge.value = alert_gauge
@@ -32,8 +33,8 @@ func _physics_process(delta: float) -> void:
 	super(delta)
 	queue_redraw()
 	if move_enable:
-		_handle_collisions()
 		move_and_slide()
+		_handle_collisions()
 		$VisionCone.rotation = dir.angle()
 
 func _push_prop(collider: Object, direction: Vector2):
@@ -46,8 +47,8 @@ func update_debug_dest(coord: Vector2):
 	new_dest = coord
 	queue_redraw()
 	
-func saw_prop_moved(speed: float):
-	alert_gauge += speed/10
+func saw_prop_moved(prop_speed: float):
+	alert_gauge += prop_speed/10
 
 func heard_prop_moved(prop_global_position: Vector2, volume: int):
 	alert_gauge += (volume * 1000)/(global_position.distance_to(prop_global_position))
@@ -59,18 +60,16 @@ func update_audible_prop_list(body:Node2D, add_prop: bool):
 		body.sound_emitted.disconnect(heard_prop_moved)
 		
 func _on_player_died():
-	FSM.curr_state.transitioned.emit(FSM.curr_state, "o_win")
-	
+	fsm.curr_state.transitioned.emit(fsm.curr_state, "o_win")	
 
 func die():
 	super.die()
-	move_enable = false
-	died.emit()
+
 
 func _draw() -> void:
-	draw_string(ThemeDB.fallback_font, Vector2(80, -20), FSM.curr_state.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color.BLACK)
-	if FSM.curr_state.name == "o_passive": draw_string(ThemeDB.fallback_font, Vector2(0, -50), str(roundf(FSM.curr_state.wander_time)), HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color.LIGHT_BLUE)
-	if FSM.curr_state.name == "o_hunt": 
+	draw_string(ThemeDB.fallback_font, Vector2(80, -20), fsm.curr_state.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color.BLACK)
+	if fsm.curr_state.name == "o_passive": draw_string(ThemeDB.fallback_font, Vector2(0, -50), str(roundf(fsm.curr_state.wander_time)), HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color.LIGHT_BLUE)
+	if fsm.curr_state.name == "o_hunt": 
 		draw_string(ThemeDB.fallback_font, Vector2(50, 0), "finished: %s" % $NavigationAgent2D.is_navigation_finished(), HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color.BLACK)
 		draw_string(ThemeDB.fallback_font, Vector2(50, 20), "reachable: %s" % $NavigationAgent2D.is_target_reachable(), HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color.BLACK)
 		draw_string(ThemeDB.fallback_font, Vector2(50, 40), "reached: %s" % $NavigationAgent2D.is_target_reached(), HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color.BLACK)

@@ -14,7 +14,7 @@ func enter():
 			congregator.add_child(bullet)
 			bullet.owner = congregator
 
-func update(delta: float):
+func update(_delta: float):
 	transitioned.emit(self, "o_hunt")
 
 func exit():

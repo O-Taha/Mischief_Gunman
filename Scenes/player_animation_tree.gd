@@ -3,7 +3,7 @@ extends AnimationTree
 @onready var last_facing_dir: Vector2 = Vector2.UP
 var aim_direction: Vector2 = Vector2.UP
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if owner.dir:
 		last_facing_dir = owner.dir
 		set("parameters/Player Animation FSM/idle/blend_position", last_facing_dir)

@@ -7,7 +7,7 @@ func _ready() -> void:
 	play()
 	playback = get_stream_playback()
 	
-func play_sfx(name: StringName):
-	var stream = audio.get(name)
-	assert(stream != null, "You tried to play %s while existing audios are %s" % [name, audio.keys()])
-	playback.play_stream(stream)
+func play_sound(sound_name: StringName):
+	var stream_found = audio.get(sound_name)
+	assert(stream_found != null, "You tried to play %s while existing audios are %s" % [sound_name, audio.keys()])
+	playback.play_stream(stream_found)
