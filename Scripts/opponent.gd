@@ -9,6 +9,7 @@ extends Cowboy
 const MAX_ALERT: float = 100.0
 var alert_gauge: float = 0.0:
 	set(value):
+		if not move_enable: return # is probably waiting outside of screen waiting for next level to be loaded
 		if alert_gauge == MAX_ALERT: return
 		if value >= MAX_ALERT:
 			alert_gauge = MAX_ALERT #↓ HACK ↓ : States should be the 
@@ -18,16 +19,15 @@ var alert_gauge: float = 0.0:
 		else: 
 			alert_gauge = value
 		$AlertGauge.value = alert_gauge
-		
-var new_dest: Vector2 = position # DEBUG : used for o_passive wandering direction
-var audible_props: Array[Prop]
+@export var hearing_radius: Curve
 
-			
+var new_dest: Vector2 = position # DEBUG : used for o_passive wandering direction
+
+
 func _ready() -> void:
 	$FSM/o_passive.new_dest.connect(update_debug_dest)
-	$HearingRadius.body_entered.connect(update_audible_prop_list.bind(true))
-	$HearingRadius.body_exited.connect(update_audible_prop_list.bind(false))
-	if player: player.died.connect(_on_player_died)
+	SfxPlayer.sound_emitted.connect(heard_something)
+	if player: player.died.connect(_on_player_died) # if allows this scene to be used standalone for debug
 	
 func _physics_process(delta: float) -> void:
 	super(delta)
@@ -47,24 +47,21 @@ func update_debug_dest(coord: Vector2):
 	new_dest = coord
 	queue_redraw()
 	
-func saw_prop_moved(prop_speed: float):
-	alert_gauge += prop_speed/10
+func saw_something_moved(move_speed: float):
+	alert_gauge += move_speed/10
 
-func heard_prop_moved(prop_global_position: Vector2, volume: int):
-	alert_gauge += (volume * 1000)/(global_position.distance_to(prop_global_position))
-
-func update_audible_prop_list(body:Node2D, add_prop: bool):
-	if add_prop: # body_entered
-		body.sound_emitted.connect(heard_prop_moved)
-	else: # body_exited
-		body.sound_emitted.disconnect(heard_prop_moved)
+func heard_something(volume: int, sound_global_position: Vector2):
+	if volume == -1: 
+		alert_gauge = MAX_ALERT
+		return
+	var distance: float = global_position.distance_to(sound_global_position)
+	alert_gauge += (volume * 100)*(hearing_radius.sample(distance))
 		
 func _on_player_died():
 	fsm.curr_state.transitioned.emit(fsm.curr_state, "o_win")	
 
 func die():
 	super.die()
-
 
 func _draw() -> void:
 	draw_string(ThemeDB.fallback_font, Vector2(80, -20), fsm.curr_state.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color.BLACK)

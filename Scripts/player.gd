@@ -73,7 +73,7 @@ func check_for_dash(delta: float) -> void: # A dash is achieved by pressing a di
 func check_for_shoot():
 	if Input.is_action_just_pressed('shoot'):
 				fsm.curr_state.transitioned.emit(fsm.curr_state, "shoot")
-				SfxPlayer.play_sound("TEST")
+				SfxPlayer.play_sound("TEST", -1, global_position)
 		
 func reset_dash_FSM():
 	dash_check_state = DashCheckState.IDLE

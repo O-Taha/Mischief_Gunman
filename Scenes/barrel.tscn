@@ -19,6 +19,8 @@ animations = [{
 size = Vector2(100, 49)
 
 [node name="Barrel" instance=ExtResource("1_m5w3l")]
+sound_name = null
+sound_volume = null
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 self_modulate = Color(1, 1, 1, 1)

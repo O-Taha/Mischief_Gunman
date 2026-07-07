@@ -25,10 +25,10 @@ func _ready() -> void:
 	opponent.died.connect(win)
 	$UI/LowerContainer/ShootableStartButton.function = start_pressed
 	
-func _physics_process(delta: float) -> void:
-	var statenames = ["TITLE", "PLAYING", "GO", "GAMEOVER"]
+#func _physics_process(_delta: float) -> void:
+	#var statenames = ["TITLE", "PLAYING", "GO", "GAMEOVER"]
 	#print(statenames[game_state])
-	print(game_state == GameState.GO, next_level_trigger.monitoring)
+	#print(game_state == GameState.GO, next_level_trigger.monitoring)
 
 func turn_opponent_after_countdown():
 	if opponent and opponent.fsm.curr_state.has_method("turn_around"):
@@ -49,5 +49,6 @@ func start_pressed():
 
 func transition_next_level(body: Node2D):
 	if body is Player:
+		ui.hide_all()
 		game_state = GameState.PLAYING
 		world.show_next_level()

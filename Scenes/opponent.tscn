@@ -25,6 +25,11 @@
 [ext_resource type="Script" uid="uid://834hq614bavk" path="res://Scripts/States/Opponent/o_shoot.gd" id="22_sd3ku"]
 [ext_resource type="Script" uid="uid://o0xtf3d1i5r0" path="res://Scripts/States/Opponent/o_win.gd" id="23_e5o20"]
 
+[sub_resource type="Curve" id="Curve_e5o20"]
+_limits = [0.0, 1.0, 0.0, 500.0]
+_data = [Vector2(0, 1), 0.0, -0.00788656, 0, 0, Vector2(300, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_2o52v"]
 animations = [{
 "frames": [{
@@ -101,9 +106,6 @@ colors = PackedColorArray(1, 0.374074, 0.342341, 1)
 gradient = SubResource("Gradient_e5o20")
 width = 16
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xagfj"]
-radius = 208.274
-
 [node name="Opponent" node_paths=PackedStringArray("fsm", "collision") groups=["Opponent"] instance=ExtResource("1_i4xd2")]
 collision_mask = 11
 wall_min_slide_angle = 0.0
@@ -111,6 +113,7 @@ safe_margin = 0.1
 script = ExtResource("2_1ejkn")
 fsm = NodePath("FSM")
 collision = NodePath("CollisionShape2D")
+hearing_radius = SubResource("Curve_e5o20")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 scale = Vector2(0.2, 0.2)
@@ -163,13 +166,5 @@ offset_bottom = -24.0
 fill_mode = 3
 texture_under = SubResource("GradientTexture2D_sd3ku")
 texture_progress = SubResource("GradientTexture2D_nrimw")
-
-[node name="HearingRadius" type="Area2D" parent="." index="7"]
-modulate = Color(0.3, 0.44, 1, 1)
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HearingRadius" index="0"]
-shape = SubResource("CircleShape2D_xagfj")
 
 [editable path="VisionCone"]

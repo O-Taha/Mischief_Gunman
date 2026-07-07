@@ -10,7 +10,9 @@ script = ExtResource("1_3mqfk")
 opponent = NodePath("Opponent")
 
 [node name="Opponent" parent="." instance=ExtResource("1_4dpyx")]
-position = Vector2(240, 360)
+position = Vector2(240, 240)
 
 [node name="Barrel" parent="." instance=ExtResource("2_3mqfk")]
-position = Vector2(240, 660)
+position = Vector2(240, 600)
+sound_name = null
+sound_volume = null

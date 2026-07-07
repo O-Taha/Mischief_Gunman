@@ -10,13 +10,12 @@ const NON_COVER_COMPONENT: int = 4
 const IMMOVABLE_COMPONENT: int = 8
 var added_components: int = 0
 
-
 var is_moving: bool = false
 @onready var initial_scale: Vector2 = $AnimatedSprite2D.scale
 
-signal sound_emitted(global_position: Vector2, volume: int)
-@export var sfx_name: StringName = "TEST"
-@export_range(0.0, 3.0) var sfx_volume: int = 1
+@export var sound_name: StringName = "TEST"
+@export_range(0.0, 3.0) var sound_volume: int = 1
+
 
 func _set_added_components():
 	for component in find_children("*Component*"):
@@ -49,11 +48,7 @@ func _physics_process(delta: float) -> void:
 func push(impulse: Vector2):	# Just a wrapper for moving props, 
 						# to easily emit the signals and create setter-like behaviour
 	apply_central_impulse(impulse)
-	emit_sound()
-	
-func emit_sound():
-	SfxPlayer.play_sound(sfx_name)
-	sound_emitted.emit(global_position, sfx_volume)
+	SfxPlayer.play_sound(sound_name, sound_volume, global_position)
 
 func die():
 	queue_free()
