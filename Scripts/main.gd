@@ -16,6 +16,9 @@ var game_state: GameState = GameState.TITLE:
 		game_state = value
 
 func _ready() -> void:
+	var reticle_texture: CompressedTexture2D = load("res://Assets/Placeholder/cursor1.png")
+	Input.set_custom_mouse_cursor(reticle_texture, Input.CURSOR_ARROW, reticle_texture.get_size()/2)
+	
 	player.move_enable = false
 	
 	player.position = world.start_pos
