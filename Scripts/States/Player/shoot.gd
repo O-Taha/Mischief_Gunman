@@ -10,6 +10,8 @@ func enter():
 		aim_direction = aim_direction.normalized() * owner.collision.get_shape().get_rect().size.y
 		
 		var bullet = owner.bullet.instantiate()._initialize(owner.global_position+aim_direction, aim_direction.angle())
+		bullet.set_collision_mask_value(9, true) # enables shooting UI for player only, since opponent could sometimes shoot retry button while it appeared during game over animation
+
 		var congregator = get_tree().root.get_node("/root/BulletCongregator")
 		congregator.add_child(bullet)
 		bullet.owner = congregator

@@ -35,6 +35,9 @@ func _physics_process(delta: float) -> void:
 	if move_enable:
 		move_and_slide()
 		_handle_collisions()
+		#for i in get_slide_collision_count():
+			#var collision = get_slide_collision(i)
+			#print("Collided with: ", collision.get_collider().name)
 		$VisionCone.rotation = dir.angle()
 
 func _push_prop(collider: Object, direction: Vector2):

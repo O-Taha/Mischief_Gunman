@@ -29,10 +29,9 @@ func _handle_collisions():
 		var collision_info: KinematicCollision2D = get_slide_collision(collision)
 		var collider: Object = collision_info.get_collider()
 
-		var curr_vel: Vector2 = get_real_velocity()
-		var is_dashing_or_pushing: bool = (acceleration > 0 or velocity.length() >= speed)
+		var curr_vel: Vector2 = velocity
 		
-		if collider is RigidBody2D and is_dashing_or_pushing:
+		if collider is RigidBody2D:
 			collided.emit(curr_vel)
 			_push_prop(collider, -collision_info.get_normal())
 
