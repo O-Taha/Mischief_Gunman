@@ -16,5 +16,7 @@ func play_sound(sound_name: StringName, sound_volume: int, global_position: Vect
 	var stream_found = audio.get(sound_name)
 	assert(stream_found != null, "You tried to play %s while existing audios are %s" % [sound_name, audio.keys()])
 	
-	playback.play_stream(stream_found)
+	var db_volume: float = log(sound_volume*1000000)/log(10)
+	if is_nan(db_volume) or is_inf(db_volume): db_volume = 0 # probably due to volume = -1 from gunshot
+	playback.play_stream(stream_found, 0, db_volume*1.5)
 	sound_emitted.emit(sound_volume, global_position)
