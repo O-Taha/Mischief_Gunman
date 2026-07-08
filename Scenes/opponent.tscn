@@ -111,9 +111,9 @@ collision_mask = 11
 wall_min_slide_angle = 0.0
 safe_margin = 0.1
 script = ExtResource("2_1ejkn")
+hearing_radius = SubResource("Curve_e5o20")
 fsm = NodePath("FSM")
 collision = NodePath("CollisionShape2D")
-hearing_radius = SubResource("Curve_e5o20")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 scale = Vector2(0.2, 0.2)

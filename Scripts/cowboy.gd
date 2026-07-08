@@ -10,13 +10,27 @@ var dir: Vector2
 @export_category("Nodes & Scenes")
 @export var bullet: PackedScene
 @export var sprite: Node2D
+@export var fsm: FSM
+@export var collision: CollisionShape2D
 
-var move_enable: bool = true
-var shoot_enable: bool = true
+var move_enable: bool = true:
+	set(value):
+		if value == false:
+			velocity = Vector2.ZERO
+		move_enable = value
+
+var shoot_cooldown_time: float = 0.5
+var shoot_enable: bool = true:
+	set(value):
+		if value == false:
+			get_tree().create_tween().tween_callback(func(): shoot_enable = true).set_delay(shoot_cooldown_time)
+		shoot_enable = value
+	
 var acceleration: float # Used to check we just did a dash, for prop pushing 
 # since checking dash state isn't enough as it is transient
 var last_vel_lenght: float
 var about_to_stop: bool
+	
 
 func _physics_process(_delta: float) -> void:
 	about_to_stop = velocity.length() <= 100\
@@ -44,8 +58,20 @@ func _push_prop(collider: Object, direction: Vector2):
 func _apply_opposite_force_to_self_and_collider(impulse: Vector2, collider: Object):
 	collider.push(impulse)
 	velocity = -impulse/2
+	
+func disable_physics():
+	set_physics_process(false)
+	collision.set_deferred("disabled", true)
+	move_enable = false
+	shoot_enable = false
+
+func enable_physics(and_functionality: bool = true):
+	set_physics_process(true)
+	collision.set_deferred("disabled", false)
+	if and_functionality:
+		move_enable = true
+		shoot_enable = true
 
 func die():
-	queue_free()
 	move_enable = false
 	died.emit()

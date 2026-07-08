@@ -2,9 +2,7 @@ class_name Player
 extends Cowboy
 
 @export_category("Nodes & Scenes")
-@export var fsm: FSM
 @export var bullet_trajectory: Line2D
-@export var collision: CollisionShape2D
 
 @export var dash_force: float = speed * 5
 
@@ -72,8 +70,7 @@ func check_for_dash(delta: float) -> void: # A dash is achieved by pressing a di
 					
 func check_for_shoot():
 	if Input.is_action_just_pressed('shoot'):
-				fsm.curr_state.transitioned.emit(fsm.curr_state, "shoot")
-				SfxPlayer.play_sound("TEST", -1, global_position)
+		fsm.curr_state.transitioned.emit(fsm.curr_state, "shoot")
 		
 func reset_dash_FSM():
 	dash_check_state = DashCheckState.IDLE

@@ -20,9 +20,8 @@ func _ready() -> void:
 	Input.set_custom_mouse_cursor(reticle_texture, Input.CURSOR_ARROW, reticle_texture.get_size()/2)
 	
 	player.move_enable = false
-	
 	player.position = world.start_pos
-	await get_tree().create_timer(1.0).timeout
+	
 	ui.show_title_screen()
 	player.died.connect(game_over)
 	opponent.died.connect(win)
@@ -38,10 +37,12 @@ func turn_opponent_after_countdown():
 		opponent.fsm.curr_state.turn_around()
 
 func game_over():
-	await ui.show_game_over()
+	ui.show_game_over()
+	world.reset_player_pos_game_over()
 	game_state = GameState.GAMEOVER
 
 func win():
+	if game_state == GameState.GAMEOVER: return # to avoid player winning because of a stray bullet before dying
 	ui.show_go()
 	game_state = GameState.GO
 

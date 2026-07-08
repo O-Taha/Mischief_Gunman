@@ -2022,14 +2022,14 @@ nodes/TimeScale/position = Vector2(100, 120)
 nodes/output/position = Vector2(300, 120)
 node_connections = [&"TimeScale", 0, &"Player Animation FSM", &"output", 0, &"TimeScale"]
 
-[node name="Player" node_paths=PackedStringArray("fsm", "bullet_trajectory", "collision") groups=["Player"] instance=ExtResource("1_v1ht0")]
+[node name="Player" node_paths=PackedStringArray("bullet_trajectory", "fsm", "collision") groups=["Player"] instance=ExtResource("1_v1ht0")]
 collision_mask = 11
 safe_margin = 10.0
 script = ExtResource("2_vdpp0")
-fsm = NodePath("FSM")
 bullet_trajectory = NodePath("BulletTrajectory")
-collision = NodePath("CollisionShape2D")
 dash_force = null
+fsm = NodePath("FSM")
+collision = NodePath("CollisionShape2D")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 scale = Vector2(0.4, 0.4)

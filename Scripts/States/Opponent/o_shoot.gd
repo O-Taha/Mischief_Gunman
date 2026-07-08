@@ -2,8 +2,9 @@
 extends State
 
 func enter():
-	owner.speed /= 2
-	if owner.move_enable:
+	owner.speed /= 20
+	if owner.shoot_enable:
+		owner.shoot_enable = false # will be set to true by its own setter
 		await get_tree().create_timer(0.8).timeout
 		if owner.player: 
 			var aim_direction: Vector2 = owner.to_local(owner.player.global_position + owner.player.velocity/5)
@@ -13,9 +14,11 @@ func enter():
 			var congregator = get_tree().root.get_node("/root/BulletCongregator")
 			congregator.add_child(bullet)
 			bullet.owner = congregator
+			SfxPlayer.play_sound("TEST", -1, owner.global_position)
+
 
 func update(_delta: float):
 	transitioned.emit(self, "o_hunt")
 
 func exit():
-	owner.speed *= 2
+	owner.speed *= 20

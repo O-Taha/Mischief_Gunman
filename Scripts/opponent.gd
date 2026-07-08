@@ -1,9 +1,5 @@
 extends Cowboy
 
-@export_category("Nodes & Scenes")
-@export var fsm: FSM
-@export var collision: CollisionShape2D
-
 @onready var player: Player = get_tree().get_first_node_in_group("Player")
 
 const MAX_ALERT: float = 100.0
@@ -65,6 +61,8 @@ func _on_player_died():
 
 func die():
 	super.die()
+	hide()
+	disable_physics()
 
 func _draw() -> void:
 	draw_string(ThemeDB.fallback_font, Vector2(80, -20), fsm.curr_state.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color.BLACK)
