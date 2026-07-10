@@ -18,11 +18,13 @@ func _ready() -> void:
 func show_next_level():
 	var pos_tween: Tween = create_tween().set_trans(Tween.TRANS_EXPO)
 	var duration: float = 2.0
+	player.disable_physics()
 	current_level.opponent.disable_physics()
 	pos_tween.tween_property(current_level, "position:y", 0.0, duration)
 	pos_tween.parallel().tween_property(player, "position:y", start_pos.y, duration)
 	await pos_tween.finished
 	current_level.opponent.enable_physics()
+	player.enable_physics()
 	
 func reset_player_pos_game_over():
 	var pos_tween: Tween = create_tween().set_trans(Tween.TRANS_EXPO)
@@ -30,5 +32,5 @@ func reset_player_pos_game_over():
 	player.disable_physics()
 	pos_tween.tween_property(player, "position", start_pos, duration)
 	await pos_tween.finished
-	player.enable_physics(false)
+	player.enable_physics()
 	

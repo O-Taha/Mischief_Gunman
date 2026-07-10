@@ -26,5 +26,7 @@ func _physics_process(delta: float) -> void:
 		if player: 
 			var distance_to_player: float = opponent.to_local(player.global_position).length()/get_viewport_rect().size.y
 			opponent.saw_something_moved((delta * player_seen_gauge_fill_rate) * alert_by_distance_curve.sample_baked(distance_to_player))
-			if opponent.fsm.curr_state.name == "o_hunt": opponent.fsm.curr_state.transitioned.emit(opponent.fsm.curr_state, "o_shoot")
+			print(opponent.fsm.curr_state.name == "o_hunt" and opponent.shoot_enable and not opponent.dead)
+			if opponent.fsm.curr_state.name == "o_hunt" and opponent.shoot_enable and not opponent.dead: 
+				opponent.fsm.curr_state.transitioned.emit(opponent.fsm.curr_state, "o_shoot")
 		if prop and prop.is_moving: opponent.saw_something_moved(prop.linear_velocity.length() * delta)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ylm46mo706i8"]
 
-[ext_resource type="Script" uid="uid://wcl8fhs70qq6" path="res://hideable_container.gd" id="1_bjqie"]
+[ext_resource type="Script" uid="uid://wcl8fhs70qq6" path="res://Scripts/hideable_container.gd" id="1_bjqie"]
 
 [node name="HideableContainer" type="MarginContainer"]
 script = ExtResource("1_bjqie")

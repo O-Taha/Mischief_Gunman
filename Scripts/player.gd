@@ -33,13 +33,14 @@ var dash_enable: bool = true:			# NOTE: Automatically sets sprite transparency (
 #endregion
 
 func _ready() -> void:
+	initial_dir = Vector2.ZERO
 	bullet_trajectory.get_node("RayCast2D").add_exception(self)
 
 func _physics_process(delta: float) -> void:
 	super(delta)
 	if move_enable: dir = Input.get_vector("left", "right", "up", "down")
 	if dash_enable: check_for_dash(delta)
-	check_for_shoot()
+	if shoot_enable: check_for_shoot()
 	move_and_slide()
 	_handle_collisions()
 
@@ -69,7 +70,7 @@ func check_for_dash(delta: float) -> void: # A dash is achieved by pressing a di
 					reset_dash_FSM()
 					
 func check_for_shoot():
-	if Input.is_action_just_pressed('shoot'):
+	if Input.is_action_just_pressed('shoot'): # if shoot_enable checked before call to func
 		fsm.curr_state.transitioned.emit(fsm.curr_state, "shoot")
 		
 func reset_dash_FSM():

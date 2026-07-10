@@ -2015,6 +2015,7 @@ _data = {
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_pu2lt"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ukyrk"]
+graph_offset = Vector2(-304.267, 99.7333)
 "nodes/Player Animation FSM/node" = ExtResource("10_gymyn")
 "nodes/Player Animation FSM/position" = Vector2(-180, 160)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_pu2lt")

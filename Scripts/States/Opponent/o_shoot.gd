@@ -1,11 +1,17 @@
 @tool
 extends State
 
+var shoot_cooldown_enabler: Tween
+var shoot_reaction_time: float = 0.8
+
 func enter():
 	owner.speed /= 20
-	if owner.shoot_enable:
-		owner.shoot_enable = false # will be set to true by its own setter
-		await get_tree().create_timer(0.8).timeout
+	assert(owner.shoot_enable)
+	await get_tree().create_timer(shoot_reaction_time).timeout # WARNING Leave it 
+	# here instead of inside the if clause to allow died to update in time, or else
+	# will enter if then die, making it shoot even when dead
+	if owner.shoot_enable and not owner.dead: # line may be superfluous
+		owner.shoot_enable = false
 		if owner.player: 
 			var aim_direction: Vector2 = owner.to_local(owner.player.global_position + owner.player.velocity/5)
 			aim_direction = aim_direction.normalized() * (owner.collision.get_shape().get_rect().size.y-10)
@@ -22,3 +28,9 @@ func update(_delta: float):
 
 func exit():
 	owner.speed *= 20
+	if not owner.dead: _enable_shoot_after_cooldown(owner.shoot_cooldown_time)
+
+func _enable_shoot_after_cooldown(time: float):
+	shoot_cooldown_enabler = get_tree().create_tween()
+	shoot_cooldown_enabler.tween_callback(func (): owner.shoot_enable = true).set_delay(time)
+	

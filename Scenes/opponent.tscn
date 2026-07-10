@@ -112,6 +112,7 @@ wall_min_slide_angle = 0.0
 safe_margin = 0.1
 script = ExtResource("2_1ejkn")
 hearing_radius = SubResource("Curve_e5o20")
+turn_speed = 5.0
 fsm = NodePath("FSM")
 collision = NodePath("CollisionShape2D")
 

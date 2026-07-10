@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cy8ut2hk7s4u3"]
 
-[ext_resource type="Script" uid="uid://cp720yh8e3e4t" path="res://sfx_player.gd" id="1_g0cor"]
+[ext_resource type="Script" uid="uid://cp720yh8e3e4t" path="res://Scripts/sfx_player.gd" id="1_g0cor"]
 [ext_resource type="AudioStream" uid="uid://bbhp0ca051h8s" path="res://Assets/Placeholder/hit01.wav" id="2_u8eqc"]
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_u8eqc"]

@@ -13,18 +13,18 @@ var dir: Vector2
 @export var fsm: FSM
 @export var collision: CollisionShape2D
 
-var move_enable: bool = true:
+var dead: bool
+
+var initial_dir: Vector2
+var move_enable: bool:
 	set(value):
 		if value == false:
 			velocity = Vector2.ZERO
+			dir = initial_dir
 		move_enable = value
 
-var shoot_cooldown_time: float = 0.5
-var shoot_enable: bool = true:
-	set(value):
-		if value == false:
-			get_tree().create_tween().tween_callback(func(): shoot_enable = true).set_delay(shoot_cooldown_time)
-		shoot_enable = value
+var shoot_cooldown_time: float = 2.0
+var shoot_enable: bool
 	
 var acceleration: float # Used to check we just did a dash, for prop pushing 
 # since checking dash state isn't enough as it is transient
@@ -39,8 +39,8 @@ func _physics_process(_delta: float) -> void:
 	last_vel_lenght = velocity.length()
 
 func _handle_collisions():
-	for collision in get_slide_collision_count(): # Credits to KidsCanCode (https://kidscancode.org/godot_recipes/4.x/physics/character_vs_rigid/index.html)
-		var collision_info: KinematicCollision2D = get_slide_collision(collision)
+	for col in get_slide_collision_count(): # Credits to KidsCanCode (https://kidscancode.org/godot_recipes/4.x/physics/character_vs_rigid/index.html)
+		var collision_info: KinematicCollision2D = get_slide_collision(col)
 		var collider: Object = collision_info.get_collider()
 
 		var curr_vel: Vector2 = velocity
@@ -62,16 +62,11 @@ func _apply_opposite_force_to_self_and_collider(impulse: Vector2, collider: Obje
 func disable_physics():
 	set_physics_process(false)
 	collision.set_deferred("disabled", true)
-	move_enable = false
-	shoot_enable = false
 
-func enable_physics(and_functionality: bool = true):
+func enable_physics():
 	set_physics_process(true)
 	collision.set_deferred("disabled", false)
-	if and_functionality:
-		move_enable = true
-		shoot_enable = true
 
 func die():
-	move_enable = false
+	dead = true
 	died.emit()

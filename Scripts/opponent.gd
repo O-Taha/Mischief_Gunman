@@ -5,7 +5,7 @@ extends Cowboy
 const MAX_ALERT: float = 100.0
 var alert_gauge: float = 0.0:
 	set(value):
-		if not move_enable: return # is probably waiting outside of screen waiting for next level to be loaded
+		if dead: return # is waiting outside of screen waiting for next level to be loaded
 		if alert_gauge == MAX_ALERT: return
 		if value >= MAX_ALERT:
 			alert_gauge = MAX_ALERT #↓ HACK ↓ : States should be the 
@@ -19,8 +19,11 @@ var alert_gauge: float = 0.0:
 
 var new_dest: Vector2 = position # DEBUG : used for o_passive wandering direction
 
+var desired_dir: Vector2		# Allows the opponent to turn more slowly
+@export var turn_speed: float = 5.0
 
 func _ready() -> void:
+	initial_dir = Vector2.UP
 	$FSM/o_passive.new_dest.connect(update_debug_dest)
 	SfxPlayer.sound_emitted.connect(heard_something)
 	if player: player.died.connect(_on_player_died) # if allows this scene to be used standalone for debug
@@ -61,8 +64,9 @@ func _on_player_died():
 
 func die():
 	super.die()
-	hide()
-	disable_physics()
+	fsm.curr_state.transitioned.emit(fsm.curr_state, "o_turned")
+	modulate.a = 0.5
+
 
 func _draw() -> void:
 	draw_string(ThemeDB.fallback_font, Vector2(80, -20), fsm.curr_state.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color.BLACK)
