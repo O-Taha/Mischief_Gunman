@@ -11,7 +11,6 @@ opponent = NodePath("Opponent")
 
 [node name="Opponent" parent="." instance=ExtResource("1_4dpyx")]
 position = Vector2(240, 240)
-turn_speed = 5.0
 
 [node name="Barrel" parent="." instance=ExtResource("2_3mqfk")]
 position = Vector2(240, 600)

@@ -20,7 +20,7 @@ var alert_gauge: float = 0.0:
 var new_dest: Vector2 = position # DEBUG : used for o_passive wandering direction
 
 var desired_dir: Vector2		# Allows the opponent to turn more slowly
-@export var turn_speed: float = 5.0
+var turn_speed: float = 12.0
 
 func _ready() -> void:
 	initial_dir = Vector2.UP

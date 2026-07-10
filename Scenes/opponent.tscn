@@ -112,7 +112,6 @@ wall_min_slide_angle = 0.0
 safe_margin = 0.1
 script = ExtResource("2_1ejkn")
 hearing_radius = SubResource("Curve_e5o20")
-turn_speed = 5.0
 fsm = NodePath("FSM")
 collision = NodePath("CollisionShape2D")
 
@@ -121,7 +120,7 @@ scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_2o52v")
 
 [node name="FSM" parent="." index="2" node_paths=PackedStringArray("init_state")]
-init_state = NodePath("o_turned")
+init_state = NodePath("o_passive")
 
 [node name="o_turned" type="Node" parent="FSM" index="0"]
 script = ExtResource("19_g3rks")

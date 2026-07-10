@@ -17,15 +17,21 @@ func _ready() -> void:
 const WALL_BUFFER: float = 60.0
 
 func randomize_move():
-	# WARNING : Doesn't detect NonCoverProps 
 	owner.speed = randf_range(MAX_SPEED/2, MAX_SPEED)
-	
-	owner.dir = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
-	obstacle_checker.target_position = initial_target.rotated(owner.dir.angle())
+
+	owner.desired_dir = Vector2(
+		randf_range(-1, 1),
+		randf_range(-1, 1)
+	).normalized()
+
+	obstacle_checker.target_position = initial_target.rotated(owner.desired_dir.angle())
 	obstacle_checker.force_shapecast_update()
-	
-	wander_time = (initial_target.length() * obstacle_checker.get_closest_collision_safe_fraction() - WALL_BUFFER) / owner.speed
-	new_dest.emit(wander_time * owner.speed * owner.dir) # DEBUG
+
+	var distance := initial_target.length() * obstacle_checker.get_closest_collision_safe_fraction()
+
+	wander_time = (distance - WALL_BUFFER) / owner.speed
+
+	new_dest.emit(distance * owner.desired_dir)  # DEBUG
 		
 		
 func enter():
@@ -36,6 +42,7 @@ func physics_update(delta: float):
 		wander_time -= delta
 	else:
 		randomize_move()
+	owner.dir = owner.dir.slerp(owner.desired_dir, owner.turn_speed * delta).normalized()
 	owner.velocity = owner.dir * owner.speed
 	if Input.is_action_just_pressed("ui_focus_next"): 
 		transitioned.emit(self, "o_hunt") # DEBUG
