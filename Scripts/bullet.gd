@@ -24,7 +24,9 @@ func _physics_process(delta):
 		
 		if has_no_components: #Either no components added or isn't a Prop (could be a player)
 			self.die()
-			if prop.has_method("die"): prop.die() # Used to kill Cowboys, trigger shootable buttons
+			if prop.has_method("die"): 
+				if not prop.get("dead"): # Calls die only if doesn't have dead property (eg: button) or isn't dead
+					prop.die() # Used to kill Cowboys, trigger shootable buttons
 			return
 		if prop.has_component(prop.HEALTH_COMPONENT):
 			prop.get_node("HealthComponent")._on_hit_by(self)
