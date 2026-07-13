@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dpbvlnb0x7af7"]
+[gd_scene load_steps=6 format=3 uid="uid://dpbvlnb0x7af7"]
 
 [ext_resource type="Script" uid="uid://mrvhsqa6akvx" path="res://Scripts/prop.gd" id="1_5sh6o"]
 [ext_resource type="Texture2D" uid="uid://dvs1art550aah" path="res://Assets/Placeholder/sphere-00.png" id="2_5sh6o"]
@@ -16,6 +16,9 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5sh6o"]
 size = Vector2(100, 100)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5sh6o"]
+polygon = PackedVector2Array(-50, -50, -150, -50, 50, 50, -50, 50)
 
 [node name="Prop" type="RigidBody2D"]
 collision_layer = 2
@@ -41,3 +44,6 @@ shape = SubResource("RectangleShape2D_5sh6o")
 scale = Vector2(10, 10)
 target_position = Vector2(0, 0)
 collide_with_bodies = false
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_5sh6o")

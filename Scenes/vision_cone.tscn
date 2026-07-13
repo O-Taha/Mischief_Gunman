@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://tem0cx8tjqvh"]
+[gd_scene load_steps=4 format=3 uid="uid://tem0cx8tjqvh"]
 
 [ext_resource type="Script" uid="uid://dvsjkabhrrgby" path="res://Scripts/vision_ray.gd" id="1_upggy"]
+[ext_resource type="Texture2D" uid="uid://dmkyd6pxcecs5" path="res://Assets/Placeholder/path1.png" id="2_f4k6l"]
 
 [sub_resource type="Curve" id="Curve_upggy"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.3), 0.0, 0.0, 0, 0]
@@ -42,3 +43,12 @@ target_position = Vector2(500, 0)
 collision_mask = 11
 script = ExtResource("1_upggy")
 alert_by_distance_curve = SubResource("Curve_upggy")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.868811, 5.77569e-07, 0.459911, 1)
+energy = 100000.0
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("2_f4k6l")
+offset = Vector2(208, 0)
+texture_scale = 5.0

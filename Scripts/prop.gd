@@ -26,6 +26,8 @@ func has_component(component_mask: int) -> bool:
 
 func _ready() -> void:
 	_set_added_components()
+	var col_shape: Rect2 = $CollisionShape2D.shape.get_rect()
+	$LightOccluder2D.occluder.polygon = PackedVector2Array([col_shape.position, col_shape.position + Vector2.LEFT*col_shape.size.x, col_shape.end, col_shape.position + Vector2.DOWN*col_shape.size.y])
 	
 func _physics_process(delta: float) -> void:
 	if not Engine.is_editor_hint():

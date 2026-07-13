@@ -14,4 +14,3 @@ position = Vector2(240, 240)
 
 [node name="Barrel" parent="." instance=ExtResource("2_3mqfk")]
 position = Vector2(240, 600)
-sound_volume = 3
