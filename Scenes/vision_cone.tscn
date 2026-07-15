@@ -12,39 +12,40 @@ metadata/_snap_enabled = true
 
 [node name="VisionRay0" type="RayCast2D" parent="."]
 target_position = Vector2(500, 0)
-collision_mask = 11
+collision_mask = 41
 script = ExtResource("1_upggy")
 alert_by_distance_curve = SubResource("Curve_upggy")
 
 [node name="VisionRay-1" type="RayCast2D" parent="."]
 rotation = 0.0872665
 target_position = Vector2(500, 0)
-collision_mask = 11
+collision_mask = 41
 script = ExtResource("1_upggy")
 alert_by_distance_curve = SubResource("Curve_upggy")
 
 [node name="VisionRay1" type="RayCast2D" parent="."]
 rotation = -0.0872665
 target_position = Vector2(500, 0)
-collision_mask = 11
+collision_mask = 41
 script = ExtResource("1_upggy")
 alert_by_distance_curve = SubResource("Curve_upggy")
 
 [node name="VisionRay-2" type="RayCast2D" parent="."]
 rotation = 0.174533
 target_position = Vector2(500, 0)
-collision_mask = 11
+collision_mask = 41
 script = ExtResource("1_upggy")
 alert_by_distance_curve = SubResource("Curve_upggy")
 
 [node name="VisionRay2" type="RayCast2D" parent="."]
 rotation = -0.174533
 target_position = Vector2(500, 0)
-collision_mask = 11
+collision_mask = 41
 script = ExtResource("1_upggy")
 alert_by_distance_curve = SubResource("Curve_upggy")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 color = Color(0.868811, 5.77569e-07, 0.459911, 1)
 energy = 100000.0
 blend_mode = 2

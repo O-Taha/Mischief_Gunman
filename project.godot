@@ -23,7 +23,6 @@ SfxPlayer="*res://Scenes/sfx_player.tscn"
 
 window/size/viewport_width=480
 window/size/viewport_height=852
-window/size/mode=3
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
 
@@ -74,9 +73,10 @@ shoot={
 [layer_names]
 
 2d_physics/layer_1="Player"
-2d_physics/layer_2="Prop"
+2d_physics/layer_2="PropCollision"
 2d_physics/layer_3="Bullet"
 2d_physics/layer_4="Wall"
+2d_physics/layer_6="PropHurtbox"
 2d_physics/layer_9="UI"
 
 [rendering]

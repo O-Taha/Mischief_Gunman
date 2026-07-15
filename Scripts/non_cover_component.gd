@@ -7,4 +7,4 @@ extends Node2D
 func _ready() -> void:
 	var parent = get_parent()
 	if parent:
-		parent.add_to_group("not_a_cover_prop", true)
+		parent.bullet_detector.add_to_group("not_a_cover_prop", true)

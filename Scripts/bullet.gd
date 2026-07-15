@@ -1,7 +1,9 @@
+class_name Bullet
 extends CharacterBody2D
 
 var speed: float = 750.0
 const DESPAWN_TIMER_DELAY: int = 30
+const PROPHURTBOX_LAYER: int = 6
 
 func _initialize(_position = Vector2.ZERO, _direction = 0) -> Node:
 	rotation = _direction
@@ -18,26 +20,22 @@ func _ready() -> void:
 func _physics_process(delta):
 	var collision_info: KinematicCollision2D = move_and_collide(velocity * delta)
 	if collision_info:
-		var prop = collision_info.get_collider()
-		var has_no_components: bool = not prop.get("added_components")
-		var queue_death: bool = false # Allows for freeing *after* checking all conditions
-		
-		if has_no_components: #Either no components added or isn't a Prop (could be a player)
+		var col = collision_info.get_collider() # Buttons, Cowboys, BulletDetectors
+		print(col)
+		if col.has_method("die"): # kills Cowboys, triggers shootable buttons
+			if not col.get("dead"): # Calls die only if doesn't have dead property (eg: button) or isn't dead
+				col.die()
 			self.die()
-			if prop.has_method("die"): 
-				if not prop.get("dead"): # Calls die only if doesn't have dead property (eg: button) or isn't dead
-					prop.die() # Used to kill Cowboys, trigger shootable buttons
-			return
-		if prop.has_component(prop.HEALTH_COMPONENT):
-			prop.get_node("HealthComponent")._on_hit_by(self)
-			queue_death = true
-		if prop.has_component(prop.RICOCHET_COMPONENT):
-			velocity = velocity.bounce(collision_info.get_normal())
-			velocity *= prop.get_node("RicochetComponent").bounce_factor
-			queue_death = false
-		else: queue_death = true
-			
-		if queue_death: die()
+		elif col.get_collision_layer_value(PROPHURTBOX_LAYER):
+			var prop: Prop = col.owner # if it's a prop, get Prop instead of BulletDetector 
+			col._on_body_entered(self) # RigidBody's default collision response is colliding
+								# this means it never enters BulletDetector's area,
+								# Its callback has to be called manually like this
+								# WARNING: Can't replace BulletDetector w/ Area2D or
+								# you'll loose get_collider() & get_normal()
+			if prop.has_component(prop.RICOCHET_COMPONENT):
+				velocity = velocity.bounce(collision_info.get_normal())
+				velocity *= prop.get_node("RicochetComponent").bounce_factor
 
 func die():
 	queue_free()

@@ -23,7 +23,7 @@ var move_enable: bool:
 			dir = initial_dir
 		move_enable = value
 
-var shoot_cooldown_time: float = 2.0
+var shoot_cooldown_time: float = 0.5
 var shoot_enable: bool
 	
 var acceleration: float # Used to check we just did a dash, for prop pushing 

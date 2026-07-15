@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dpbvlnb0x7af7"]
+[gd_scene load_steps=8 format=3 uid="uid://dpbvlnb0x7af7"]
 
 [ext_resource type="Script" uid="uid://mrvhsqa6akvx" path="res://Scripts/prop.gd" id="1_5sh6o"]
 [ext_resource type="Texture2D" uid="uid://dvs1art550aah" path="res://Assets/Placeholder/sphere-00.png" id="2_5sh6o"]
+[ext_resource type="Script" uid="uid://b7r53e1ciung8" path="res://Scenes/bullet_detector.gd" id="3_6l8ut"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5sh6o"]
 animations = [{
@@ -18,9 +19,12 @@ animations = [{
 size = Vector2(100, 100)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5sh6o"]
-polygon = PackedVector2Array(-50, -50, -150, -50, 50, 50, -50, 50)
+polygon = PackedVector2Array(-72.5, -18.5, 72.5, -18.5, 72.5, 18.5, -72.5, 18.5)
 
-[node name="Prop" type="RigidBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6l8ut"]
+size = Vector2(145, 37)
+
+[node name="Prop" type="RigidBody2D" node_paths=PackedStringArray("bullet_detector")]
 collision_layer = 2
 collision_mask = 11
 collision_priority = 10.0
@@ -29,7 +33,7 @@ can_sleep = false
 lock_rotation = true
 linear_damp = 5.0
 script = ExtResource("1_5sh6o")
-metadata/_edit_group_ = true
+bullet_detector = NodePath("BulletDetector")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(0, 0.600517, 0.32298, 1)
@@ -37,7 +41,7 @@ scale = Vector2(0.58, 0.58)
 sprite_frames = SubResource("SpriteFrames_5sh6o")
 offset = Vector2(0, -40)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionBox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5sh6o")
 
 [node name="VelocityVector" type="RayCast2D" parent="."]
@@ -45,5 +49,20 @@ scale = Vector2(10, 10)
 target_position = Vector2(0, 0)
 collide_with_bodies = false
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+[node name="VisionConeOccluder" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_5sh6o")
+
+[node name="BulletDetector" type="RigidBody2D" parent="." node_paths=PackedStringArray("hurtbox")]
+collision_layer = 32
+collision_mask = 4
+gravity_scale = 0.0
+can_sleep = false
+lock_rotation = true
+freeze = true
+script = ExtResource("3_6l8ut")
+hurtbox = NodePath("Hurtbox")
+metadata/_edit_group_ = true
+
+[node name="Hurtbox" type="CollisionShape2D" parent="BulletDetector"]
+shape = SubResource("RectangleShape2D_6l8ut")
+debug_color = Color(0.901723, 0.194314, 0.581841, 0.42)

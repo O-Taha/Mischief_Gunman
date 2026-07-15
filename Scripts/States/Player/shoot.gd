@@ -10,7 +10,7 @@ var shoot_cooldown_enabler: Tween
 
 func enter():
 	assert(owner.shoot_enable)
-	if owner.shoot_enable and (owner.bullet_trajectory.points.size() == 2):
+	if owner.shoot_enable and (owner.bullet_trajectory.points.size() >= 2):
 		owner.shoot_enable = false
 		var aim_direction: Vector2 = owner.bullet_trajectory.points[1] - owner.bullet_trajectory.points[0]
 		aim_direction = aim_direction.normalized() * owner.collision.get_shape().get_rect().size.y

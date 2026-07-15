@@ -65,6 +65,7 @@ func _ready() -> void:
 	player.died.connect(game_over)
 	opponent.died.connect(win)
 	$UI/LowerContainer/ShootableStartButton.function = start_pressed
+	$UI/LowerContainer/ShootableRetryButton.function = start_pressed
 	
 #func _physics_process(_delta: float) -> void:
 	#var statenames = ["TITLE", "PLAYING", "GO", "GAMEOVER"]

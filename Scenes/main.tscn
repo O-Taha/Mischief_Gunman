@@ -1,9 +1,13 @@
-[gd_scene load_steps=22 format=4 uid="uid://dlmr6missb311"]
+[gd_scene load_steps=26 format=4 uid="uid://dlmr6missb311"]
 
 [ext_resource type="Script" uid="uid://3go8gw3j1sdi" path="res://Scripts/main.gd" id="1_344ge"]
 [ext_resource type="PackedScene" uid="uid://kqv4rlq3vjgj" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://dfbkhn6f78ndr" path="res://Scenes/world.gd" id="2_344ge"]
 [ext_resource type="Texture2D" uid="uid://b36x6h1fd70pe" path="res://Assets/Placeholder/desert.png" id="2_d1ilt"]
+[ext_resource type="PackedScene" uid="uid://dpbvlnb0x7af7" path="res://Scenes/prop.tscn" id="6_6bp64"]
+[ext_resource type="PackedScene" uid="uid://bhchfsbwqnrj1" path="res://Scenes/Components/health_component.tscn" id="7_hptm8"]
+[ext_resource type="PackedScene" uid="uid://vnetyy40d6l6" path="res://Scenes/Components/ricochet_component.tscn" id="8_d1ilt"]
+[ext_resource type="PackedScene" uid="uid://kr065k2vptg0" path="res://Scenes/Components/immovable_component.tscn" id="9_6iyac"]
 [ext_resource type="PackedScene" uid="uid://bcmopllvyr764" path="res://Scenes/wall.tscn" id="12_fdnlq"]
 [ext_resource type="PackedScene" uid="uid://dptg81ablxq32" path="res://Scenes/ui.tscn" id="13_fdnlq"]
 
@@ -690,6 +694,21 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/NextLevelTrigger"]
 position = Vector2(230, 31)
 shape = SubResource("RectangleShape2D_21xkr")
+
+[node name="Prop" parent="World" instance=ExtResource("6_6bp64")]
+position = Vector2(344, 416)
+
+[node name="HealthComponent" parent="World/Prop" instance=ExtResource("7_hptm8")]
+health = 2.0
+
+[node name="RicochetComponent" parent="World/Prop" instance=ExtResource("8_d1ilt")]
+position = Vector2(0, 288)
+
+[node name="Prop2" parent="World" instance=ExtResource("6_6bp64")]
+position = Vector2(344, 704)
+sound_name = &""
+
+[node name="ImmovableComponent" parent="World/Prop2" instance=ExtResource("9_6iyac")]
 
 [node name="UI" parent="." instance=ExtResource("13_fdnlq")]
 visible = false

@@ -4,6 +4,9 @@ extends RigidBody2D
 
 var display_debug_vector: bool = true
 
+@export_category("Nodes & Scenes")
+@export var bullet_detector: RigidBody2D
+
 const HEALTH_COMPONENT: int = 1
 const RICOCHET_COMPONENT: int = 2
 const NON_COVER_COMPONENT: int = 4
@@ -16,7 +19,6 @@ var is_moving: bool = false
 @export var sound_name: StringName = "TEST"
 @export_range(0.0, 3.0) var sound_volume: int = 1
 
-
 func _set_added_components():
 	for component in find_children("*Component*"):
 		added_components |= get(component.name.to_snake_case().to_upper())
@@ -26,8 +28,8 @@ func has_component(component_mask: int) -> bool:
 
 func _ready() -> void:
 	_set_added_components()
-	var col_shape: Rect2 = $CollisionShape2D.shape.get_rect()
-	$LightOccluder2D.occluder.polygon = PackedVector2Array([col_shape.position, col_shape.position + Vector2.LEFT*col_shape.size.x, col_shape.end, col_shape.position + Vector2.DOWN*col_shape.size.y])
+	var col_shape: Rect2 = $BulletDetector/Hurtbox.shape.get_rect()
+	$VisionConeOccluder.occluder.polygon = PackedVector2Array([col_shape.position, col_shape.position + Vector2.RIGHT*col_shape.size.x, col_shape.end, col_shape.position + Vector2.DOWN*col_shape.size.y])
 	
 func _physics_process(delta: float) -> void:
 	if not Engine.is_editor_hint():
@@ -50,7 +52,7 @@ func _physics_process(delta: float) -> void:
 func push(impulse: Vector2):	# Just a wrapper for moving props, 
 						# to easily emit the signals and create setter-like behaviour
 	apply_central_impulse(impulse)
-	SfxPlayer.play_sound(sound_name, sound_volume, global_position)
+	if sound_name and sound_volume: SfxPlayer.play_sound(sound_name, sound_volume, global_position)
 
 func die():
 	queue_free()

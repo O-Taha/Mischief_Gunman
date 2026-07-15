@@ -2060,6 +2060,7 @@ script = ExtResource("5_fkybt")
 script = ExtResource("53_vq3lt")
 
 [node name="BulletTrajectory" parent="." index="3" instance=ExtResource("53_ie7r7")]
+z_index = 1
 fade_curve = SubResource("Curve_gymyn")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
