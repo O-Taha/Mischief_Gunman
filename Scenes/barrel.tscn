@@ -1,8 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfjt2ebm1npn6"]
+[gd_scene load_steps=11 format=3 uid="uid://dfjt2ebm1npn6"]
 
 [ext_resource type="PackedScene" uid="uid://dpbvlnb0x7af7" path="res://Scenes/prop.tscn" id="1_m5w3l"]
 [ext_resource type="Texture2D" uid="uid://cst4iw5vpg0il" path="res://Assets/Placeholder/tilt_minus_45_512.png" id="2_rp70x"]
+[ext_resource type="Texture2D" uid="uid://rq2aghjx4es2" path="res://Assets/Props/sprisheet_barrel.png" id="3_1tdys"]
 [ext_resource type="PackedScene" uid="uid://bhchfsbwqnrj1" path="res://Scenes/Components/health_component.tscn" id="3_rp70x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6ax0"]
+atlas = ExtResource("3_1tdys")
+region = Rect2(0, 0, 516, 516)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4cgw"]
+atlas = ExtResource("3_1tdys")
+region = Rect2(0, 516, 516, 516)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cukp"]
+atlas = ExtResource("3_1tdys")
+region = Rect2(516, 516, 516, 516)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpb77"]
+atlas = ExtResource("3_1tdys")
+region = Rect2(516, 0, 516, 516)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1tdys"]
 animations = [{
@@ -11,23 +28,48 @@ animations = [{
 "texture": ExtResource("2_rp70x")
 }],
 "loop": true,
-"name": &"default",
+"name": &"placeholder",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w6ax0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4cgw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0cukp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpb77")
+}],
+"loop": true,
+"name": &"spin",
+"speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_m5w3l"]
-size = Vector2(100, 49)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1tdys"]
+radius = 40.0
+height = 99.0
 
 [node name="Barrel" instance=ExtResource("1_m5w3l")]
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 self_modulate = Color(1, 1, 1, 1)
-scale = Vector2(0.29, 0.29)
+scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_1tdys")
+frame = 3
 
-[node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(0, 40.5)
-shape = SubResource("RectangleShape2D_m5w3l")
+[node name="CollisionBox" parent="." index="1"]
+position = Vector2(0, 25.5)
 
 [node name="HealthComponent" parent="." index="3" instance=ExtResource("3_rp70x")]
 health = 3.0
+
+[node name="BulletDetector" parent="." index="5"]
+position = Vector2(0, -1)
+
+[node name="Hurtbox" parent="BulletDetector" index="0"]
+position = Vector2(0, -8.5)
+shape = SubResource("CapsuleShape2D_1tdys")

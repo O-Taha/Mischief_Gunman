@@ -1,9 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5q8ectcb2ima"]
+[gd_scene load_steps=12 format=3 uid="uid://c5q8ectcb2ima"]
 
 [ext_resource type="PackedScene" uid="uid://dpbvlnb0x7af7" path="res://Scenes/prop.tscn" id="1_krne5"]
 [ext_resource type="Texture2D" uid="uid://b7k6vktv6tc35" path="res://Assets/Placeholder/cactus.png" id="2_jeihb"]
+[ext_resource type="Texture2D" uid="uid://ck5kgjprv3iu5" path="res://Assets/Props/spritesheet_cactus.png" id="3_kj16u"]
 [ext_resource type="PackedScene" uid="uid://bhchfsbwqnrj1" path="res://Scenes/Components/health_component.tscn" id="3_mjejd"]
 [ext_resource type="PackedScene" uid="uid://kr065k2vptg0" path="res://Scenes/Components/immovable_component.tscn" id="4_kj16u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0akkt"]
+atlas = ExtResource("3_kj16u")
+region = Rect2(0, 0, 516, 516)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6vup"]
+atlas = ExtResource("3_kj16u")
+region = Rect2(516, 0, 516, 516)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xsmg"]
+atlas = ExtResource("3_kj16u")
+region = Rect2(516, 516, 516, 516)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_756jn"]
+atlas = ExtResource("3_kj16u")
+region = Rect2(0, 516, 516, 516)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mjejd"]
 animations = [{
@@ -12,27 +29,46 @@ animations = [{
 "texture": ExtResource("2_jeihb")
 }],
 "loop": true,
-"name": &"default",
+"name": &"placeholder",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0akkt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6vup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1xsmg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_756jn")
+}],
+"loop": true,
+"name": &"spin",
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kj16u"]
-size = Vector2(62, 40)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_joo8e"]
+radius = 33.0
+height = 138.0
 
 [node name="Cactus" instance=ExtResource("1_krne5")]
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 self_modulate = Color(1, 1, 1, 1)
-scale = Vector2(1.99, 1.99)
 sprite_frames = SubResource("SpriteFrames_mjejd")
-frame_progress = 0.0678114
+frame = 3
 offset = Vector2(0, 0)
 
-[node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(0, 28)
-shape = SubResource("RectangleShape2D_kj16u")
+[node name="CollisionBox" parent="." index="1"]
+position = Vector2(0, 54)
 
 [node name="HealthComponent" parent="." index="3" instance=ExtResource("3_mjejd")]
 health = 3.0
 
 [node name="ImmovableComponent" parent="." index="4" instance=ExtResource("4_kj16u")]
+
+[node name="Hurtbox" parent="BulletDetector" index="0"]
+shape = SubResource("CapsuleShape2D_joo8e")

@@ -11,20 +11,20 @@ animations = [{
 "texture": ExtResource("2_5sh6o")
 }],
 "loop": true,
-"name": &"default",
+"name": &"spin",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5sh6o"]
-size = Vector2(100, 100)
+size = Vector2(96, 39)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5sh6o"]
-polygon = PackedVector2Array(-72.5, -18.5, 72.5, -18.5, 72.5, 18.5, -72.5, 18.5)
+polygon = PackedVector2Array(-40, -49.5, 40, -49.5, 40, 49.5, -40, 49.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6l8ut"]
-size = Vector2(145, 37)
+size = Vector2(120, 137)
 
-[node name="Prop" type="RigidBody2D" node_paths=PackedStringArray("bullet_detector")]
+[node name="Prop" type="RigidBody2D" node_paths=PackedStringArray("bullet_detector", "animatedSprite")]
 collision_layer = 2
 collision_mask = 11
 collision_priority = 10.0
@@ -34,11 +34,13 @@ lock_rotation = true
 linear_damp = 5.0
 script = ExtResource("1_5sh6o")
 bullet_detector = NodePath("BulletDetector")
+animatedSprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(0, 0.600517, 0.32298, 1)
 scale = Vector2(0.58, 0.58)
 sprite_frames = SubResource("SpriteFrames_5sh6o")
+animation = &"spin"
 offset = Vector2(0, -40)
 
 [node name="CollisionBox" type="CollisionShape2D" parent="."]
