@@ -32,8 +32,6 @@ func has_component(component_mask: int) -> bool:
 func _ready() -> void:
 	_set_added_components()
 	animatedSprite.frame = randi_range(0, animatedSprite.sprite_frames.get_frame_count("spin"))
-	var col_shape: Rect2 = $BulletDetector/Hurtbox.shape.get_rect()
-	$VisionConeOccluder.occluder.polygon = PackedVector2Array([col_shape.position, col_shape.position + Vector2.RIGHT*col_shape.size.x, col_shape.end, col_shape.position + Vector2.DOWN*col_shape.size.y])
 	
 func _physics_process(delta: float) -> void:
 	if not Engine.is_editor_hint():
@@ -52,6 +50,7 @@ func _physics_process(delta: float) -> void:
 			is_moving = false
 			$AnimatedSprite2D.scale = $AnimatedSprite2D.scale.lerp(initial_scale, delta * 10.0)
 			$AnimatedSprite2D.skew = lerp($AnimatedSprite2D.skew, 0.0, delta * 10.0)
+	
 	
 func push(impulse: Vector2):	# Just a wrapper for moving props, 
 						# to easily emit the signals and create setter-like behaviour
@@ -74,6 +73,7 @@ func play_spin(strength: float):
 	spin_tween = create_tween()
 	spin_tween.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	spin_tween.tween_property(animatedSprite, "speed_scale", 0.0, duration)
+
 
 func die():
 	queue_free()

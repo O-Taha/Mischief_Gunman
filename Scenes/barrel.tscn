@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfjt2ebm1npn6"]
+[gd_scene load_steps=15 format=3 uid="uid://dfjt2ebm1npn6"]
 
 [ext_resource type="PackedScene" uid="uid://dpbvlnb0x7af7" path="res://Scenes/prop.tscn" id="1_m5w3l"]
 [ext_resource type="Texture2D" uid="uid://cst4iw5vpg0il" path="res://Assets/Placeholder/tilt_minus_45_512.png" id="2_rp70x"]
@@ -49,6 +49,18 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_w6ax0"]
+polygon = PackedVector2Array(-3, -58, 21, -52, 40, -26, 43, -13, 41, -1, 30, 24, 26, 30, 3, 38, -21, 33, -40, 7, -42, -5, -39, -21, -31, -41, -25, -49)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1tdys"]
+polygon = PackedVector2Array(0, -57, 24, -50, 41, -21, 43, -9, 41, 2, 24, 32, 0, 38, -22, 32, -40, 2, -43, -10, -40, -24, -23, -51)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_n4cgw"]
+polygon = PackedVector2Array(8, -57, 28, -47, 34, -38, 42, -3, 39, 10, 33, 20, 18, 35, -6, 38, -28, 28, -34, 19, -41, -15, -39, -30, -18, -54)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0cukp"]
+polygon = PackedVector2Array(-10, -56, 15, -54, 32, -41, 38, -32, 41, -18, 39, 1, 36, 16, 30, 26, 12, 37, -15, 36, -35, 18, -38, 13, -41, 1, -35, -37, -29, -45)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1tdys"]
 radius = 40.0
 height = 99.0
@@ -59,13 +71,16 @@ height = 99.0
 self_modulate = Color(1, 1, 1, 1)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_1tdys")
-frame = 3
 
 [node name="CollisionBox" parent="." index="1"]
-position = Vector2(0, 25.5)
+position = Vector2(0, 23)
 
 [node name="HealthComponent" parent="." index="3" instance=ExtResource("3_rp70x")]
 health = 3.0
+
+[node name="VisionConeOccluder" parent="." index="4"]
+occluder = SubResource("OccluderPolygon2D_w6ax0")
+occluders = Array[OccluderPolygon2D]([SubResource("OccluderPolygon2D_1tdys"), SubResource("OccluderPolygon2D_n4cgw"), SubResource("OccluderPolygon2D_0cukp"), SubResource("OccluderPolygon2D_w6ax0")])
 
 [node name="BulletDetector" parent="." index="5"]
 position = Vector2(0, -1)

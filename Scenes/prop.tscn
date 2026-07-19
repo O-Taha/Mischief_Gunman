@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dpbvlnb0x7af7"]
+[gd_scene load_steps=9 format=3 uid="uid://dpbvlnb0x7af7"]
 
 [ext_resource type="Script" uid="uid://mrvhsqa6akvx" path="res://Scripts/prop.gd" id="1_5sh6o"]
 [ext_resource type="Texture2D" uid="uid://dvs1art550aah" path="res://Assets/Placeholder/sphere-00.png" id="2_5sh6o"]
 [ext_resource type="Script" uid="uid://b7r53e1ciung8" path="res://Scenes/bullet_detector.gd" id="3_6l8ut"]
+[ext_resource type="Script" uid="uid://bg4pmpsm8dl7p" path="res://Scenes/vision_cone_occluder.gd" id="3_844ta"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5sh6o"]
 animations = [{
@@ -19,7 +20,7 @@ animations = [{
 size = Vector2(96, 39)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5sh6o"]
-polygon = PackedVector2Array(-40, -49.5, 40, -49.5, 40, 49.5, -40, 49.5)
+polygon = PackedVector2Array(-58, -17, -17, -71, 59, -43, 55, 12, 18, 62, -52, 37)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6l8ut"]
 size = Vector2(120, 137)
@@ -53,6 +54,7 @@ collide_with_bodies = false
 
 [node name="VisionConeOccluder" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_5sh6o")
+script = ExtResource("3_844ta")
 
 [node name="BulletDetector" type="RigidBody2D" parent="." node_paths=PackedStringArray("hurtbox")]
 collision_layer = 32

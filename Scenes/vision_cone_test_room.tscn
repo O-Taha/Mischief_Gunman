@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://cijeboh2j4as0"]
+
+[ext_resource type="Script" uid="uid://kv8w7wc7gb15" path="res://Scenes/vision_cone_test_room.gd" id="1_116ku"]
+[ext_resource type="PackedScene" uid="uid://dujt3r3bmm62r" path="res://Scenes/opponent.tscn" id="1_j3kqs"]
+[ext_resource type="PackedScene" uid="uid://dfjt2ebm1npn6" path="res://Scenes/barrel.tscn" id="2_hg4qo"]
+[ext_resource type="Texture2D" uid="uid://c6oskwkkaf0dp" path="res://Assets/ground.png" id="3_hg4qo"]
+[ext_resource type="PackedScene" uid="uid://c5q8ectcb2ima" path="res://Scenes/cactus.tscn" id="5_jhupw"]
+[ext_resource type="PackedScene" uid="uid://dnajrn1qknkrw" path="res://Scenes/metal_crate.tscn" id="6_awqv5"]
+
+[node name="VisionConeTestRoom" type="Node2D"]
+script = ExtResource("1_116ku")
+
+[node name="Ground" type="Sprite2D" parent="."]
+position = Vector2(240, 420)
+texture = ExtResource("3_hg4qo")
+
+[node name="Opponent" parent="." instance=ExtResource("1_j3kqs")]
+position = Vector2(-2, 150)
+
+[node name="Barrel" parent="." instance=ExtResource("2_hg4qo")]
+position = Vector2(370, 161)
+
+[node name="AnimatedSprite2D" parent="Barrel" index="0"]
+frame = 3
+
+[node name="Cactus" parent="." instance=ExtResource("5_jhupw")]
+position = Vector2(370, 315)
+
+[node name="AnimatedSprite2D" parent="Cactus" index="0"]
+frame = 3
+
+[node name="MetalCrate" parent="." instance=ExtResource("6_awqv5")]
+position = Vector2(370, 475)
+
+[editable path="Barrel"]
+[editable path="Cactus"]

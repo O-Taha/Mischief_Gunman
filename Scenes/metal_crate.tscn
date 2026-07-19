@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dnajrn1qknkrw"]
+[gd_scene load_steps=14 format=3 uid="uid://dnajrn1qknkrw"]
 
 [ext_resource type="PackedScene" uid="uid://dpbvlnb0x7af7" path="res://Scenes/prop.tscn" id="1_isp43"]
 [ext_resource type="Texture2D" uid="uid://ctcwwv2go3wow" path="res://Assets/Props/spritesheet_crate.png" id="2_ptr1n"]
@@ -49,6 +49,18 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ptr1n"]
+polygon = PackedVector2Array(-58, -17, -17, -71, 59, -43, 55, 12, 18, 62, -52, 37)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_sead1"]
+polygon = PackedVector2Array(62, -26, 56, 29, -5, 63, -55, 21, -60, -36, 7, -73)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_k52rv"]
+polygon = PackedVector2Array(34, -67, 53, -6, 48, 45, -30, 57, -46, 3, -50, -53)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_maato"]
+polygon = PackedVector2Array(-34, -66, 51, -54, 46, 3, 31, 57, -46, 47, -50, -6)
+
 [node name="MetalCrate" instance=ExtResource("1_isp43")]
 
 [node name="AnimatedSprite2D" parent="." index="0"]
@@ -57,14 +69,23 @@ position = Vector2(0, 24.0337)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_k52rv")
 animation = &"new_animation"
+frame = 3
 offset = Vector2(0, -90)
 
 [node name="CollisionBox" parent="." index="1"]
+visible = false
 position = Vector2(0, 37.5)
 
 [node name="RicochetComponent" type="Node2D" parent="." index="3"]
 script = ExtResource("3_ptr1n")
 metadata/_custom_type_script = "uid://k0lkvmnf0qhf"
+
+[node name="VisionConeOccluder" parent="." index="4"]
+occluder = null
+occluders = Array[OccluderPolygon2D]([SubResource("OccluderPolygon2D_ptr1n"), SubResource("OccluderPolygon2D_sead1"), SubResource("OccluderPolygon2D_k52rv"), SubResource("OccluderPolygon2D_maato")])
+
+[node name="BulletDetector" parent="." index="5"]
+visible = false
 
 [node name="Hurtbox" parent="BulletDetector" index="0"]
 position = Vector2(0, -11.5)
