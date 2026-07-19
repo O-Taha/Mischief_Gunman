@@ -120,7 +120,7 @@ scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_2o52v")
 
 [node name="FSM" parent="." index="2" node_paths=PackedStringArray("init_state")]
-init_state = NodePath("o_passive")
+init_state = NodePath("o_turned")
 
 [node name="o_turned" type="Node" parent="FSM" index="0"]
 script = ExtResource("19_g3rks")

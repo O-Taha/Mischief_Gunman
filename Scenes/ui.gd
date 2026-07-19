@@ -3,6 +3,7 @@ extends Control
 @export_category("Nodes & Scenes")
 @export var upper: Container
 @export var lower: Container
+@export var timer: Timer
 
 func _ready() -> void:
 	show()
@@ -27,6 +28,7 @@ func show_go():
 
 func show_counter():
 	await hide_all()
+	upper.set("theme_override_constants/margin_top", -250.0)
 	$UpperContainer/Counter.show()
 	upper.show_container()
 
@@ -39,3 +41,4 @@ func hide_all():
 	await lower.hide_container()
 	upper.hide_all_content()
 	lower.hide_all_content()
+	upper.set("theme_override_constants/margin_top", 0.0)

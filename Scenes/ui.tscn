@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b7nis4gtwnjx8" path="res://Assets/Placeholder/gameover.png" id="5_ryf15"]
 [ext_resource type="Texture2D" uid="uid://cfombixufvfml" path="res://Assets/Placeholder/Go.png" id="6_mmixe"]
 
-[node name="UI" type="Control" node_paths=PackedStringArray("upper", "lower")]
+[node name="UI" type="Control" node_paths=PackedStringArray("upper", "lower", "timer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,6 +19,7 @@ mouse_filter = 2
 script = ExtResource("1_2246s")
 upper = NodePath("UpperContainer")
 lower = NodePath("LowerContainer")
+timer = NodePath("UpperContainer/Counter/Timer")
 
 [node name="UpperContainer" parent="." instance=ExtResource("1_jxero")]
 layout_mode = 1
@@ -34,6 +35,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Counter" type="RichTextLabel" parent="UpperContainer"]
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/outline_size = 50
 theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
 text = "10"

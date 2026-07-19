@@ -2,7 +2,7 @@ extends Node
 
 @export_category("Nodes & Scenes")
 @export var world: Node2D
-@export var timer: Timer
+@onready var timer: Timer = ui.timer
 @export var ui: Control
 @export var next_level_trigger: Area2D
 
@@ -73,6 +73,7 @@ func _ready() -> void:
 	#print(game_state == GameState.GO, next_level_trigger.monitoring)
 
 func turn_opponent_after_countdown():
+	ui.hide_all()
 	if opponent and opponent.fsm.curr_state.has_method("turn_around"):
 		opponent.fsm.curr_state.turn_around()
 
@@ -92,6 +93,11 @@ func start_pressed():
 
 func transition_next_level(body: Node2D):
 	if body is Player:
-		ui.hide_all()
 		game_state = GameState.PLAYING
 		world.show_next_level()
+		setup_counter()
+
+func setup_counter():
+	ui.show_counter()
+	timer.start(10)
+	timer.timeout.connect(turn_opponent_after_countdown)
