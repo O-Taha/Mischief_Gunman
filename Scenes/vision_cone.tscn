@@ -46,7 +46,7 @@ alert_by_distance_curve = SubResource("Curve_upggy")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(0.868811, 5.77569e-07, 0.459911, 1)
-energy = 100000.0
+energy = 100.0
 blend_mode = 2
 shadow_enabled = true
 texture = ExtResource("2_f4k6l")

@@ -2,11 +2,9 @@ extends Node2D
 
 func _ready() -> void:
 	var props = get_children().filter(func(x): return x is Prop)
-	print(props)
 	props.any(spin)
 
 func spin(prop): 
-	print(prop)
 	prop.animatedSprite.play()
 
 func _input(event: InputEvent) -> void:

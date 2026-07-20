@@ -64,6 +64,7 @@ func _ready() -> void:
 	ui.show_title_screen()
 	player.died.connect(game_over)
 	opponent.died.connect(win)
+	opponent.turned.connect(ui.hide_all)
 	$UI/LowerContainer/ShootableStartButton.function = start_pressed
 	$UI/LowerContainer/ShootableRetryButton.function = start_pressed
 	
@@ -73,8 +74,8 @@ func _ready() -> void:
 	#print(game_state == GameState.GO, next_level_trigger.monitoring)
 
 func turn_opponent_after_countdown():
-	ui.hide_all()
 	if opponent and opponent.fsm.curr_state.has_method("turn_around"):
+		ui.hide_all()
 		opponent.fsm.curr_state.turn_around()
 
 func game_over():
@@ -98,6 +99,6 @@ func transition_next_level(body: Node2D):
 		setup_counter()
 
 func setup_counter():
-	ui.show_counter()
+	await ui.show_counter()
 	timer.start(10)
 	timer.timeout.connect(turn_opponent_after_countdown)

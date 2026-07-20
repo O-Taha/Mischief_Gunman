@@ -9,3 +9,6 @@ func turn_around(hunt: bool = false):
 		transitioned.emit(self, "o_hunt")
 	else:
 		transitioned.emit(self, "o_passive")
+
+func exit():
+	owner.turned.emit()

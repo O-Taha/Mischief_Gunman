@@ -21,7 +21,6 @@ func _physics_process(delta):
 	var collision_info: KinematicCollision2D = move_and_collide(velocity * delta)
 	if collision_info:
 		var col = collision_info.get_collider() # Buttons, Cowboys, BulletDetectors
-		print(col)
 		if col.has_method("die"): # kills Cowboys, triggers shootable buttons
 			if not col.get("dead"): # Calls die only if doesn't have dead property (eg: button) or isn't dead
 				col.die()

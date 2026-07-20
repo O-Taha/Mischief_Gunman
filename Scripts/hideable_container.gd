@@ -29,9 +29,6 @@ func _ready() -> void:
 		grow_vertical = GROW_DIRECTION_BEGIN
 	hide_container(true)
 
-func _physics_process(delta: float) -> void:
-	if name == "UpperContainer": print(position.y)
-
 func show_container(instantaneous: bool = false):
 	if not is_hidden: return
 	is_hidden = false

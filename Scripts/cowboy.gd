@@ -24,7 +24,10 @@ var move_enable: bool:
 		move_enable = value
 
 var shoot_cooldown_time: float = 0.5
-var shoot_enable: bool
+var shoot_enable: bool:
+	set(value):
+		if name == "Opponent": print(value)
+		shoot_enable = value
 	
 var acceleration: float # Used to check we just did a dash, for prop pushing 
 # since checking dash state isn't enough as it is transient

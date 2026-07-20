@@ -66,7 +66,6 @@ func play_spin(strength: float):
 	var start_speed: float = sqrt(strength*5/get_tree().get_first_node_in_group("Player").speed)
 	var duration: float = start_speed/1.1
 	
-	prints(start_speed, duration)
 	animatedSprite.play()
 	animatedSprite.speed_scale = start_speed
 	

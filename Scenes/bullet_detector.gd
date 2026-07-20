@@ -7,7 +7,6 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node2D):
-	print(body)
 	if body is not Bullet: return
 	
 	var has_no_components: bool = not owner.get("added_components")

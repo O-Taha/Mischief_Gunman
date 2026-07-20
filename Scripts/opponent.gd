@@ -1,6 +1,7 @@
 extends Cowboy
 
 @onready var player: Player = get_tree().get_first_node_in_group("Player")
+signal turned
 
 const MAX_ALERT: float = 100.0
 var alert_gauge: float = 0.0:
@@ -10,7 +11,7 @@ var alert_gauge: float = 0.0:
 		if value >= MAX_ALERT:
 			alert_gauge = MAX_ALERT #↓ HACK ↓ : States should be the 
 			# only ones to change current state but easier 
-			#than checking current state then calling  the state's function...
+			# than checking current state then calling the state's function...
 			fsm.curr_state.transitioned.emit(fsm.curr_state, "o_hunt")
 		else: 
 			alert_gauge = value
