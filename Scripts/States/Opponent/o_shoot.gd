@@ -7,6 +7,7 @@ var shoot_reaction_time: float = 0.8
 func enter():
 	owner.speed /= 20
 	assert(owner.shoot_enable)
+	assert(owner.shoot_cooldown_time > shoot_reaction_time, "Setting shoot_cooldown_time < shoot_reaction_time may lock the opponent with shoot_enable at false")
 	await get_tree().create_timer(shoot_reaction_time).timeout # WARNING Leave it 
 	# here instead of inside the if clause to allow died to update in time, or else
 	# will enter if then die, making it shoot even when dead

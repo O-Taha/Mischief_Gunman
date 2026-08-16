@@ -10,5 +10,6 @@ func turn_around(hunt: bool = false):
 	else:
 		transitioned.emit(self, "o_passive")
 
-func exit():
-	owner.turned.emit()
+#func exit():
+	#
+	#print("turned")

@@ -12,6 +12,7 @@ var alert_gauge: float = 0.0:
 			alert_gauge = MAX_ALERT #↓ HACK ↓ : States should be the 
 			# only ones to change current state but easier 
 			# than checking current state then calling the state's function...
+			turned.emit()
 			fsm.curr_state.transitioned.emit(fsm.curr_state, "o_hunt")
 		else: 
 			alert_gauge = value
@@ -65,7 +66,7 @@ func _on_player_died():
 
 func die():
 	super.die()
-	fsm.curr_state.transitioned.emit(fsm.curr_state, "o_turned")
+	fsm.curr_state.transitioned.emit(fsm.curr_state, "o_dead")
 	modulate.a = 0.5
 
 

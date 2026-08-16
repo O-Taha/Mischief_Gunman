@@ -1,10 +1,12 @@
 extends RayCast2D
 
 var initial_length: float = 500.0
-var prop: Object = null
 
+var ray_id: int # Used by VisionCone to specify to its rays which index of its array is theirs
+var prop: Object = null
 var player: Object = null
-@export var alert_by_distance_curve: Curve
+@onready var pointLight: PointLight2D = owner.pointLight
+@onready var alert_by_distance_curve: Curve = owner.alert_by_distance_curve
 var player_seen_gauge_fill_rate: float = 1000:
 	get:
 		player_seen_gauge_fill_rate *= 2
@@ -23,9 +25,11 @@ func _physics_process(delta: float) -> void:
 		target_position = target_position.limit_length(to_local(get_collision_point()).length())
 		prop = get_collider() if get_collider() is Prop else null
 		player = get_collider() if get_collider() is Player else null
-		if player: 
+		if player:
+			owner.player_seen_by_ray[ray_id] = true
 			var distance_to_player: float = opponent.to_local(player.global_position).length()/get_viewport_rect().size.y
 			opponent.saw_something_moved((delta * player_seen_gauge_fill_rate) * alert_by_distance_curve.sample_baked(distance_to_player))
-			if opponent.fsm.curr_state.name == "o_hunt" and opponent.shoot_enable and not opponent.dead: 
-				opponent.fsm.curr_state.transitioned.emit(opponent.fsm.curr_state, "o_shoot")
+		else: 
+			owner.player_seen_by_ray[ray_id] = false
+			
 		if prop and prop.is_moving: opponent.saw_something_moved(prop.linear_velocity.length() * delta)

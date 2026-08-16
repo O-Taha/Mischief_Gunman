@@ -71,7 +71,7 @@ height = 138.0
 [node name="AnimatedSprite2D" parent="." index="0"]
 self_modulate = Color(1, 1, 1, 1)
 sprite_frames = SubResource("SpriteFrames_mjejd")
-frame = 3
+frame = 1
 offset = Vector2(0, 0)
 
 [node name="CollisionBox" parent="." index="1"]

@@ -63,8 +63,9 @@ func _ready() -> void:
 	
 	ui.show_title_screen()
 	player.died.connect(game_over)
+	opponent.turned.connect(_on_opponent_turned)
+	timer.timeout.connect(_on_counter_timeout)
 	opponent.died.connect(win)
-	opponent.turned.connect(ui.hide_all)
 	$UI/LowerContainer/ShootableStartButton.function = start_pressed
 	$UI/LowerContainer/ShootableRetryButton.function = start_pressed
 	
@@ -73,18 +74,25 @@ func _ready() -> void:
 	#print(statenames[game_state])
 	#print(game_state == GameState.GO, next_level_trigger.monitoring)
 
-func turn_opponent_after_countdown():
-	if opponent and opponent.fsm.curr_state.has_method("turn_around"):
+func _on_opponent_turned():
+	timer.timeout.disconnect(_on_counter_timeout)
+	if ui.current == ui.UIState.COUNTER:
 		ui.hide_all()
-		opponent.fsm.curr_state.turn_around()
+
+func _on_counter_timeout():
+	if ui.current == ui.UIState.COUNTER:
+		ui.hide_all()
+	opponent.fsm.curr_state.turn_around(false)
 
 func game_over():
 	ui.show_game_over()
+	print("GAME OVER")
 	world.reset_player_pos_game_over()
 	game_state = GameState.GAMEOVER
 
 func win():
 	if game_state == GameState.GAMEOVER: return # to avoid player winning because of a stray bullet before dying
+	await get_tree().create_timer(1.0).timeout # delays show_go() to allow _on_opponent_turned()'s hide_ui to trigger first (there was a race condition when we directly shot at the opponent)
 	ui.show_go()
 	game_state = GameState.GO
 
@@ -101,4 +109,3 @@ func transition_next_level(body: Node2D):
 func setup_counter():
 	await ui.show_counter()
 	timer.start(10)
-	timer.timeout.connect(turn_opponent_after_countdown)

@@ -18,7 +18,6 @@ func physics_update(delta: float):
 	owner.dir = owner.dir.slerp(owner.desired_dir, owner.turn_speed * delta).normalized()
 
 	nav_agent.velocity = owner.dir * (owner.speed * max(0.7, abs(deg_to_rad(owner.dir.angle_to(old_dir)))))*1000
-	#print(max(0.7, abs(deg_to_rad(dir.angle_to(old_dir)))))
 	old_dir = owner.dir
 	if Input.is_action_just_pressed("ui_focus_next"):
 		transitioned.emit(self, "o_passive") # DEBUG

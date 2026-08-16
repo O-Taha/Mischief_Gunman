@@ -1,12 +1,9 @@
-[gd_scene load_steps=25 format=4 uid="uid://dlmr6missb311"]
+[gd_scene load_steps=22 format=4 uid="uid://dlmr6missb311"]
 
 [ext_resource type="Script" uid="uid://3go8gw3j1sdi" path="res://Scripts/main.gd" id="1_344ge"]
 [ext_resource type="PackedScene" uid="uid://kqv4rlq3vjgj" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://dfbkhn6f78ndr" path="res://Scenes/world.gd" id="2_344ge"]
 [ext_resource type="Texture2D" uid="uid://b36x6h1fd70pe" path="res://Assets/Placeholder/desert.png" id="2_d1ilt"]
-[ext_resource type="PackedScene" uid="uid://dfjt2ebm1npn6" path="res://Scenes/barrel.tscn" id="6_6bp64"]
-[ext_resource type="PackedScene" uid="uid://c5q8ectcb2ima" path="res://Scenes/cactus.tscn" id="7_344ge"]
-[ext_resource type="PackedScene" uid="uid://dnajrn1qknkrw" path="res://Scenes/metal_crate.tscn" id="8_ynf5e"]
 [ext_resource type="PackedScene" uid="uid://bcmopllvyr764" path="res://Scenes/wall.tscn" id="12_fdnlq"]
 [ext_resource type="PackedScene" uid="uid://dptg81ablxq32" path="res://Scenes/ui.tscn" id="13_fdnlq"]
 
@@ -693,15 +690,6 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/NextLevelTrigger"]
 position = Vector2(230, 31)
 shape = SubResource("RectangleShape2D_21xkr")
-
-[node name="Barrel" parent="World" instance=ExtResource("6_6bp64")]
-position = Vector2(352, 632)
-
-[node name="Cactus" parent="World" instance=ExtResource("7_344ge")]
-position = Vector2(150, 664)
-
-[node name="MetalCrate" parent="World" instance=ExtResource("8_ynf5e")]
-position = Vector2(240, 376)
 
 [node name="UI" parent="." instance=ExtResource("13_fdnlq")]
 metadata/_edit_lock_ = true
