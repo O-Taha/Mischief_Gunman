@@ -3,6 +3,9 @@ extends Marker2D
 
 const EDITOR_BULLET_LIFETIME: int = 2
 
+enum TT {LINE, POS, NODE}
+var target_type: TT = TT.LINE
+
 @export_category("Nodes & Scenes")
 @export var bullet: PackedScene
 @export var timer: Timer
@@ -18,6 +21,23 @@ const EDITOR_BULLET_LIFETIME: int = 2
 
 @export var cooldown_pattern: Array[float]
 var cooldown_index: int = 0
+
+@export_category("Target")
+@export var target_node: Node2D:
+	set(value):
+		target_type = TT.NODE
+		target_node = value
+var target: Vector2 = Vector2.ZERO: # expects global position
+	set(value):
+		target_type = TT.POS
+		target = value
+
+func get_target_position() -> Vector2:
+	if target_type == TT.NODE:
+		if not is_instance_valid(target_node):
+			return global_position
+		return target_node.global_position
+	return target
 
 func start():
 	if not enable: enable = true # to avoid enable's setter (infinite loop)
@@ -42,7 +62,8 @@ func _on_timer_timeout() -> void:
 func _fire() -> void:
 	if bullet == null: return
 
-	var aim_direction: Vector2 = line_of_sight.points[1]
+	var aim_direction: Vector2 = line_of_sight.points[1] if target_type == TT.LINE\
+							else to_local(get_target_position())
 	var new_bullet = bullet.instantiate()
 
 	if Engine.is_editor_hint():

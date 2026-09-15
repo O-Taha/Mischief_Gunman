@@ -12,6 +12,7 @@ line_of_sight = NodePath("LineOfSight")
 cooldown_pattern = Array[float]([0.1, 0.2, 1.0])
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
 
 [node name="LineOfSight" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 0, 60)

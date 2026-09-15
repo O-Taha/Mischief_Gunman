@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnbd6lnrb8m7r"]
+
+[ext_resource type="Script" uid="uid://ctxjq3kixri6h" path="res://Scenes/bullet_spawner_test_room.gd" id="1_1eh8t"]
+[ext_resource type="PackedScene" uid="uid://igjhkd4otdhu" path="res://Scenes/bullet_spawner.tscn" id="2_o6br0"]
+
+[node name="BulletSpawnerTestRoom" type="Node2D"]
+script = ExtResource("1_1eh8t")
+
+[node name="BulletSpawner" parent="." instance=ExtResource("2_o6br0")]
+position = Vector2(60, 30)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(210, 180)
