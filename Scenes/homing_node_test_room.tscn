@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6chkvk1hosip"]
+
+[ext_resource type="Script" uid="uid://ceqf5qvhc2qyi" path="res://Scripts/homing_node_test_room.gd" id="1_hgdcw"]
+[ext_resource type="PackedScene" uid="uid://dfxl4evsf3if4" path="res://Scenes/homing_node.tscn" id="2_bxdl2"]
+[ext_resource type="Texture2D" uid="uid://co3v83fiot4co" path="res://icon.svg" id="3_bxdl2"]
+
+[node name="HomingNodeTestRoom" type="Node2D"]
+script = ExtResource("1_hgdcw")
+
+[node name="HomingNode" parent="." instance=ExtResource("2_bxdl2")]
+sprite = ExtResource("3_bxdl2")

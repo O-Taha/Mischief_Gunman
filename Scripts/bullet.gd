@@ -1,13 +1,17 @@
+@tool
 class_name Bullet
 extends CharacterBody2D
 
-var speed: float = 750.0
-const DESPAWN_TIMER_DELAY: int = 30
+const DEFAULT_LIFETIME: int = 30
 const PROPHURTBOX_LAYER: int = 6
 
-func _initialize(_position = Vector2.ZERO, _direction = 0) -> Node:
+var speed: float = 750.0
+var lifetime: float = DEFAULT_LIFETIME
+
+func _initialize(_position = Vector2.ZERO, _direction = 0, _lifetime = DEFAULT_LIFETIME) -> Node:
 	rotation = _direction
-	position = _position
+	global_position = _position
+	lifetime = _lifetime
 	velocity = Vector2(speed, 0).rotated(rotation)
 	return self
 
@@ -15,10 +19,12 @@ func _ready() -> void:
 	$VisibleOnScreenNotifier2D.screen_exited.connect(die)
 	
 	var despawn_timer: Tween = get_tree().create_tween()
-	despawn_timer.tween_callback(die).set_delay(DESPAWN_TIMER_DELAY)
+	despawn_timer.tween_callback(die).set_delay(lifetime)
 
 func _physics_process(delta):
 	var collision_info: KinematicCollision2D = move_and_collide(velocity * delta)
+	if Engine.is_editor_hint(): return
+
 	if collision_info:
 		var col = collision_info.get_collider() # Buttons, Cowboys, BulletDetectors
 		if col.has_method("die"): # kills Cowboys, triggers shootable buttons

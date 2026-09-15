@@ -71,7 +71,7 @@ height = 99.0
 self_modulate = Color(1, 1, 1, 1)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_1tdys")
-frame = 1
+frame = 2
 
 [node name="CollisionBox" parent="." index="1"]
 position = Vector2(0, 23)

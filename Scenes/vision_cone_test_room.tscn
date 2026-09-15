@@ -24,11 +24,14 @@ blend_mode = 1
 [node name="Barrel" parent="." instance=ExtResource("2_hg4qo")]
 position = Vector2(370, 161)
 
+[node name="AnimatedSprite2D" parent="Barrel" index="0"]
+frame = 3
+
 [node name="Cactus" parent="." instance=ExtResource("5_jhupw")]
 position = Vector2(370, 315)
 
 [node name="AnimatedSprite2D" parent="Cactus" index="0"]
-frame = 3
+frame = 0
 
 [node name="MetalCrate" parent="." instance=ExtResource("6_awqv5")]
 position = Vector2(370, 475)

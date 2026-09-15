@@ -4,7 +4,7 @@ extends CharacterBody2D
 signal collided(vel) # Will be used for screen shake
 signal died
 
-@export var speed: float = 300
+@export var speed: float = 400
 var dir: Vector2 
 
 @export_category("Nodes & Scenes")

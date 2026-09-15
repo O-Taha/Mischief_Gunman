@@ -50,3 +50,6 @@ shadow_enabled = true
 texture = ExtResource("2_f4k6l")
 offset = Vector2(208, 0)
 texture_scale = 5.0
+
+[node name="ReticleRestPos" type="Marker2D" parent="."]
+position = Vector2(128, 0)

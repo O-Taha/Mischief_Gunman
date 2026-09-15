@@ -1,0 +1,72 @@
+@tool
+extends Marker2D
+
+const EDITOR_BULLET_LIFETIME: int = 2
+
+@export_category("Nodes & Scenes")
+@export var bullet: PackedScene
+@export var timer: Timer
+@export var line_of_sight: Line2D
+
+@export var enable: bool = false:
+	set(value):
+		enable = value
+		if not is_inside_tree(): return
+
+		if value:	start()
+		else: 	stop()
+
+@export var cooldown_pattern: Array[float]
+var cooldown_index: int = 0
+
+func start():
+	if not enable: enable = true # to avoid enable's setter (infinite loop)
+	cooldown_index = 0
+	_start_cooldown(cooldown_pattern[cooldown_index])
+	
+func stop():
+	if enable: enable = false # to avoid enable's setter (infinite loop)
+	timer.stop()
+
+func _start_cooldown(time: float) -> void:
+	if cooldown_pattern.is_empty(): push_warning("DulletSpawner.cooldown_pattern[] is empty!")
+	timer.start(time)
+
+func _on_timer_timeout() -> void:
+	if not enable: return
+
+	_fire()
+	cooldown_index = (cooldown_index + 1) % cooldown_pattern.size()
+	_start_cooldown(cooldown_pattern[cooldown_index])
+
+func _fire() -> void:
+	if bullet == null: return
+
+	var aim_direction: Vector2 = line_of_sight.points[1]
+	var new_bullet = bullet.instantiate()
+
+	if Engine.is_editor_hint():
+		# Add the bullet to the tree first so it has a parent and a valid transform.
+		# Otherwise, setting its global_position in _initialize() before add_child()
+		# can cause an offset when the parent's transform is applied afterwards.
+		add_child(new_bullet)
+		new_bullet = new_bullet._initialize(global_position, aim_direction.angle(), EDITOR_BULLET_LIFETIME)
+
+		new_bullet.owner = self
+
+	else:
+		var congregator := get_tree().root.get_node("/root/BulletCongregator")
+		# Same as above
+		congregator.add_child(new_bullet)
+		new_bullet = new_bullet._initialize(global_position, aim_direction.angle())
+
+		new_bullet.owner = congregator
+
+		SfxPlayer.play_sound("TEST", -1, global_position)
+
+
+func _ready() -> void:
+	timer.timeout.connect(_on_timer_timeout)
+	if not Engine.is_editor_hint():
+		start()
+		line_of_sight.hide()

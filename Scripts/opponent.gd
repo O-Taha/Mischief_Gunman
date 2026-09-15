@@ -9,6 +9,7 @@ var alert_gauge: float = 0.0:
 		if dead: return # is waiting outside of screen waiting for next level to be loaded
 		if alert_gauge == MAX_ALERT: return
 		if value >= MAX_ALERT:
+			target_reticle(player)
 			alert_gauge = MAX_ALERT #↓ HACK ↓ : States should be the 
 			# only ones to change current state but easier 
 			# than checking current state then calling the state's function...
@@ -29,8 +30,11 @@ func _ready() -> void:
 	$FSM/o_passive.new_dest.connect(update_debug_dest)
 	SfxPlayer.sound_emitted.connect(heard_something)
 	if player: player.died.connect(_on_player_died) # if allows this scene to be used standalone for debug
-	
+	init_reticle()
+	shoot_enable = false
+
 func _physics_process(delta: float) -> void:
+	print(shoot_enable)
 	super(delta)
 	queue_redraw()
 	if move_enable:
@@ -60,7 +64,7 @@ func heard_something(volume: int, sound_global_position: Vector2):
 		return
 	var distance: float = global_position.distance_to(sound_global_position)
 	alert_gauge += (volume * 100)*(hearing_radius.sample(distance))
-		
+
 func _on_player_died():
 	fsm.curr_state.transitioned.emit(fsm.curr_state, "o_win")	
 
@@ -69,6 +73,15 @@ func die():
 	fsm.curr_state.transitioned.emit(fsm.curr_state, "o_dead")
 	modulate.a = 0.5
 
+func init_reticle():
+	$Reticle.homing_type = $Reticle.HT.LOCK
+	$Reticle.blink_enable = false
+	$Reticle.target_node = $VisionCone/ReticleRestPos
+
+func target_reticle(target: Node2D):
+	$Reticle.homing_type = $Reticle.HT.WOOZY
+	$Reticle.blink_enable = true
+	$Reticle.target_node = target
 
 func _draw() -> void:
 	draw_string(ThemeDB.fallback_font, Vector2(80, -20), fsm.curr_state.name, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color.BLACK)

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://igjhkd4otdhu"]
+
+[ext_resource type="Script" uid="uid://c7lw03ph3booq" path="res://Scenes/bullet_spawner.gd" id="1_ju4wr"]
+[ext_resource type="PackedScene" uid="uid://c58aiqdcb4njg" path="res://Scenes/bullet.tscn" id="2_4fhvc"]
+
+[node name="BulletSpawner" type="Marker2D" node_paths=PackedStringArray("timer", "line_of_sight")]
+gizmo_extents = 20.0
+script = ExtResource("1_ju4wr")
+bullet = ExtResource("2_4fhvc")
+timer = NodePath("Timer")
+line_of_sight = NodePath("LineOfSight")
+cooldown_pattern = Array[float]([0.1, 0.2, 1.0])
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="LineOfSight" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 60)
+width = 5.0
+default_color = Color(1, 0, 0, 0.196078)

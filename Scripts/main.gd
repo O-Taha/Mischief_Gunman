@@ -30,7 +30,7 @@ var game_state: GameState:
 				player.dead = false
 				
 				opponent.move_enable = true
-				opponent.shoot_enable = true
+				opponent.shoot_enable = false
 				opponent.dead = false
 				
 			GameState.GO:

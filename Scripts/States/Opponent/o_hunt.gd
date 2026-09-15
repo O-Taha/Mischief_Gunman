@@ -1,6 +1,10 @@
 @tool
 extends State
 
+@export_category("Nodes & Scenes")
+@export var vision_cone: Node2D
+@export var reticle: Node2D
+
 @onready var nav_agent: NavigationAgent2D = $"../../NavigationAgent2D"
 @onready var old_dir = owner.get("dir")
 
@@ -19,8 +23,10 @@ func physics_update(delta: float):
 
 	nav_agent.velocity = owner.dir * (owner.speed * max(0.7, abs(deg_to_rad(owner.dir.angle_to(old_dir)))))*1000
 	old_dir = owner.dir
-	if Input.is_action_just_pressed("ui_focus_next"):
-		transitioned.emit(self, "o_passive") # DEBUG
+	
+	owner.shoot_enable = reticle.target_acquired and vision_cone.player_in_sight
+	if owner.shoot_enable and not owner.dead: 
+		transitioned.emit(self, "o_shoot")
 
 func on_avoidance_velocity_computed(safe_velocity: Vector2):
 	owner.velocity = safe_velocity*2
