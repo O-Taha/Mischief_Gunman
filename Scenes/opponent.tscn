@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dujt3r3bmm62r"]
+[gd_scene load_steps=36 format=3 uid="uid://dujt3r3bmm62r"]
 
 [ext_resource type="PackedScene" uid="uid://belgvmbxjjgpt" path="res://Scenes/cowboy.tscn" id="1_i4xd2"]
 [ext_resource type="Script" uid="uid://bro8mi4mkjdtg" path="res://Scripts/opponent.gd" id="2_1ejkn"]
@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://dxfrlqvs6ro1m" path="res://Scripts/States/Opponent/o_dead.gd" id="24_nrimw"]
 [ext_resource type="PackedScene" uid="uid://dfxl4evsf3if4" path="res://Scenes/homing_node.tscn" id="26_i20be"]
 [ext_resource type="Texture2D" uid="uid://btqhy42fybebs" path="res://Assets/Placeholder/cursor1.png" id="27_i20be"]
+[ext_resource type="PackedScene" uid="uid://igjhkd4otdhu" path="res://Scenes/bullet_spawner.tscn" id="28_5br6n"]
 
 [sub_resource type="Curve" id="Curve_e5o20"]
 _limits = [0.0, 1.0, 0.0, 500.0]
@@ -110,6 +111,7 @@ gradient = SubResource("Gradient_e5o20")
 width = 16
 
 [node name="Opponent" node_paths=PackedStringArray("fsm", "collision") groups=["Opponent"] instance=ExtResource("1_i4xd2")]
+position = Vector2(168, 136)
 collision_mask = 11
 wall_min_slide_angle = 0.0
 safe_margin = 0.1
@@ -179,4 +181,24 @@ texture_progress = SubResource("GradientTexture2D_nrimw")
 top_level = true
 sprite = ExtResource("27_i20be")
 
+[node name="BulletSpawnerL" parent="." index="8" instance=ExtResource("28_5br6n")]
+position = Vector2(-24, 0)
+
+[node name="LineOfSight" parent="BulletSpawnerL" index="1"]
+points = PackedVector2Array(0, 0, 0, 83)
+
+[node name="BulletSpawnerM" parent="." index="9" instance=ExtResource("28_5br6n")]
+
+[node name="LineOfSight" parent="BulletSpawnerM" index="1"]
+points = PackedVector2Array(0, 0, 0, 83)
+
+[node name="BulletSpawnerR" parent="." index="10" instance=ExtResource("28_5br6n")]
+position = Vector2(24, 0)
+
+[node name="LineOfSight" parent="BulletSpawnerR" index="1"]
+points = PackedVector2Array(0, 0, 0, 83)
+
 [editable path="VisionCone"]
+[editable path="BulletSpawnerL"]
+[editable path="BulletSpawnerM"]
+[editable path="BulletSpawnerR"]

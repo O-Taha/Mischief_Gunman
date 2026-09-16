@@ -1,6 +1,7 @@
 extends Cowboy
 
 @onready var player: Player = get_tree().get_first_node_in_group("Player")
+@onready var bullet_spawners: Array[Node] = find_children("BulletSpawner*", "BulletSpawner")
 signal turned
 
 const MAX_ALERT: float = 100.0
@@ -34,7 +35,7 @@ func _ready() -> void:
 	shoot_enable = false
 
 func _physics_process(delta: float) -> void:
-	print(shoot_enable)
+	#print(shoot_enable)
 	super(delta)
 	queue_redraw()
 	if move_enable:

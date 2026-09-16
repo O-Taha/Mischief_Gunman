@@ -10,7 +10,7 @@ extends State
 
 func enter():
 	nav_agent.velocity_computed.connect(on_avoidance_velocity_computed)
-	nav_agent.target_position = owner.player.global_position
+	if owner.player: nav_agent.target_position = owner.player.global_position
 	nav_agent.navigation_finished.connect(update_player_target_position)
 	create_tween().set_loops().tween_callback(update_player_target_position).set_delay(1.0)
 

@@ -1,4 +1,5 @@
 @tool
+class_name BulletSpawner
 extends Marker2D
 
 const EDITOR_BULLET_LIFETIME: int = 2
@@ -71,7 +72,7 @@ func _fire() -> void:
 		# Otherwise, setting its global_position in _initialize() before add_child()
 		# can cause an offset when the parent's transform is applied afterwards.
 		add_child(new_bullet)
-		new_bullet = new_bullet._initialize(global_position, aim_direction.angle(), EDITOR_BULLET_LIFETIME)
+		new_bullet = new_bullet._initialize(global_position, aim_direction.angle(), null, EDITOR_BULLET_LIFETIME)
 
 		new_bullet.owner = self
 
@@ -79,7 +80,9 @@ func _fire() -> void:
 		var congregator := get_tree().root.get_node("/root/BulletCongregator")
 		# Same as above
 		congregator.add_child(new_bullet)
-		new_bullet = new_bullet._initialize(global_position, aim_direction.angle())
+		
+		var shooter = owner if owner is PhysicsBody2D else null 
+		new_bullet = new_bullet._initialize(global_position, aim_direction.angle(), shooter, new_bullet.DEFAULT_LIFETIME)
 
 		new_bullet.owner = congregator
 

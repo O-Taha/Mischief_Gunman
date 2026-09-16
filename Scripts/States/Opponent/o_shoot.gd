@@ -13,7 +13,7 @@ func enter():
 	# will enter if then die, making it shoot even when dead
 	if owner.shoot_enable and not owner.dead: # line may be superfluous
 		owner.shoot_enable = false
-		if owner.player: 
+		if owner.player: pass
 			
 
 

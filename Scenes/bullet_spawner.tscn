@@ -9,7 +9,7 @@ script = ExtResource("1_ju4wr")
 bullet = ExtResource("2_4fhvc")
 timer = NodePath("Timer")
 line_of_sight = NodePath("LineOfSight")
-cooldown_pattern = Array[float]([0.1, 0.2, 1.0])
+cooldown_pattern = Array[float]([0.1])
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2

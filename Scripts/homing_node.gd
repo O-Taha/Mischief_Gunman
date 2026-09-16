@@ -1,3 +1,4 @@
+class_name HomingNode
 extends Node2D
 
 enum TT {POS, NODE}

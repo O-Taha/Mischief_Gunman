@@ -22,3 +22,10 @@ polygon = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_xjght")
+
+[node name="ShooterExitDetector" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ShooterExitDetector"]
+shape = SubResource("RectangleShape2D_xjght")

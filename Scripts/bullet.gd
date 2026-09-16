@@ -2,27 +2,43 @@
 class_name Bullet
 extends CharacterBody2D
 
-const DEFAULT_LIFETIME: int = 30
+const DEFAULT_LIFETIME: int = 10
 const PROPHURTBOX_LAYER: int = 6
 
 var speed: float = 750.0
 var lifetime: float = DEFAULT_LIFETIME
 var editor_lifetime: float = 0.0
+var shooter: PhysicsBody2D # Since owner is BulletCongregator
 
-func _initialize(_position = Vector2.ZERO, _direction = 0, _lifetime = DEFAULT_LIFETIME) -> Node:
+func _initialize(_position = Vector2.ZERO, _direction = 0, _shooter: PhysicsBody2D = null, _lifetime = DEFAULT_LIFETIME) -> Node:
 	rotation = _direction
 	global_position = _position
+	shooter = _shooter
 	lifetime = _lifetime
 	editor_lifetime = _lifetime
 	velocity = Vector2(speed, 0).rotated(rotation)
+	
+	if shooter != null:
+		set_collision_mask_value(shooter.collision_layer, false)
+		$ShooterExitDetector.body_exited.connect(_enable_collision_with_shooter)
 	return self
+
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
+	#modulate.a = 0.1 # DEBUG
 	
 	$VisibleOnScreenNotifier2D.screen_exited.connect(die)
 	var despawn_timer: Tween = get_tree().create_tween()
 	despawn_timer.tween_callback(die).set_delay(lifetime)
+
+
+func _enable_collision_with_shooter(body: Node2D) -> void:
+	if not is_instance_valid(shooter): return
+	set_collision_mask_value(shooter.collision_layer, true)
+	$ShooterExitDetector.queue_free()
+	#modulate = Color.REBECCA_PURPLE # DEBUG
+
 
 func _physics_process(delta):
 	if Engine.is_editor_hint():

@@ -86,7 +86,6 @@ func _on_counter_timeout():
 
 func game_over():
 	ui.show_game_over()
-	print("GAME OVER")
 	world.reset_player_pos_game_over()
 	game_state = GameState.GAMEOVER
 
