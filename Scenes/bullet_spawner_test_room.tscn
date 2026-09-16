@@ -8,6 +8,7 @@ script = ExtResource("1_1eh8t")
 
 [node name="BulletSpawner" parent="." instance=ExtResource("2_o6br0")]
 position = Vector2(60, 30)
+cooldown_pattern = Array[float]([0.1, 1.0])
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(210, 180)

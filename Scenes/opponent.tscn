@@ -111,7 +111,7 @@ gradient = SubResource("Gradient_e5o20")
 width = 16
 
 [node name="Opponent" node_paths=PackedStringArray("fsm", "collision") groups=["Opponent"] instance=ExtResource("1_i4xd2")]
-position = Vector2(168, 136)
+position = Vector2(168, 120)
 collision_mask = 11
 wall_min_slide_angle = 0.0
 safe_margin = 0.1
@@ -182,7 +182,7 @@ top_level = true
 sprite = ExtResource("27_i20be")
 
 [node name="BulletSpawnerL" parent="." index="8" instance=ExtResource("28_5br6n")]
-position = Vector2(-24, 0)
+position = Vector2(-24, -12)
 
 [node name="LineOfSight" parent="BulletSpawnerL" index="1"]
 points = PackedVector2Array(0, 0, 0, 83)
@@ -193,7 +193,7 @@ points = PackedVector2Array(0, 0, 0, 83)
 points = PackedVector2Array(0, 0, 0, 83)
 
 [node name="BulletSpawnerR" parent="." index="10" instance=ExtResource("28_5br6n")]
-position = Vector2(24, 0)
+position = Vector2(24, -12)
 
 [node name="LineOfSight" parent="BulletSpawnerR" index="1"]
 points = PackedVector2Array(0, 0, 0, 83)

@@ -26,7 +26,7 @@ func _initialize(_position = Vector2.ZERO, _direction = 0, _shooter: PhysicsBody
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
-	#modulate.a = 0.1 # DEBUG
+	modulate.a = 0.2 # DEBUG
 	
 	$VisibleOnScreenNotifier2D.screen_exited.connect(die)
 	var despawn_timer: Tween = get_tree().create_tween()
@@ -37,7 +37,7 @@ func _enable_collision_with_shooter(body: Node2D) -> void:
 	if not is_instance_valid(shooter): return
 	set_collision_mask_value(shooter.collision_layer, true)
 	$ShooterExitDetector.queue_free()
-	#modulate = Color.REBECCA_PURPLE # DEBUG
+	modulate = Color.REBECCA_PURPLE # DEBUG
 
 
 func _physics_process(delta):

@@ -4,7 +4,7 @@ extends Marker2D
 
 const EDITOR_BULLET_LIFETIME: int = 2
 
-enum TT {LINE, POS, NODE}
+enum TT {LINE, POS, NODE, ANGLE}
 var target_type: TT = TT.LINE
 
 @export_category("Nodes & Scenes")
@@ -14,9 +14,10 @@ var target_type: TT = TT.LINE
 
 @export var enable: bool = false:
 	set(value):
+		if enable == value: return
 		enable = value
-		if not is_inside_tree(): return
 
+		if not is_inside_tree(): return
 		if value:	start()
 		else: 	stop()
 
@@ -92,5 +93,4 @@ func _fire() -> void:
 func _ready() -> void:
 	timer.timeout.connect(_on_timer_timeout)
 	if not Engine.is_editor_hint():
-		start()
 		line_of_sight.hide()
