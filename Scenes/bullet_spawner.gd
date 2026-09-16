@@ -33,6 +33,10 @@ var target: Vector2 = Vector2.ZERO: # expects global position
 	set(value):
 		target_type = TT.POS
 		target = value
+var target_angle: float: # expects rad
+	set(value):
+		target_type = TT.ANGLE
+		target_angle = value
 
 func get_target_position() -> Vector2:
 	if target_type == TT.NODE:
@@ -64,8 +68,15 @@ func _on_timer_timeout() -> void:
 func _fire() -> void:
 	if bullet == null: return
 
-	var aim_direction: Vector2 = line_of_sight.points[1] if target_type == TT.LINE\
-							else to_local(get_target_position())
+	var aim_direction: Vector2 
+	match target_type:
+		TT.LINE:
+			aim_direction = line_of_sight.points[1]
+		TT.POS, TT.NODE:
+			aim_direction = to_local(get_target_position()).normalized()
+		TT.ANGLE:
+			aim_direction = Vector2.RIGHT.rotated(target_angle)
+
 	var new_bullet = bullet.instantiate()
 
 	if Engine.is_editor_hint():

@@ -1,7 +1,15 @@
 extends Node2D
 
 func _ready() -> void:
-	$BulletSpawner.target_node = $Marker2D
+	#$BulletSpawner.target_node = $Marker2D
+	$BulletSpawner.start()
+	var tween := create_tween()
+	tween.tween_property(
+		$BulletSpawner,
+		"target_angle",
+		0.0,
+		5.0
+	).from(PI/2) # Careful, don't forget unit circle is also reversed, just like the Y axis
 	
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("shoot"): 
